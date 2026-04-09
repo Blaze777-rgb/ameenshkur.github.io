@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ameen Shkur — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ════════════════════════════════════════
+       TOKENS
+    ════════════════════════════════════════ */
+    :root {
+      --bg:          #fafaf8;
+      --surface:     #ffffff;
+      --surface-2:   #f5f4f1;
+      --text:        #1c1917;
+      --text-muted:  #78716c;
+      --teal:        #0d9488;
+      --teal-dark:   #0f766e;
+      --teal-light:  #f0fdfa;
+      --teal-mid:    #99f6e4;
+      --border:      #e7e5e4;
+      --radius:      12px;
+      --shadow-hover: 0 8px 28px rgba(13,148,136,0.13), 0 1px 4px rgba(0,0,0,0.05);
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Outfit', sans-serif;
+      --font-arabic:  'Noto Kufi Arabic', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    html[dir="rtl"] body {
+      font-family: var(--font-arabic);
+    }
+
+    /* ════════════════════════════════════════
+       NAVBAR
+    ════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250,250,248,0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--teal); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* Language toggle */
+    .lang-toggle {
+      display: flex;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .lang-btn {
+      padding: 0.35rem 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      color: var(--text-muted);
+      border: none;
+      background: none;
+      font-family: inherit;
+      transition: all 0.18s;
+    }
+    .lang-btn.active {
+      background: var(--teal);
+      color: white;
+    }
+
+    /* ════════════════════════════════════════
+       SHARED LAYOUT
+    ════════════════════════════════════════ */
+    section { padding: 6rem 0; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 3rem;
+    }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      padding-top: 64px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Dot grid */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #c8c5c0 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    /* Teal glow */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -15%;
+      right: -10%;
+      width: 55vw;
+      height: 75vh;
+      background: radial-gradient(ellipse, rgba(13,148,136,0.09) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 5rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* Availability pill */
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--teal-light);
+      border: 1px solid var(--teal-mid);
+      color: var(--teal);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.95rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2.5s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.45; transform: scale(0.75); }
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.25rem, 7.5vw, 5.75rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .hero-name .accent { color: var(--teal); }
+
+    .hero-subtitle {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-subtitle span { color: var(--text); font-weight: 600; }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 510px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--teal);
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.22s;
+      box-shadow: 0 4px 16px rgba(13,148,136,0.28);
+    }
+    .btn-primary:hover {
+      background: var(--teal-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13,148,136,0.38);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--surface);
+      color: var(--text);
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: all 0.22s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    /* Stats bar */
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      line-height: 1;
+    }
+    .stat-number span { color: var(--teal); }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.2rem;
+    }
+
+    /* Photo */
+    .hero-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -18px;
+      border-radius: 50%;
+      border: 2px dashed rgba(13,148,136,0.35);
+      animation: spin 22s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .hero-photo {
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border: 5px solid white;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.13),
+        0 0 0 10px rgba(13,148,136,0.08);
+    }
+
+    /* ════════════════════════════════════════
+       EXPERIENCE
+    ════════════════════════════════════════ */
+    #experience { background: var(--surface); }
+
+    .timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    html[dir="rtl"] .timeline {
+      padding-left: 0;
+      padding-right: 2.5rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--teal) 60%, transparent);
+    }
+    html[dir="rtl"] .timeline::before {
+      left: auto;
+      right: 0;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3.25rem;
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.9rem;
+      top: 0.45rem;
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      background: var(--teal);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--teal);
+    }
+    html[dir="rtl"] .timeline-dot {
+      left: auto;
+      right: -2.9rem;
+    }
+
+    .timeline-year {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.3rem;
+    }
+    .timeline-role {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-company {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.85rem;
+    }
+    .timeline-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .timeline-bullets li {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.6;
+    }
+    html[dir="rtl"] .timeline-bullets li {
+      padding-left: 0;
+      padding-right: 1.1rem;
+    }
+    .timeline-bullets li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-weight: 900;
+      font-size: 1.1em;
+    }
+    html[dir="rtl"] .timeline-bullets li::before {
+      left: auto;
+      right: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #92400e;
+      font-size: 0.77rem;
+      font-weight: 700;
+      padding: 0.3rem 0.85rem;
+      border-radius: 6px;
+      margin-top: 0.85rem;
+    }
+
+    /* ════════════════════════════════════════
+       SKILLS
+    ════════════════════════════════════════ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: all 0.25s;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    .skill-card.visible { opacity: 1; transform: translateY(0); }
+    .skill-card:hover {
+      border-color: var(--teal);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-4px);
+    }
+
+    .skill-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .skill-category {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.45rem;
+    }
+    .skill-list {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ════════════════════════════════════════
+       WORK / PORTFOLIO
+    ════════════════════════════════════════ */
+    #work { background: var(--surface); }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .filter-btn {
+      padding: 0.45rem 1.15rem;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: translateY(22px);
+    }
+    .project-card.visible { opacity: 1; transform: translateY(0); }
+    .project-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-5px);
+      border-color: rgba(13,148,136,0.35);
+    }
+    .project-card.hidden { display: none; }
+
+    /* Real image */
+    .project-thumb {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Placeholder (colored block + emoji) */
+    .project-thumb-placeholder {
+      width: 100%;
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    /* Video embed */
+    .project-video {
+      width: 100%;
+      height: 210px;
+      border: none;
+      display: block;
+    }
+
+    .project-body { padding: 1.35rem; }
+
+    .project-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-light);
+      padding: 0.22rem 0.65rem;
+      border-radius: 4px;
+      margin-bottom: 0.65rem;
+    }
+    .project-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ════════════════════════════════════════
+       CONTACT
+    ════════════════════════════════════════ */
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+      align-items: start;
+    }
+
+    .contact-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .contact-text > p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.22s;
+      font-weight: 500;
+    }
+    .contact-link:hover {
+      border-color: var(--teal);
+      box-shadow: var(--shadow-hover);
+      transform: translateX(5px);
+    }
+    html[dir="rtl"] .contact-link:hover {
+      transform: translateX(-5px);
+    }
+    .contact-link-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      background: var(--surface-2);
+      flex-shrink: 0;
+    }
+    .contact-link-label {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      display: block;
+      font-weight: 400;
+    }
+    .contact-link-value {
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    /* CV card */
+    .cv-card {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      border-radius: var(--radius);
+      padding: 2rem;
+      color: white;
+    }
+    .cv-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .cv-card p {
+      font-size: 0.9rem;
+      opacity: 0.82;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .cv-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      color: var(--teal);
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cv-download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+    }
+
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+    footer a { color: var(--teal); text-decoration: none; }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 820px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-photo-wrap { display: none; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; gap: 2rem; }
+      .hero-bio { margin-left: auto; margin-right: auto; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 4rem 0; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════ -->
+<nav>
+  <a href="#hero" class="nav-logo">Ameen <span>Shkur</span></a>
+
+  <ul class="nav-links">
+    <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+    <li><a href="#skills"     data-i18n="nav_skills">Skills</a></li>
+    <li><a href="#work"       data-i18n="nav_work">Work</a></li>
+    <li><a href="#contact"    data-i18n="nav_contact">Contact</a></li>
+  </ul>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn"        onclick="setLang('ar')">AR</button>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <div class="hero-tag" data-i18n="hero_tag">Available for freelance projects</div>
+
+        <h1 class="hero-name">Ameen<br><span class="accent">Shkur</span></h1>
+
+        <p class="hero-subtitle">
+          <span data-i18n="hero_role1">Graphic Designer</span> &nbsp;·&nbsp;
+          <span data-i18n="hero_role2">3D Artist</span> &nbsp;·&nbsp;
+          <span data-i18n="hero_role3">AI Automation</span>
+        </p>
+
+        <p class="hero-bio" data-i18n="hero_bio">
+          A versatile creative professional from Kurdistan, Iraq — combining visual design, 3D animation, and AI-powered automation. Working with clients across Iraq, UAE, Syria, and Egypt.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#work"           class="btn-primary"   data-i18n="hero_cta1">View My Work →</a>
+          <a href="assets/cv.pdf" download class="btn-secondary" data-i18n="hero_cta2">Download CV</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number">4<span>+</span></div>
+            <div class="stat-label" data-i18n="stat1">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">4<span>+</span></div>
+            <div class="stat-label" data-i18n="stat2">Countries Reached</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">400</div>
+            <div class="stat-label" data-i18n="stat3">Books Sold on Launch Day</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-photo-wrap">
+        <!--
+          PUT YOUR PHOTO AT: assets/photo.jpg
+          This is the Square.jpg file you uploaded — rename it to photo.jpg
+        -->
+        <img src="assets/photo.jpg" alt="Ameen Shkur" class="hero-photo">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     EXPERIENCE
+═══════════════════════════════════════════ -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label" data-i18n="exp_label">Career</p>
+    <h2 class="section-title" data-i18n="exp_title">Experience</h2>
+
+    <div class="timeline">
+
+      <!-- ── Entry 1 ── -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2023 — Present</div>
+        <div class="timeline-role" data-i18n="exp1_role">Graphic Designer &amp; Office Operations</div>
+        <div class="timeline-company">Hassarost General Contracting LLC — Emerald City Project &nbsp;·&nbsp; Kirkuk</div>
+        <ul class="timeline-bullets">
+          <li data-i18n="exp1_b1">Sole employee at the Kirkuk office — independently handling all design, client communications, and expense tracking for the Emerald City real estate development</li>
+          <li data-i18n="exp1_b2">Producing promotional images, branded videos, and digital content published across the project's official platforms</li>
+          <li data-i18n="exp1_b3">Built Emerald CRM — a full Arabic-first real estate payment tracking system in Python/Django with dashboard, analytics, Excel export, currency converter, and dark mode</li>
+        </ul>
+      </div>
+
+      <!-- ── Entry 2 ── -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2025 — Present</div>
+        <div class="timeline-role" data-i18n="exp2_role">Graphic Designer &amp; AI Automation Engineer</div>
+        <div class="timeline-company">Royal Smells Perfumes &nbsp;·&nbsp; Remote — Iraq, UAE, Syria, Egypt</div>
+        <ul class="timeline-bullets">
+          <li data-i18n="exp2_b1">Designing promotional materials including brochures, flyers, packaging, vehicle wrappings, and stickers for a luxury fragrance B2B brand</li>
+          <li data-i18n="exp2_b2">Built Python and Django automation pipelines for batch AI-enhanced product photography and large-scale content generation using Google Imagen and Gemini API</li>
+          <li data-i18n="exp2_b3">Collaborating remotely with a cross-regional team managed from the UAE</li>
+        </ul>
+      </div>
+
+      <!-- ── Entry 3 ── -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2025</div>
+        <div class="timeline-role" data-i18n="exp3_role">3D Artist &amp; Motion Designer</div>
+        <div class="timeline-company">Baghe Khatina Cosmetics &nbsp;·&nbsp; Remote — Iraq &amp; UAE</div>
+        <ul class="timeline-bullets">
+          <li data-i18n="exp3_b1">Modeling, texturing, and animating cosmetic products into high-quality 3D video presentations for client campaigns</li>
+          <li data-i18n="exp3_b2">Co-produced two anamorphic videos for Nogat Baghdad — the largest anamorphic screen in Baghdad — with UAE-based artist Hadeel Al Azzawi</li>
+          <li data-i18n="exp3_b3">Subsequently commissioned directly by Nogat Baghdad to produce a standalone Ramadan anamorphic video</li>
+        </ul>
+        <div class="badge">⭐ Featured on Nogat Baghdad — Largest Anamorphic Screen in Baghdad</div>
+      </div>
+
+      <!-- ── Entry 4 ── -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2023</div>
+        <div class="timeline-role" data-i18n="exp4_role">Design Collaborator &amp; NLP Developer</div>
+        <div class="timeline-company">Diyako Hashemi — Kurdish Linguist &amp; SaaS Platform &nbsp;·&nbsp; Kurdistan Region</div>
+        <ul class="timeline-bullets">
+          <li data-i18n="exp4_b1">Graphic design and content production for a Kurdish-language educational platform with 5,000+ followers</li>
+          <li data-i18n="exp4_b2">Co-produced a Kurdish dictionary endorsed by the Kurdish Language Academy (Erbil) — sold 400 copies on release day</li>
+          <li data-i18n="exp4_b3">Building NLP corpus pipelines for a Kurdish Sorani dictation SaaS using Python, HuggingFace, and Ollama</li>
+        </ul>
+        <div class="badge">⭐ 400 Copies Sold on Launch Day &nbsp;·&nbsp; Endorsed by The Kurdish Language Academy, Erbil</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SKILLS
+═══════════════════════════════════════════ -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label" data-i18n="skills_label">Toolkit</p>
+    <h2 class="section-title" data-i18n="skills_title">Skills &amp; Tools</h2>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <div class="skill-category" data-i18n="sk1_cat">Design</div>
+        <div class="skill-list">Photoshop &nbsp;·&nbsp; Illustrator &nbsp;·&nbsp; InDesign</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🎬</div>
+        <div class="skill-category" data-i18n="sk2_cat">3D &amp; Motion</div>
+        <div class="skill-list">Blender &nbsp;·&nbsp; After Effects &nbsp;·&nbsp; Anamorphic Video</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-category" data-i18n="sk3_cat">AI Generation</div>
+        <div class="skill-list">Google Imagen &nbsp;·&nbsp; Veo 3 &nbsp;·&nbsp; Gemini API &nbsp;·&nbsp; Claude &nbsp;·&nbsp; ChatGPT</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <div class="skill-category" data-i18n="sk4_cat">Development</div>
+        <div class="skill-list">Python &nbsp;·&nbsp; Django &nbsp;·&nbsp; VS Code &nbsp;·&nbsp; NLP Pipelines</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-category" data-i18n="sk5_cat">Languages</div>
+        <div class="skill-list">Kurdish — Native &nbsp;·&nbsp; Arabic — Fluent &nbsp;·&nbsp; English — Fluent</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📋</div>
+        <div class="skill-category" data-i18n="sk6_cat">Disciplines</div>
+        <div class="skill-list">Print &amp; Digital Design &nbsp;·&nbsp; Motion Graphics &nbsp;·&nbsp; AI Content Pipelines &nbsp;·&nbsp; Translation &amp; Subtitling</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     WORK / PORTFOLIO
+═══════════════════════════════════════════ -->
+<section id="work">
+  <div class="container">
+    <p class="section-label" data-i18n="work_label">Portfolio</p>
+    <h2 class="section-title" data-i18n="work_title">Selected Work</h2>
+
+    <div class="filter-tabs">
+      <button class="filter-btn active" onclick="filterWork(this,'all')"    data-i18n="filter_all">All</button>
+      <button class="filter-btn"        onclick="filterWork(this,'design')" data-i18n="filter_design">Graphic Design</button>
+      <button class="filter-btn"        onclick="filterWork(this,'3d')"     data-i18n="filter_3d">3D Animation</button>
+      <button class="filter-btn"        onclick="filterWork(this,'dev')"    data-i18n="filter_dev">Python &amp; AI</button>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <!--
+      ╔══════════════════════════════════════════════════════════════╗
+      ║  HOW TO ADD A NEW PROJECT                                    ║
+      ║  1. Copy any project-card block below                        ║
+      ║  2. Set data-category to: "design" | "3d" | "dev"           ║
+      ║  3. For an image:   use <img class="project-thumb" src="…">  ║
+      ║  4. For a video:    use <iframe class="project-video" …>     ║
+      ║  5. Or leave the placeholder div and change the emoji/color  ║
+      ╚══════════════════════════════════════════════════════════════╝
+      -->
+
+      <!-- PROJECT 1: Emerald CRM -->
+      <div class="project-card" data-category="dev">
+        <!--
+          REPLACE THIS with: <img class="project-thumb" src="assets/projects/emerald-crm.jpg" alt="Emerald CRM">
+          OR a video: <iframe class="project-video" src="https://player.vimeo.com/video/YOUR_ID" allowfullscreen></iframe>
+        -->
+        <div class="project-thumb-placeholder" style="background:linear-gradient(135deg,#f0fdfa,#ccfbf1)">🏗️</div>
+        <div class="project-body">
+          <span class="project-tag" data-i18n="filter_dev">Python &amp; AI</span>
+          <h3 class="project-title">Emerald CRM</h3>
+          <p class="project-desc" data-i18n="proj_crm">Full Arabic-first real estate payment tracking system built in Python/Django. Features dashboard, IQD/USD currency converter, Excel export, monthly analytics, and dark mode.</p>
+        </div>
+      </div>
+
+      <!-- PROJECT 2: Nogat Baghdad -->
+      <div class="project-card" data-category="3d">
+        <div class="project-thumb-placeholder" style="background:linear-gradient(135deg,#fdf4ff,#ede9fe)">🎬</div>
+        <div class="project-body">
+          <span class="project-tag" data-i18n="filter_3d">3D Animation</span>
+          <h3 class="project-title">Nogat Baghdad — Anamorphic Billboard</h3>
+          <p class="project-desc" data-i18n="proj_nogat">3D anamorphic content displayed on Nogat Baghdad — the largest anamorphic screen in Baghdad. Co-produced with UAE artist Hadeel Al Azzawi, then commissioned as a standalone Ramadan piece.</p>
+        </div>
+      </div>
+
+      <!-- PROJECT 3: Royal Smells -->
+      <div class="project-card" data-category="design">
+        <div class="project-thumb-placeholder" style="background:linear-gradient(135deg,#fff7ed,#fed7aa)">🌸</div>
+        <div class="project-body">
+          <span class="project-tag" data-i18n="filter_design">Graphic Design</span>
+          <h3 class="project-title">Royal Smells — AI Social Media Pipeline</h3>
+          <p class="project-desc" data-i18n="proj_royal">AI-powered social media content production system for a luxury fragrance brand — using Google Imagen 3 and Gemini API to batch-generate product visuals across 4 languages.</p>
+        </div>
+      </div>
+
+      <!-- PROJECT 4: Kurdish Dictionary -->
+      <div class="project-card" data-category="design">
+        <div class="project-thumb-placeholder" style="background:linear-gradient(135deg,#f0fdf4,#bbf7d0)">📚</div>
+        <div class="project-body">
+          <span class="project-tag" data-i18n="filter_design">Graphic Design</span>
+          <h3 class="project-title">Kurdish Dictionary — Kurdistan Language Academy</h3>
+          <p class="project-desc" data-i18n="proj_kurd">Design collaboration on a Kurdish dictionary endorsed and published by the Kurdish Language Academy in Erbil. 400 copies sold on launch day, highlighted on the Academy's official channels.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+
+      <div class="contact-text">
+        <p class="section-label" data-i18n="contact_label">Get in Touch</p>
+        <h2 data-i18n="contact_title">Let's work<br>together.</h2>
+        <p data-i18n="contact_bio">Available for freelance projects in graphic design, 3D animation, and AI automation. Fixed-price, delivery-first. Response within 24 hours.</p>
+
+        <div class="contact-links">
+
+          <a href="mailto:ameenshkur@gmail.com" class="contact-link">
+            <div class="contact-link-icon">📧</div>
+            <div>
+              <span class="contact-link-label" data-i18n="contact_email_label">Email</span>
+              <span class="contact-link-value">ameenshkur@gmail.com</span>
+            </div>
+          </a>
+
+          <a href="https://wa.me/9647719541390" target="_blank" rel="noopener" class="contact-link">
+            <div class="contact-link-icon">💬</div>
+            <div>
+              <span class="contact-link-label">WhatsApp</span>
+              <span class="contact-link-value">+964 771 954 1390</span>
+            </div>
+          </a>
+
+          <!--
+            REPLACE [Your WeChat ID] below with your actual WeChat ID
+          -->
+          <div class="contact-link" style="cursor:default;">
+            <div class="contact-link-icon">🟢</div>
+            <div>
+              <span class="contact-link-label">WeChat</span>
+              <span class="contact-link-value">[Your WeChat ID]</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div>
+        <div class="cv-card">
+          <h3 data-i18n="cv_title">Download My CV</h3>
+          <p data-i18n="cv_desc">Full work history, skills, and project details in one clean document.</p>
+          <!--
+            PUT YOUR CV AT: assets/cv.pdf
+            This is the English_CV_Update.pdf you uploaded — rename it to cv.pdf
+          -->
+          <a href="assets/cv.pdf" download class="cv-download-btn">⬇ Download CV</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer>
+  <p>© 2025 Ameen Shkur &nbsp;·&nbsp; Kirkuk, Kurdistan Region &nbsp;·&nbsp; <a href="mailto:ameenshkur@gmail.com">ameenshkur@gmail.com</a></p>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script>
+  /* ─── TRANSLATIONS ─────────────────────────────────────── */
+  const T = {
+    en: {
+      nav_exp:'Experience', nav_skills:'Skills', nav_work:'Work', nav_contact:'Contact',
+      hero_tag:'Available for freelance projects',
+      hero_role1:'Graphic Designer', hero_role2:'3D Artist', hero_role3:'AI Automation',
+      hero_bio:'A versatile creative professional from Kurdistan, Iraq — combining visual design, 3D animation, and AI-powered automation. Working with clients across Iraq, UAE, Syria, and Egypt.',
+      hero_cta1:'View My Work →', hero_cta2:'Download CV',
+      stat1:'Years Experience', stat2:'Countries Reached', stat3:'Books Sold on Launch Day',
+      exp_label:'Career', exp_title:'Experience',
+      exp1_role:'Graphic Designer & Office Operations',
+      exp1_b1:'Sole employee at the Kirkuk office — independently handling all design, client communications, and expense tracking for the Emerald City real estate development',
+      exp1_b2:'Producing promotional images, branded videos, and digital content published across the project\'s official platforms',
+      exp1_b3:'Built Emerald CRM — a full Arabic-first real estate payment tracking system in Python/Django with dashboard, analytics, Excel export, currency converter, and dark mode',
+      exp2_role:'Graphic Designer & AI Automation Engineer',
+      exp2_b1:'Designing promotional materials including brochures, flyers, packaging, vehicle wrappings, and stickers for a luxury fragrance B2B brand',
+      exp2_b2:'Built Python and Django automation pipelines for batch AI-enhanced product photography and large-scale content generation using Google Imagen and Gemini API',
+      exp2_b3:'Collaborating remotely with a cross-regional team managed from the UAE',
+      exp3_role:'3D Artist & Motion Designer',
+      exp3_b1:'Modeling, texturing, and animating cosmetic products into high-quality 3D video presentations for client campaigns',
+      exp3_b2:'Co-produced two anamorphic videos for Nogat Baghdad — the largest anamorphic screen in Baghdad — with UAE-based artist Hadeel Al Azzawi',
+      exp3_b3:'Subsequently commissioned directly by Nogat Baghdad to produce a standalone Ramadan anamorphic video',
+      exp4_role:'Design Collaborator & NLP Developer',
+      exp4_b1:'Graphic design and content production for a Kurdish-language educational platform with 5,000+ followers',
+      exp4_b2:'Co-produced a Kurdish dictionary endorsed by the Kurdish Language Academy (Erbil) — sold 400 copies on release day',
+      exp4_b3:'Building NLP corpus pipelines for a Kurdish Sorani dictation SaaS using Python, HuggingFace, and Ollama',
+      skills_label:'Toolkit', skills_title:'Skills & Tools',
+      sk1_cat:'Design', sk2_cat:'3D & Motion', sk3_cat:'AI Generation',
+      sk4_cat:'Development', sk5_cat:'Languages', sk6_cat:'Disciplines',
+      work_label:'Portfolio', work_title:'Selected Work',
+      filter_all:'All', filter_design:'Graphic Design', filter_3d:'3D Animation', filter_dev:'Python & AI',
+      proj_crm:'Full Arabic-first real estate payment tracking system built in Python/Django. Features dashboard, IQD/USD currency converter, Excel export, monthly analytics, and dark mode.',
+      proj_nogat:'3D anamorphic content displayed on Nogat Baghdad — the largest anamorphic screen in Baghdad. Co-produced with UAE artist Hadeel Al Azzawi, then commissioned as a standalone Ramadan piece.',
+      proj_royal:'AI-powered social media content production system for a luxury fragrance brand — using Google Imagen 3 and Gemini API to batch-generate product visuals across 4 languages.',
+      proj_kurd:'Design collaboration on a Kurdish dictionary endorsed by the Kurdish Language Academy in Erbil. 400 copies sold on launch day, highlighted on the Academy\'s official channels.',
+      contact_label:'Get in Touch', contact_title:"Let's work\ntogether.",
+      contact_bio:'Available for freelance projects in graphic design, 3D animation, and AI automation. Fixed-price, delivery-first. Response within 24 hours.',
+      contact_email_label:'Email',
+      cv_title:'Download My CV', cv_desc:'Full work history, skills, and project details in one clean document.',
+    },
+    ar: {
+      nav_exp:'الخبرة', nav_skills:'المهارات', nav_work:'الأعمال', nav_contact:'التواصل',
+      hero_tag:'متاح لمشاريع العمل الحر',
+      hero_role1:'مصمم جرافيك', hero_role2:'فنان ثلاثي الأبعاد', hero_role3:'أتمتة بالذكاء الاصطناعي',
+      hero_bio:'مبدع متعدد المواهب من كردستان، العراق — يجمع بين التصميم البصري والرسوم المتحركة ثلاثية الأبعاد وأتمتة الذكاء الاصطناعي. أعمل مع عملاء في العراق والإمارات وسوريا ومصر.',
+      hero_cta1:'شاهد أعمالي ←', hero_cta2:'تحميل السيرة الذاتية',
+      stat1:'سنوات خبرة', stat2:'دول تغطية', stat3:'نسخة مباعة يوم الإطلاق',
+      exp_label:'المسيرة المهنية', exp_title:'الخبرة العملية',
+      exp1_role:'مصمم جرافيك ومدير مكتب',
+      exp1_b1:'موظف وحيد في مكتب كركوك — أتولى بشكل مستقل جميع مهام التصميم وتواصل العملاء وتتبع المصاريف لمشروع العقارات',
+      exp1_b2:'إنتاج صور ترويجية ومقاطع مرئية ومحتوى رقمي لمشروع إيميرالد سيتي العقاري',
+      exp1_b3:'بناء نظام Emerald CRM — نظام متكامل لتتبع مدفوعات العقارات باللغة العربية باستخدام Python وDjango',
+      exp2_role:'مصمم جرافيك ومهندس أتمتة بالذكاء الاصطناعي',
+      exp2_b1:'تصميم مواد ترويجية شاملة لعلامة تجارية فاخرة للعطور تعمل في 4 دول',
+      exp2_b2:'بناء خطوط أتمتة بـ Python وDjango لتصوير المنتجات بمساعدة الذكاء الاصطناعي باستخدام Google Imagen وGemini API',
+      exp2_b3:'التعاون عن بُعد مع فريق متعدد الجنسيات يُدار من الإمارات',
+      exp3_role:'فنان ثلاثي الأبعاد ومصمم حركة',
+      exp3_b1:'نمذجة وتحريك المنتجات التجميلية في عروض فيديو ثلاثية الأبعاد احترافية لحملات العملاء',
+      exp3_b2:'شاركت في إنتاج فيديوهين أنامورفيين لشاشة نقطة بغداد — أكبر شاشة أنامورفية في بغداد — مع الفنانة الإماراتية هديل العزاوي',
+      exp3_b3:'كُلّفت لاحقاً بإنتاج فيديو أنامورفي مستقل لرمضان من قِبل نقطة بغداد مباشرةً',
+      exp4_role:'متعاون في التصميم ومطور معالجة لغة طبيعية',
+      exp4_b1:'تصميم جرافيك وإنتاج محتوى لمنصة تعليمية باللغة الكردية تضم أكثر من 5000 متابع',
+      exp4_b2:'شاركت في إنتاج قاموس كردي اعتمدته أكاديمية اللغة الكردية في أربيل — 400 نسخة مباعة يوم الإطلاق',
+      exp4_b3:'بناء خطوط معالجة مدونة نصية كردية سورانية باستخدام Python وHuggingFace وOllama',
+      skills_label:'الأدوات', skills_title:'المهارات والأدوات',
+      sk1_cat:'التصميم', sk2_cat:'ثلاثي الأبعاد والحركة', sk3_cat:'توليد بالذكاء الاصطناعي',
+      sk4_cat:'التطوير', sk5_cat:'اللغات', sk6_cat:'التخصصات',
+      work_label:'معرض الأعمال', work_title:'أبرز الأعمال',
+      filter_all:'الكل', filter_design:'تصميم جرافيك', filter_3d:'رسوم ثلاثية الأبعاد', filter_dev:'بايثون وذكاء اصطناعي',
+      proj_crm:'نظام متكامل لتتبع مدفوعات العقارات باللغة العربية باستخدام Python/Django مع لوحة تحكم وتحويل IQD/USD وتصدير Excel.',
+      proj_nogat:'محتوى أنامورفي ثلاثي الأبعاد عُرض على شاشة نقطة بغداد — أكبر شاشة أنامورفية في بغداد. أُنتج بالتعاون مع الفنانة هديل العزاوي.',
+      proj_royal:'نظام إنتاج محتوى سوشيال ميديا مدعوم بالذكاء الاصطناعي لعلامة عطور فاخرة — باستخدام Google Imagen 3 وGemini API لإنتاج محتوى بـ 4 لغات.',
+      proj_kurd:'تصميم قاموس كردي اعتمدته أكاديمية اللغة الكردية في أربيل — 400 نسخة مباعة يوم الإطلاق وإشادة رسمية من الأكاديمية.',
+      contact_label:'تواصل معي', contact_title:"لنعمل\nمعاً.",
+      contact_bio:'متاح لمشاريع العمل الحر في التصميم والرسوم ثلاثية الأبعاد وأتمتة الذكاء الاصطناعي. سعر ثابت، تسليم أولاً. رد خلال 24 ساعة.',
+      contact_email_label:'البريد الإلكتروني',
+      cv_title:'تحميل السيرة الذاتية', cv_desc:'السيرة الذاتية الكاملة مع تفاصيل الخبرات والمهارات والمشاريع.',
+    }
+  };
+
+  /* ─── setLang ───────────────────────────────────────────── */
+  function setLang(lang) {
+    const t = T[lang];
+    const rtl = lang === 'ar';
+
+    document.documentElement.dir  = rtl ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (!t[key]) return;
+      if (key === 'contact_title') {
+        el.innerHTML = t[key].replace('\n', '<br>');
+      } else {
+        el.textContent = t[key];
+      }
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
+    });
+  }
+
+  /* ─── filterWork ────────────────────────────────────────── */
+  function filterWork(btn, category) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.project-card').forEach(card => {
+      const match = category === 'all' || card.dataset.category === category;
+      card.classList.toggle('hidden', !match);
+    });
+  }
+
+  /* ─── Scroll animations ─────────────────────────────────── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 90);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.timeline-item, .skill-card, .project-card').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
