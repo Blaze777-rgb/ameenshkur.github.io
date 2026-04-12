@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" font-family="'Outfit', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="800" height="460" fill="#fafaf8" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a" font-family="'Syne', Arial, sans-serif">Royal Smells Catalogue Generator</text>
+  <text x="400" y="68" text-anchor="middle" font-size="13" fill="#64748b">Arabic product catalogue — from data to print-ready A4 PDF</text>
+
+  <!-- Step 1 -->
+  <rect x="50" y="115" width="140" height="160" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="120" y="157" text-anchor="middle" font-size="28">🖼️</text>
+  <text x="120" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Input</text>
+  <text x="120" y="205" text-anchor="middle" font-size="11" fill="#64748b">Product images</text>
+  <text x="120" y="222" text-anchor="middle" font-size="11" fill="#64748b">Product names</text>
+  <text x="120" y="239" text-anchor="middle" font-size="11" fill="#64748b">Prices &amp; details</text>
+  <text x="120" y="256" text-anchor="middle" font-size="11" fill="#64748b">Brand data</text>
+
+  <!-- Arrow -->
+  <line x1="190" y1="195" x2="220" y2="195" stroke="#0d9488" stroke-width="2"/>
+  <polygon points="221,195 209,189 209,201" fill="#0d9488"/>
+
+  <!-- Step 2 -->
+  <rect x="220" y="115" width="140" height="160" rx="12" fill="#0d9488"/>
+  <text x="290" y="157" text-anchor="middle" font-size="28">🐍</text>
+  <text x="290" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Python Script</text>
+  <text x="290" y="205" text-anchor="middle" font-size="11" fill="#ccfbf1">Reads assets</text>
+  <text x="290" y="222" text-anchor="middle" font-size="11" fill="#ccfbf1">Builds layout</text>
+  <text x="290" y="239" text-anchor="middle" font-size="11" fill="#ccfbf1">RTL Arabic</text>
+  <text x="290" y="256" text-anchor="middle" font-size="11" fill="#ccfbf1">Injects data</text>
+
+  <!-- Arrow -->
+  <line x1="360" y1="195" x2="390" y2="195" stroke="#0d9488" stroke-width="2"/>
+  <polygon points="391,195 379,189 379,201" fill="#0d9488"/>
+
+  <!-- Step 3 -->
+  <rect x="390" y="115" width="140" height="160" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="460" y="157" text-anchor="middle" font-size="28">🌐</text>
+  <text x="460" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">HTML/CSS</text>
+  <text x="460" y="205" text-anchor="middle" font-size="11" fill="#64748b">Arabic template</text>
+  <text x="460" y="222" text-anchor="middle" font-size="11" fill="#64748b">RTL layout</text>
+  <text x="460" y="239" text-anchor="middle" font-size="11" fill="#64748b">Grid design</text>
+  <text x="460" y="256" text-anchor="middle" font-size="11" fill="#64748b">Brand styling</text>
+
+  <!-- Arrow -->
+  <line x1="530" y1="195" x2="560" y2="195" stroke="#0d9488" stroke-width="2"/>
+  <polygon points="561,195 549,189 549,201" fill="#0d9488"/>
+
+  <!-- Step 4 -->
+  <rect x="560" y="115" width="170" height="160" rx="12" fill="#f0fdfa" stroke="#0d9488" stroke-width="1.5"/>
+  <text x="645" y="157" text-anchor="middle" font-size="28">📄</text>
+  <text x="645" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">PDF Output</text>
+  <text x="645" y="205" text-anchor="middle" font-size="11" fill="#0f766e">A4 format</text>
+  <text x="645" y="222" text-anchor="middle" font-size="11" fill="#0f766e">Print-ready</text>
+  <text x="645" y="239" text-anchor="middle" font-size="11" fill="#0f766e">Full Arabic RTL</text>
+  <text x="645" y="256" text-anchor="middle" font-size="11" fill="#0f766e">All products</text>
+
+  <!-- Sample catalogue page visual -->
+  <rect x="175" y="310" width="450" height="90" rx="10" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <!-- Simulated catalogue grid -->
+  <rect x="195" y="324" width="55" height="62" rx="5" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="222" y="358" text-anchor="middle" font-size="20">🧴</text>
+  <rect x="265" y="324" width="55" height="62" rx="5" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="292" y="358" text-anchor="middle" font-size="20">🧴</text>
+  <rect x="335" y="324" width="55" height="62" rx="5" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="362" y="358" text-anchor="middle" font-size="20">🧴</text>
+  <rect x="405" y="324" width="55" height="62" rx="5" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="432" y="358" text-anchor="middle" font-size="20">🧴</text>
+  <rect x="475" y="324" width="55" height="62" rx="5" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="502" y="358" text-anchor="middle" font-size="20">🧴</text>
+  <text x="555" y="350" text-anchor="middle" font-size="11" fill="#94a3b8">A4 PDF</text>
+  <text x="555" y="366" text-anchor="middle" font-size="10" fill="#94a3b8">catalogue</text>
+  <text x="555" y="382" text-anchor="middle" font-size="10" fill="#94a3b8">preview</text>
+
+  <!-- Tech stack -->
+  <text x="400" y="424" text-anchor="middle" font-size="12" fill="#94a3b8" font-weight="500">TECH STACK</text>
+  <rect x="185" y="436" width="80" height="28" rx="14" fill="#0d9488" opacity="0.12"/>
+  <text x="225" y="455" text-anchor="middle" font-size="12" fill="#0d9488" font-weight="600">Python</text>
+  <rect x="280" y="436" width="90" height="28" rx="14" fill="#0d9488" opacity="0.12"/>
+  <text x="325" y="455" text-anchor="middle" font-size="12" fill="#0d9488" font-weight="600">HTML/CSS</text>
+  <rect x="385" y="436" width="100" height="28" rx="14" fill="#0d9488" opacity="0.12"/>
+  <text x="435" y="455" text-anchor="middle" font-size="12" fill="#0d9488" font-weight="600">ReportLab</text>
+  <rect x="500" y="436" width="100" height="28" rx="14" fill="#0d9488" opacity="0.12"/>
+  <text x="550" y="455" text-anchor="middle" font-size="12" fill="#0d9488" font-weight="600">WeasyPrint</text>
+</svg>

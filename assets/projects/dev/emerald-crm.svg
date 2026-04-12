@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480" font-family="'Outfit', Arial, sans-serif">
+  <!-- Background -->
+  <rect width="800" height="480" fill="#fafaf8" rx="12"/>
+
+  <!-- Title -->
+  <text x="400" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a" font-family="'Syne', Arial, sans-serif">Emerald CRM</text>
+  <text x="400" y="68" text-anchor="middle" font-size="13" fill="#64748b">Django-based Real Estate Management System</text>
+
+  <!-- Flow line -->
+  <line x1="100" y1="220" x2="700" y2="220" stroke="#e2e8f0" stroke-width="2" stroke-dasharray="6 4"/>
+
+  <!-- Node 1: Input -->
+  <rect x="60" y="150" width="140" height="140" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="130" y="186" text-anchor="middle" font-size="24">🏠</text>
+  <text x="130" y="212" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Input</text>
+  <text x="130" y="230" text-anchor="middle" font-size="11" fill="#64748b">House data</text>
+  <text x="130" y="247" text-anchor="middle" font-size="11" fill="#64748b">Payment info</text>
+  <text x="130" y="264" text-anchor="middle" font-size="11" fill="#64748b">Client records</text>
+
+  <!-- Arrow 1 -->
+  <polygon points="218,215 206,209 206,221" fill="#0d9488"/>
+  <line x1="200" y1="220" x2="240" y2="220" stroke="#0d9488" stroke-width="2"/>
+
+  <!-- Node 2: Django Backend -->
+  <rect x="240" y="150" width="140" height="140" rx="12" fill="#0d9488" stroke="none"/>
+  <text x="310" y="186" text-anchor="middle" font-size="24">⚙️</text>
+  <text x="310" y="212" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Django</text>
+  <text x="310" y="230" text-anchor="middle" font-size="11" fill="#ccfbf1">Backend</text>
+  <text x="310" y="248" text-anchor="middle" font-size="11" fill="#ccfbf1">Business logic</text>
+  <text x="310" y="265" text-anchor="middle" font-size="11" fill="#ccfbf1">SQLite DB</text>
+
+  <!-- Arrow 2 -->
+  <polygon points="398,215 386,209 386,221" fill="#0d9488"/>
+  <line x1="380" y1="220" x2="420" y2="220" stroke="#0d9488" stroke-width="2"/>
+
+  <!-- Node 3: Dashboard -->
+  <rect x="420" y="150" width="140" height="140" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="490" y="186" text-anchor="middle" font-size="24">📊</text>
+  <text x="490" y="212" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Dashboard</text>
+  <text x="490" y="230" text-anchor="middle" font-size="11" fill="#64748b">Analytics</text>
+  <text x="490" y="247" text-anchor="middle" font-size="11" fill="#64748b">Sales overview</text>
+  <text x="490" y="264" text-anchor="middle" font-size="11" fill="#64748b">Filters &amp; search</text>
+
+  <!-- Arrow 3 -->
+  <polygon points="578,215 566,209 566,221" fill="#0d9488"/>
+  <line x1="560" y1="220" x2="600" y2="220" stroke="#0d9488" stroke-width="2"/>
+
+  <!-- Node 4: Outputs -->
+  <rect x="600" y="150" width="140" height="140" rx="12" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+  <text x="670" y="186" text-anchor="middle" font-size="24">📤</text>
+  <text x="670" y="212" text-anchor="middle" font-size="13" font-weight="600" fill="#0f172a">Output</text>
+  <text x="670" y="230" text-anchor="middle" font-size="11" fill="#64748b">Excel export</text>
+  <text x="670" y="247" text-anchor="middle" font-size="11" fill="#64748b">Receipt printing</text>
+  <text x="670" y="264" text-anchor="middle" font-size="11" fill="#64748b">IQD / USD</text>
+
+  <!-- Tech stack badges -->
+  <text x="400" y="340" text-anchor="middle" font-size="12" fill="#94a3b8" font-weight="500">TECH STACK</text>
+  <!-- Badge Python -->
+  <rect x="190" y="355" width="80" height="28" rx="14" fill="#0d9488" opacity="0.12"/>
+  <text x="230" y="374" text-anchor="middle" font-size="12" fill="#0d9488" font-weight="600">Python</text>
+  <!-- Badge Django -->
+  <rect x="285" y="355" width="80" height="28" rx="14" fill="#0d9488" opacity="0.12"/>
+  <text x="325" y="374" text-anchor="middle" font-size="12" fill="#0d9488" font-weight="600">Django</text>
+  <!-- Badge SQLite -->
+  <rect x="380" y="355" width="80" height="28" rx="14" fill="#0d9488" opacity="0.12"/>
+  <text x="420" y="374" text-anchor="middle" font-size="12" fill="#0d9488" font-weight="600">SQLite</text>
+  <!-- Badge HTML/CSS -->
+  <rect x="475" y="355" width="90" height="28" rx="14" fill="#0d9488" opacity="0.12"/>
+  <text x="520" y="374" text-anchor="middle" font-size="12" fill="#0d9488" font-weight="600">HTML/CSS</text>
+
+  <!-- Feature pills bottom -->
+  <rect x="100" y="415" width="130" height="28" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="165" y="434" text-anchor="middle" font-size="11" fill="#0f766e">💰 Currency Converter</text>
+  <rect x="250" y="415" width="110" height="28" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="305" y="434" text-anchor="middle" font-size="11" fill="#0f766e">📋 Excel Export</text>
+  <rect x="380" y="415" width="110" height="28" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="435" y="434" text-anchor="middle" font-size="11" fill="#0f766e">🖨️ Receipts</text>
+  <rect x="510" y="415" width="110" height="28" rx="6" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1"/>
+  <text x="565" y="434" text-anchor="middle" font-size="11" fill="#0f766e">📊 Analytics</text>
+</svg>
