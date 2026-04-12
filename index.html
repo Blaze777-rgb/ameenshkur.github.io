@@ -12,495 +12,168 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #fafaf8;
-      --bg2: #f3f3ef;
-      --teal: #0d9488;
-      --teal-light: #ccfbf1;
-      --teal-dark: #0f766e;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --text-faint: #94a3b8;
-      --border: #e2e8f0;
-      --white: #ffffff;
+      --bg: #fafaf8; --bg2: #f3f3ef;
+      --teal: #0d9488; --teal-light: #ccfbf1; --teal-dark: #0f766e;
+      --text: #0f172a; --text-muted: #64748b; --text-faint: #94a3b8;
+      --border: #e2e8f0; --white: #ffffff;
       --card-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
       --radius: 14px;
       --font-head: 'Syne', Arial, sans-serif;
       --font-body: 'Outfit', Arial, sans-serif;
     }
-
     html[lang="ar"] {
       --font-head: 'Noto Kufi Arabic', Arial, sans-serif;
       --font-body: 'Noto Kufi Arabic', Arial, sans-serif;
     }
-
     html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      font-size: 16px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── NAVBAR ─────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(250,250,248,.82);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .nav-logo {
-      font-family: var(--font-head);
-      font-weight: 700;
-      font-size: 17px;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: -.3px;
-      white-space: nowrap;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color .2s;
-    }
+    /* ── NAVBAR ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(250,250,248,.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-logo { font-family: var(--font-head); font-weight: 700; font-size: 17px; color: var(--text); text-decoration: none; letter-spacing: -.3px; white-space: nowrap; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--teal); }
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .lang-btn {
-      background: none;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      padding: 4px 10px;
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .lang-btn.active,
-    .lang-btn:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-      background: rgba(13,148,136,.06);
-    }
+    .nav-right { display: flex; align-items: center; gap: 6px; }
+    .lang-btn { background: none; border: 1.5px solid var(--border); border-radius: 6px; padding: 4px 10px; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all .2s; }
+    .lang-btn.active, .lang-btn:hover { border-color: var(--teal); color: var(--teal); background: rgba(13,148,136,.06); }
 
-    /* ── HERO ────────────────────────────────────────────── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 100px 24px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, #0d948822 1px, transparent 1px);
-      background-size: 28px 28px;
-      opacity: .45;
-      pointer-events: none;
-    }
-    #hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, var(--bg) 100%);
-      pointer-events: none;
-    }
-    .hero-inner {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-tag {
-      display: inline-block;
-      background: var(--teal-light);
-      color: var(--teal-dark);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 22px;
-      letter-spacing: .3px;
-    }
-    .hero-name {
-      font-family: var(--font-head);
-      font-size: clamp(48px, 8vw, 80px);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      color: var(--text);
-      margin-bottom: 16px;
-    }
-    .hero-bio {
-      font-size: 16px;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto 32px;
-      line-height: 1.7;
-    }
-    .hero-btns {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 52px;
-    }
-    .btn-primary {
-      background: var(--teal);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 13px 28px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background .2s, transform .15s;
-      display: inline-block;
-    }
+    /* ── HERO ── */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
+    #hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, #0d948822 1px, transparent 1px); background-size: 28px 28px; opacity: .45; pointer-events: none; }
+    #hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, var(--bg) 100%); pointer-events: none; }
+    .hero-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .hero-tag { display: inline-block; background: var(--teal-light); color: var(--teal-dark); font-size: 12px; font-weight: 600; padding: 4px 14px; border-radius: 20px; margin-bottom: 22px; letter-spacing: .3px; }
+    .hero-name { font-family: var(--font-head); font-size: clamp(48px, 8vw, 80px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; color: var(--text); margin-bottom: 16px; }
+    .hero-bio { font-size: 16px; color: var(--text-muted); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 52px; }
+    .btn-primary { background: var(--teal); color: #fff; border: none; border-radius: 10px; padding: 13px 28px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; display: inline-block; }
     .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
-    .btn-secondary {
-      background: transparent;
-      color: var(--text);
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 13px 28px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color .2s, color .2s, transform .15s;
-      display: inline-block;
-    }
+    .btn-secondary { background: transparent; color: var(--text); border: 1.5px solid var(--border); border-radius: 10px; padding: 13px 28px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; transition: border-color .2s, color .2s, transform .15s; display: inline-block; }
     .btn-secondary:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      border-top: 1px solid var(--border);
-      padding-top: 32px;
-    }
-    .stat-item {
-      padding: 0 28px;
-      text-align: center;
-      border-right: 1px solid var(--border);
-    }
+    .hero-stats { display: flex; justify-content: center; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 32px; }
+    .stat-item { padding: 0 28px; text-align: center; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
-    .stat-value {
-      font-family: var(--font-head);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      display: block;
-    }
+    .stat-value { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); display: block; }
 
-    /* ── SECTIONS ─────────────────────────────────────────── */
+    /* ── SECTIONS ── */
     section { padding: 96px 24px; }
     .container { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 12px;
-    }
-    .section-heading {
-      font-family: var(--font-head);
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -1px;
-      color: var(--text);
-      margin-bottom: 52px;
-    }
+    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+    .section-heading { font-family: var(--font-head); font-size: clamp(28px, 4vw, 42px); font-weight: 700; line-height: 1.15; letter-spacing: -1px; color: var(--text); margin-bottom: 52px; }
 
-    /* ── SERVICES ─────────────────────────────────────────── */
+    /* ── SERVICES ── */
     #services { background: var(--bg2); }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-      transition: box-shadow .2s, transform .2s;
-    }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+    .service-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; transition: box-shadow .2s, transform .2s; }
     .service-card:hover { box-shadow: var(--card-shadow); transform: translateY(-3px); }
     .service-icon { font-size: 32px; margin-bottom: 16px; display: block; }
-    .service-title {
-      font-family: var(--font-head);
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
+    .service-title { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
     .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
     .service-tools { font-size: 12px; color: var(--teal); font-weight: 600; }
-
-    .lang-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-    }
-    .lang-card-title {
-      font-family: var(--font-head);
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 18px;
-    }
-    .lang-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--border);
-    }
+    .lang-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; }
+    .lang-card-title { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 18px; }
+    .lang-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--border); }
     .lang-row:last-child { border-bottom: none; }
     .lang-name { font-size: 14px; font-weight: 500; color: var(--text); }
-    .lang-level {
-      font-size: 12px;
-      color: var(--teal-dark);
-      background: var(--teal-light);
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-weight: 600;
-    }
+    .lang-level { font-size: 12px; color: var(--teal-dark); background: var(--teal-light); padding: 3px 10px; border-radius: 20px; font-weight: 600; }
 
-    /* ── PORTFOLIO ────────────────────────────────────────── */
+    /* ── PORTFOLIO ── */
     .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
-    .filter-tab {
-      background: none;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      padding: 7px 18px;
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
-      transition: all .2s;
-    }
-    .filter-tab.active, .filter-tab:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-      background: rgba(13,148,136,.07);
-    }
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 22px;
-    }
-    .proj-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: box-shadow .25s, transform .25s;
-    }
+    .filter-tab { background: none; border: 1.5px solid var(--border); border-radius: 8px; padding: 7px 18px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all .2s; }
+    .filter-tab.active, .filter-tab:hover { border-color: var(--teal); color: var(--teal); background: rgba(13,148,136,.07); }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
+    .proj-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: box-shadow .25s, transform .25s; }
     .proj-card:hover { box-shadow: var(--card-shadow); transform: translateY(-3px); }
     .proj-card[data-hidden] { display: none !important; }
-    .proj-video-wrap {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      background: #0f172a;
-    }
-    .proj-video-wrap iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .proj-img-wrap {
-      height: 210px;
-      overflow: hidden;
-      background: var(--bg2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .proj-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .proj-body { padding: 20px 22px 24px; }
-    .proj-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 8px;
-    }
-    .proj-title {
-      font-family: var(--font-head);
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 6px;
-      line-height: 1.35;
-    }
+    .proj-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
+    .proj-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.35; }
     .proj-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-    /* ── CONTACT ──────────────────────────────────────────── */
+    /* gallery / clickable image thumbnails */
+    .proj-thumb { height: 200px; overflow: hidden; background: var(--bg2); position: relative; cursor: pointer; }
+    .proj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s; }
+    .proj-thumb:hover img { transform: scale(1.04); }
+    .gallery-badge { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,.6); color: #fff; font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 5px; pointer-events: none; }
+    .proj-thumb::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0); transition: background .25s; }
+    .proj-thumb:hover::after { background: rgba(0,0,0,.12); }
+
+    /* video placeholder thumbnails */
+    .proj-vid-thumb { height: 200px; background: #0c1526; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden; }
+    .play-btn { width: 54px; height: 54px; background: rgba(255,255,255,.14); border: 2px solid rgba(255,255,255,.38); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #fff; transition: background .2s, border-color .2s; padding-left: 3px; pointer-events: none; }
+    .proj-vid-thumb:hover .play-btn { background: var(--teal); border-color: var(--teal); }
+    .vid-label { position: absolute; bottom: 10px; right: 12px; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,.45); pointer-events: none; }
+
+    /* ── CONTACT ── */
     #contact { background: var(--bg2); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      align-items: start;
-    }
+    .contact-subtext { color: var(--text-muted); font-size: 16px; margin-top: -28px; margin-bottom: 40px; max-width: 520px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
     .contact-links-col { display: flex; flex-direction: column; gap: 14px; }
-    .contact-link-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 22px;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color .2s, box-shadow .2s, transform .2s;
-    }
-    .contact-link-card:hover {
-      border-color: var(--teal);
-      box-shadow: 0 4px 16px rgba(13,148,136,.12);
-      transform: translateY(-2px);
-    }
+    .contact-link-card { display: flex; align-items: center; gap: 16px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; text-decoration: none; color: var(--text); transition: border-color .2s, box-shadow .2s, transform .2s; }
+    .contact-link-card:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(13,148,136,.12); transform: translateY(-2px); }
+    .contact-link-card--static { cursor: default; }
     .contact-icon { font-size: 24px; flex-shrink: 0; }
-    .contact-info-label {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-faint);
-      margin-bottom: 2px;
-    }
+    .contact-info-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); margin-bottom: 2px; }
     .contact-info-value { font-size: 14px; font-weight: 500; color: var(--text); }
-    .cv-card {
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
-      border-radius: var(--radius);
-      padding: 40px 32px;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      min-height: 220px;
-      justify-content: center;
-    }
-    .cv-card-heading {
-      font-family: var(--font-head);
-      font-size: 24px;
-      font-weight: 700;
-      line-height: 1.2;
-    }
+    .cv-card { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); border-radius: var(--radius); padding: 40px 32px; color: #fff; display: flex; flex-direction: column; gap: 12px; min-height: 220px; justify-content: center; }
+    .cv-card-heading { font-family: var(--font-head); font-size: 24px; font-weight: 700; line-height: 1.2; }
     .cv-card-subtext { font-size: 14px; opacity: .8; line-height: 1.6; }
-    .cv-card .btn-white {
-      display: inline-block;
-      align-self: flex-start;
-      background: #fff;
-      color: var(--teal-dark);
-      border: none;
-      border-radius: 10px;
-      padding: 12px 26px;
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      margin-top: 8px;
-      transition: opacity .2s, transform .15s;
-    }
+    .cv-card .btn-white { display: inline-block; align-self: flex-start; background: #fff; color: var(--teal-dark); border: none; border-radius: 10px; padding: 12px 26px; font-family: var(--font-body); font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; margin-top: 8px; transition: opacity .2s, transform .15s; }
     .cv-card .btn-white:hover { opacity: .92; transform: translateY(-1px); }
 
-    /* ── FOOTER ───────────────────────────────────────────── */
-    footer {
-      background: var(--text);
-      color: rgba(255,255,255,.5);
-      text-align: center;
-      padding: 28px 24px;
-      font-size: 13px;
-    }
+    /* ── FOOTER ── */
+    footer { background: var(--text); color: rgba(255,255,255,.5); text-align: center; padding: 28px 24px; font-size: 13px; }
 
-    /* ── ANIMATIONS ───────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .55s ease, transform .55s ease;
-    }
+    /* ── LIGHTBOX ── */
+    .lb { position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .22s; }
+    .lb.open { opacity: 1; pointer-events: all; }
+    .lb-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #fff; font-size: 30px; line-height: 1; cursor: pointer; opacity: .7; transition: opacity .2s; z-index: 10; padding: 4px 8px; }
+    .lb-close:hover { opacity: 1; }
+    /* image pane */
+    .lb-img-pane { position: relative; display: flex; align-items: center; justify-content: center; max-width: 90vw; max-height: 90vh; }
+    .lb-img-pane img { max-width: 88vw; max-height: 88vh; object-fit: contain; border-radius: 6px; display: block; }
+    .lb-arr { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.13); border: 1.5px solid rgba(255,255,255,.28); border-radius: 50%; color: #fff; font-size: 24px; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .18s; line-height: 1; }
+    .lb-arr:hover { background: rgba(255,255,255,.28); }
+    .lb-prev { left: -56px; }
+    .lb-next { right: -56px; }
+    .lb-counter { position: absolute; bottom: -32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.5); font-size: 13px; white-space: nowrap; }
+    /* video pane */
+    .lb-vid-pane { width: 82vw; height: 80vh; }
+    .lb-vid-pane iframe { width: 100%; height: 100%; border: none; border-radius: 8px; }
+
+    /* ── ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
-    /* ── RESPONSIVE ───────────────────────────────────────── */
+    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .portfolio-grid { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
+      .lb-arr { display: none; }
+      .lb-img-pane img { max-width: 96vw; max-height: 80vh; }
+      .lb-vid-pane { width: 96vw; height: 54vw; }
     }
     @media (max-width: 500px) {
       .hero-stats { flex-direction: column; align-items: center; gap: 14px; }
       .stat-item { border-right: none; padding: 0; }
     }
-
-    .contact-subtext {
-      color: var(--text-muted);
-      font-size: 16px;
-      margin-top: -28px;
-      margin-bottom: 40px;
-      max-width: 520px;
-    }
-    .contact-link-card--static { cursor: default; }
-
     /* RTL */
     html[dir="rtl"] .stat-item { border-right: none; border-left: 1px solid var(--border); }
     html[dir="rtl"] .stat-item:last-child { border-left: none; }
-    html[dir="rtl"] .hero-name { letter-spacing: 0; }
-    html[dir="rtl"] .section-heading { letter-spacing: 0; }
+    html[dir="rtl"] .hero-name, html[dir="rtl"] .section-heading { letter-spacing: 0; }
+    html[dir="rtl"] .lb-prev { left: auto; right: -56px; }
+    html[dir="rtl"] .lb-next { right: auto; left: -56px; }
+    html[dir="rtl"] .gallery-badge { right: auto; left: 8px; }
+    html[dir="rtl"] .vid-label { right: auto; left: 12px; }
   </style>
 </head>
 <body>
 
-<!-- ═══ NAVBAR ══════════════════════════════════════════════ -->
+<!-- ═══ NAVBAR ═══════════════════════════════════════════════ -->
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">Ameen Shkur</a>
@@ -527,15 +200,8 @@
       <a href="assets/cv.pdf" class="btn-secondary" download data-i18n="hero_cta_cv">Download CV</a>
     </div>
     <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-value" data-i18n="stat_experience">4+ Years Experience</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" data-i18n="stat_countries">4+ Countries</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" data-i18n="stat_vimeo">17 Videos on Vimeo</span>
-      </div>
+      <div class="stat-item"><span class="stat-value" data-i18n="stat_experience">4+ Years Experience</span></div>
+      <div class="stat-item"><span class="stat-value" data-i18n="stat_countries">4+ Countries</span></div>
     </div>
   </div>
 </section>
@@ -546,51 +212,36 @@
     <p class="section-label" data-i18n="services_heading">What I Do</p>
     <h2 class="section-heading" data-i18n="services_heading">What I Do</h2>
     <div class="services-grid">
-
       <div class="service-card reveal">
         <span class="service-icon">🎨</span>
         <div class="service-title" data-i18n="service_design_title">Graphic Design</div>
         <div class="service-desc" data-i18n="service_design_desc">Brand identity, social media content, product photography editing, carousels, and promotional materials.</div>
         <div class="service-tools" data-i18n="service_design_tools">Photoshop · Illustrator · InDesign</div>
       </div>
-
       <div class="service-card reveal">
         <span class="service-icon">🎬</span>
         <div class="service-title" data-i18n="service_3d_title">3D Animation &amp; Anamorphic Video</div>
         <div class="service-desc" data-i18n="service_3d_desc">3D product animation, motion graphics, and anamorphic billboard content for large screens.</div>
         <div class="service-tools" data-i18n="service_3d_tools">Blender · After Effects</div>
       </div>
-
       <div class="service-card reveal">
         <span class="service-icon">🤖</span>
         <div class="service-title" data-i18n="service_ai_title">AI Automation &amp; Python Development</div>
         <div class="service-desc" data-i18n="service_ai_desc">Custom Python automation pipelines, AI-powered content generation, CRM systems, and batch processing tools.</div>
         <div class="service-tools" data-i18n="service_ai_tools">Python · Django · Gemini API · Google Imagen</div>
       </div>
-
       <div class="service-card reveal">
         <span class="service-icon">🌐</span>
         <div class="service-title" data-i18n="service_translation_title">Translation Services</div>
         <div class="service-desc" data-i18n="service_translation_desc">Professional translation between Kurdish, Arabic, and English. Documents, subtitles, business content, and UI localization.</div>
         <div class="service-tools" data-i18n="service_translation_tools">Kurdish · Arabic · English</div>
       </div>
-
       <div class="lang-card reveal">
         <div class="lang-card-title" data-i18n="languages_heading">Languages</div>
-        <div class="lang-row">
-          <span class="lang-name" data-i18n="lang_kurdish">Kurdish</span>
-          <span class="lang-level" data-i18n="lang_kurdish_level">Native</span>
-        </div>
-        <div class="lang-row">
-          <span class="lang-name" data-i18n="lang_arabic">Arabic</span>
-          <span class="lang-level" data-i18n="lang_arabic_level">Fluent</span>
-        </div>
-        <div class="lang-row">
-          <span class="lang-name" data-i18n="lang_english">English</span>
-          <span class="lang-level" data-i18n="lang_english_level">Fluent</span>
-        </div>
+        <div class="lang-row"><span class="lang-name" data-i18n="lang_kurdish">Kurdish</span><span class="lang-level" data-i18n="lang_kurdish_level">Native</span></div>
+        <div class="lang-row"><span class="lang-name" data-i18n="lang_arabic">Arabic</span><span class="lang-level" data-i18n="lang_arabic_level">Fluent</span></div>
+        <div class="lang-row"><span class="lang-name" data-i18n="lang_english">English</span><span class="lang-level" data-i18n="lang_english_level">Fluent</span></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -600,20 +251,130 @@
   <div class="container">
     <p class="section-label">Selected Work</p>
     <h2 class="section-heading" data-i18n="portfolio_heading">Selected Work</h2>
-
     <div class="filter-tabs">
-      <button type="button" class="filter-tab active" data-filter="all" data-i18n="filter_all">All</button>
-      <button type="button" class="filter-tab" data-filter="design" data-i18n="filter_design">Design</button>
-      <button type="button" class="filter-tab" data-filter="3d" data-i18n="filter_3d">3D Animation</button>
-      <button type="button" class="filter-tab" data-filter="ai" data-i18n="filter_ai">Python &amp; AI</button>
+      <button type="button" class="filter-tab active" data-filter="all"    data-i18n="filter_all">All</button>
+      <button type="button" class="filter-tab"        data-filter="design" data-i18n="filter_design">Design</button>
+      <button type="button" class="filter-tab"        data-filter="3d"     data-i18n="filter_3d">3D Animation</button>
+      <button type="button" class="filter-tab"        data-filter="ai"     data-i18n="filter_ai">Python &amp; AI</button>
     </div>
-
     <div class="portfolio-grid">
 
-      <!-- 3D & ANAMORPHIC -->
-      <div class="proj-card reveal" data-cat="3d">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182042232?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Hadeel Azaweey Anamorphic Video"></iframe>
+      <!-- ══ DESIGN — IMAGE GALLERIES ══ -->
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('rs-brand')">
+          <img src="assets/projects/design/royal-smells/brand/royal-smells-armani-code-perfume-bottle.jpg" alt="Royal Smells Brand Photography" loading="lazy"/>
+          <span class="gallery-badge">⊞ 10 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_rs_brand_title">Royal Smells — Brand Photography</div>
+          <div class="proj-desc" data-i18n="proj_rs_brand_desc">Product photography and brand visuals for Royal Smells perfume and fragrance line.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('rs-edited')">
+          <img src="assets/projects/design/royal-smells/edited/cover-edited.jpg" alt="Royal Smells Edited Collection" loading="lazy"/>
+          <span class="gallery-badge">⊞ 8 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_rs_edited_title">Royal Smells — Edited Collection</div>
+          <div class="proj-desc" data-i18n="proj_rs_edited_desc">Retouched product photos for Royal Smells social media campaigns.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('rs-candy')">
+          <img src="assets/projects/design/royal-smells/candy/gemini-generated-image-lsxd4llsxd4llsxd-eid.jpg" alt="Royal Smells Candy Campaign" loading="lazy"/>
+          <span class="gallery-badge">⊞ 7 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_rs_candy_title">Royal Smells — Candy Campaign</div>
+          <div class="proj-desc" data-i18n="proj_rs_candy_desc">AI-generated Eid campaign visuals for Royal Smells candy-themed product line.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('rs-spray')">
+          <img src="assets/projects/design/royal-smells/how-to-spray/how-to-spray-la-panthere-perfume.jpg" alt="How to Use Guide" loading="lazy"/>
+          <span class="gallery-badge">⊞ 5 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_rs_spray_guide_title">How to Use — Application Guide</div>
+          <div class="proj-desc" data-i18n="proj_rs_spray_guide_desc">Step-by-step visual guide carousel for Royal Smells fragrance application.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('rs-ramadan')">
+          <img src="assets/projects/design/royal-smells/ramadan-carousel/temp-pers1.jpg" alt="Ramadan Carousel" loading="lazy"/>
+          <span class="gallery-badge">⊞ 10 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_rs_ramadan_carousel_title">Royal Smells — Ramadan Carousel</div>
+          <div class="proj-desc" data-i18n="proj_rs_ramadan_carousel_desc">Ramadan-themed social media carousel posts designed for Royal Smells.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('rs-oil')">
+          <img src="assets/projects/design/royal-smells/oil-images/royal-smells-baccarat-rouge-540-oil-perfume.jpg" alt="Oil Product Shots" loading="lazy"/>
+          <span class="gallery-badge">⊞ 10 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_rs_oil_title">Royal Smells — Oil Product Shots</div>
+          <div class="proj-desc" data-i18n="proj_rs_oil_desc">10 retouched perfume oil product shots for Royal Smells luxury fragrance range.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('rs-diffuser')">
+          <img src="assets/projects/design/royal-smells/diffuser/royal-smells-mango-coconut-vanilla-diffuser.jpg" alt="Diffuser Collection" loading="lazy"/>
+          <span class="gallery-badge">⊞ 10 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_rs_diffuser_title">Royal Smells — Diffuser Collection</div>
+          <div class="proj-desc" data-i18n="proj_rs_diffuser_desc">Product photography and visual edits for the Royal Smells reed diffuser range.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('rs-room-spray')">
+          <img src="assets/projects/design/royal-smells/room-spray/whatsapp-image-2026-04-11-at-24737-pm-4.jpeg" alt="Room Spray Launch" loading="lazy"/>
+          <span class="gallery-badge">⊞ 12 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_rs_room_spray_title">Royal Smells — Room Spray Launch</div>
+          <div class="proj-desc" data-i18n="proj_rs_room_spray_desc">Launch photography for the Royal Smells room fragrance spray collection.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="design">
+        <div class="proj-thumb" onclick="lb.openGallery('ec-gallery')">
+          <img src="assets/projects/design/emerald-city/ec-villa-fountain.jpg" alt="Emerald City Gallery" loading="lazy"/>
+          <span class="gallery-badge">⊞ 19 photos</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Design</span>
+          <div class="proj-title" data-i18n="proj_ec_gallery_title">Emerald City — Visual Gallery</div>
+          <div class="proj-desc" data-i18n="proj_ec_gallery_desc">AI-generated and rendered visuals for Emerald City residential compound marketing.</div>
+        </div>
+      </div>
+
+      <!-- ══ 3D & ANAMORPHIC — VIDEO ══ -->
+
+      <div class="proj-card reveal" data-cat="3d" onclick="lb.openVideo('1182042232')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
@@ -622,9 +383,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="3d">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182051678?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Hadeel Azaweey Make-up Remover Render"></iframe>
+      <div class="proj-card reveal" data-cat="3d" onclick="lb.openVideo('1182051678')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
@@ -633,9 +395,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="3d">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182027545?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Ramadan 2026 Baghdad"></iframe>
+      <div class="proj-card reveal" data-cat="3d" onclick="lb.openVideo('1182027545')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
@@ -644,10 +407,12 @@
         </div>
       </div>
 
-      <!-- ROYAL SMELLS -->
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182182983?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Royal Smells 3D Video"></iframe>
+      <!-- ══ DESIGN — VIDEO ══ -->
+
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182182983')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -656,9 +421,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182085378?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Royal Smells Montage Video"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182085378')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -667,9 +433,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182083368?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Royal Smells AI Video 4"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182083368')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -678,9 +445,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182081407?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Royal Smells AI Video 3"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182081407')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -689,9 +457,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182076962?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Royal Smells AI Video 2"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182076962')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -700,9 +469,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182074801?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Royal Smells AI AD"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182074801')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -711,9 +481,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182053552?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Face Wash Video 1"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182053552')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -722,9 +493,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182057983?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Face Wash Video 2"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182057983')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -733,9 +505,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182054337?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Splash Spray Video 1"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182054337')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -744,10 +517,10 @@
         </div>
       </div>
 
-      <!-- EMERALD CITY -->
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182101135?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Emerald City Motion Graphic 2"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182101135')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -756,9 +529,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182056511?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Emerald City Motion Graphic Video"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182056511')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -767,9 +541,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182072317?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Emerald House Building AI Video"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182072317')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -778,10 +553,10 @@
         </div>
       </div>
 
-      <!-- OTHER CLIENTS -->
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182055798?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Kurdish Anatomy Dictionary Video"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182055798')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -790,9 +565,10 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-video-wrap">
-          <iframe src="https://player.vimeo.com/video/1182055253?badge=0&autopause=0&player_id=0" allowfullscreen allow="autoplay; fullscreen; picture-in-picture" title="Slemani Water Company Video"></iframe>
+      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182055253')">
+        <div class="proj-vid-thumb">
+          <div class="play-btn">&#9654;</div>
+          <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -801,10 +577,12 @@
         </div>
       </div>
 
-      <!-- PYTHON & AI -->
+      <!-- ══ PYTHON & AI ══ -->
+
       <div class="proj-card reveal" data-cat="ai">
-        <div class="proj-img-wrap">
-          <img src="assets/projects/dev/emerald-crm.svg" alt="Emerald CRM infographic"/>
+        <div class="proj-thumb" onclick="lb.openGallery('ec-crm')">
+          <img src="assets/projects/dev/emerald-crm/02-dashboard-main.png" alt="Emerald CRM" loading="lazy"/>
+          <span class="gallery-badge">⊞ 12 screenshots</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Python &amp; AI</span>
@@ -814,8 +592,8 @@
       </div>
 
       <div class="proj-card reveal" data-cat="ai">
-        <div class="proj-img-wrap">
-          <img src="assets/projects/dev/royal-smells-pipeline.svg" alt="Royal Smells AI Pipeline infographic"/>
+        <div class="proj-thumb" onclick="lb.openGallery('pipeline-svg')">
+          <img src="assets/projects/dev/royal-smells-pipeline.svg" alt="Royal Smells AI Content Pipeline"/>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Python &amp; AI</span>
@@ -825,8 +603,20 @@
       </div>
 
       <div class="proj-card reveal" data-cat="ai">
-        <div class="proj-img-wrap">
-          <img src="assets/projects/dev/royal-smells-catalogue.svg" alt="Royal Smells Catalogue Generator infographic"/>
+        <div class="proj-thumb" onclick="lb.openGallery('rs-ai')">
+          <img src="assets/projects/dev/royal-smells-ai/adobe-express-file.jpg" alt="AI Diffuser Content Batch Output" loading="lazy"/>
+          <span class="gallery-badge">⊞ 110 images</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Python &amp; AI</span>
+          <div class="proj-title" data-i18n="proj_ai_testers_title">AI Diffuser Content — Batch Output</div>
+          <div class="proj-desc" data-i18n="proj_ai_testers_desc">110 AI-generated fragrance product visuals produced by the Royal Smells automation pipeline using Gemini API and Google Imagen 3.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="ai">
+        <div class="proj-thumb" onclick="lb.openGallery('catalogue-svg')">
+          <img src="assets/projects/dev/royal-smells-catalogue.svg" alt="Royal Smells Catalogue Generator"/>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Python &amp; AI</span>
@@ -835,7 +625,18 @@
         </div>
       </div>
 
-    </div>
+      <div class="proj-card reveal" data-cat="ai">
+        <div class="proj-thumb" onclick="lb.openGallery('ec-systems')">
+          <img src="assets/projects/dev/emerald-city-systems/emerald-city-expenses-dashboard-screenshot.png" alt="Emerald City Systems" loading="lazy"/>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Python &amp; AI</span>
+          <div class="proj-title" data-i18n="proj_ec_systems_title">Emerald City — Expense Tracker</div>
+          <div class="proj-desc" data-i18n="proj_ec_systems_desc">Internal expenses dashboard built for Emerald City to track and report project-level costs.</div>
+        </div>
+      </div>
+
+    </div><!-- /portfolio-grid -->
   </div>
 </section>
 
@@ -844,11 +645,9 @@
   <div class="container">
     <p class="section-label">Get in touch</p>
     <h2 class="section-heading" data-i18n="contact_heading">Let's work together.</h2>
-    <p class="contact-subtext" data-i18n="contact_subtext">Available for freelance projects, collaborations, and full-time opportunities.</p>
-
+    <p class="contact-subtext" data-i18n="contact_subtext">Available for freelance projects, collaborations, and full-time opportunities. Reach out through any of the channels below.</p>
     <div class="contact-grid">
       <div class="contact-links-col">
-
         <a href="mailto:ameenshkur@gmail.com" class="contact-link-card reveal">
           <span class="contact-icon">✉️</span>
           <div>
@@ -856,7 +655,6 @@
             <div class="contact-info-value">ameenshkur@gmail.com</div>
           </div>
         </a>
-
         <a href="https://wa.me/9647719541390" target="_blank" rel="noopener" class="contact-link-card reveal">
           <span class="contact-icon">💬</span>
           <div>
@@ -864,7 +662,6 @@
             <div class="contact-info-value">+964 771 954 1390</div>
           </div>
         </a>
-
         <div class="contact-link-card contact-link-card--static reveal">
           <span class="contact-icon">💚</span>
           <div>
@@ -872,9 +669,7 @@
             <div class="contact-info-value" data-i18n="contact_wechat_id">[WeChat ID — coming soon]</div>
           </div>
         </div>
-
       </div>
-
       <div class="cv-card reveal">
         <div class="cv-card-heading" data-i18n="contact_cv_heading">Download my CV</div>
         <div class="cv-card-subtext" data-i18n="contact_cv_subtext">Full work history, skills, and references.</div>
@@ -889,99 +684,194 @@
   <span data-i18n="footer_copy">© 2026 Ameen Shkur · Kirkuk, Kurdistan Region · ameenshkur@gmail.com</span>
 </footer>
 
+<!-- ═══ LIGHTBOX ══════════════════════════════════════════════ -->
+<div id="lb-modal" class="lb" onclick="lb.clickOutside(event)" role="dialog" aria-modal="true">
+  <button type="button" class="lb-close" onclick="lb.close()" aria-label="Close">&#10005;</button>
+  <!-- image pane -->
+  <div class="lb-img-pane" id="lb-img-pane">
+    <img id="lb-img" src="" alt=""/>
+    <button type="button" class="lb-arr lb-prev" id="lb-prev" onclick="lb.nav(-1)" aria-label="Previous">&#8249;</button>
+    <button type="button" class="lb-arr lb-next" id="lb-next" onclick="lb.nav(1)"  aria-label="Next">&#8250;</button>
+    <div class="lb-counter" id="lb-counter"></div>
+  </div>
+  <!-- video pane -->
+  <div class="lb-vid-pane" id="lb-vid-pane" style="display:none">
+    <iframe id="lb-iframe" src="" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe>
+  </div>
+</div>
+
 <!-- ═══ SCRIPTS ══════════════════════════════════════════════ -->
 <script>
-(function () {
-  'use strict';
+// ── Gallery data ──────────────────────────────────────────────
+var G = {
+  'rs-brand':    {p:'assets/projects/design/royal-smells/brand/',f:['royal-smells-armani-code-oil-drop.jpg','royal-smells-armani-code-perfume-bottle.jpg','royal-smells-aroma-oil-collection-flat-lay.jpg','royal-smells-cute-reed-spray-collage.jpg','royal-smells-la-panthere-perfume-guide.jpg','royal-smells-mr-scandal-perfume-bottle.jpg','royal-smells-room-fragrance-sprays-collection.jpg','royal-smells-wild-berries-room-spray.jpg','test2.jpg','img-010.jpg']},
+  'rs-edited':   {p:'assets/projects/design/royal-smells/edited/',f:['1-edited.jpg','2-edited.jpg','3-edited.jpg','4-edited.jpg','5-edited.jpg','6-edited.jpg','cover-edited.jpg','cta-edited.jpg']},
+  'rs-candy':    {p:'assets/projects/design/royal-smells/candy/',f:['gemini-generated-image-3ltgjf3ltgjf3ltg-eid.jpg','gemini-generated-image-6ejk016ejk016ejk-eid.jpg','gemini-generated-image-cyj254cyj254cyj2-eid.jpg','gemini-generated-image-l38mhul38mhul38m-eid.jpg','gemini-generated-image-lsxd4llsxd4llsxd-eid.jpg','gemini-generated-image-spucadspucadspuc-eid.jpg','gemini-generated-image-wiv7tgwiv7tgwiv7-eid.jpg']},
+  'rs-spray':    {p:'assets/projects/design/royal-smells/how-to-spray/',f:['how-to-spray-behind-ear-step.jpg','how-to-spray-la-panthere-guide.jpg','how-to-spray-la-panthere-perfume.jpg','how-to-spray-neck-step.jpg','how-to-spray-wrist-step.jpg']},
+  'rs-ramadan':  {p:'assets/projects/design/royal-smells/ramadan-carousel/',f:['temp-pers1.jpg','temp-pers10.jpg','temp-pers2.jpg','temp-pers3.jpg','temp-pers4.jpg','temp-pers5.jpg','temp-pers6.jpg','temp-pers7.jpg','temp-pers8.jpg','temp-pers9.jpg']},
+  'rs-oil':      {p:'assets/projects/design/royal-smells/oil-images/',f:['louis-vuitton-imagination-oil-product-shot.jpg','royal-smells-azzaro-wanted-oil-product-shot.jpg','royal-smells-baccarat-rouge-540-oil-perfume.jpg','royal-smells-chopard-oud-malaki-product-shot.jpg','royal-smells-christian-dior-addict-oil.jpg','royal-smells-creed-aventus-oil-product-shot.jpg','royal-smells-hudson-valley-oil-product-shot.jpg','royal-smells-nasomatto-black-afgano-oil.jpg','royal-smells-xerjoff-alexandria-iii-oil.jpg','royal-smells-ysl-myslf-oil-product-shot.jpg']},
+  'rs-diffuser': {p:'assets/projects/design/royal-smells/diffuser/',f:['10changeing.jpg','1smaller.jpg','2darker.jpg','3changeing.jpg','7changeing.jpg','8changeing.jpg','9changeingri.jpg','royal-smells-diffuser-set-product-shot.jpg','royal-smells-mango-coconut-vanilla-diffuser.jpg','royal-smells-s5-diffuser-and-refill-bottle.jpg']},
+  'rs-room-spray':{p:'assets/projects/design/royal-smells/room-spray/',f:['whatsapp-image-2026-04-11-at-24737-pm-1.jpeg','whatsapp-image-2026-04-11-at-24737-pm-2.jpeg','whatsapp-image-2026-04-11-at-24737-pm-3.jpeg','whatsapp-image-2026-04-11-at-24737-pm-4.jpeg','whatsapp-image-2026-04-11-at-24737-pm-5.jpeg','whatsapp-image-2026-04-11-at-24737-pm-6.jpeg','whatsapp-image-2026-04-11-at-24737-pm-7.jpeg','whatsapp-image-2026-04-11-at-24737-pm-8.jpeg','whatsapp-image-2026-04-11-at-24737-pm.jpeg','whatsapp-image-2026-04-11-at-24738-pm-1.jpeg','whatsapp-image-2026-04-11-at-24738-pm-2.jpeg','whatsapp-image-2026-04-11-at-24738-pm.jpeg']},
+  'ec-gallery':  {p:'assets/projects/design/emerald-city/',f:['ec-eid-post.jpg','ec-luxury-street.jpg','ec-main-gate.jpg','ec-market.jpg','ec-mosque-dusk.jpg','ec-mosque.jpg','ec-night-view.jpg','ec-park-garden.jpg','ec-park-sunset.jpg','ec-playground.jpg','ec-sports-court.jpg','ec-street-view.jpg','ec-townhouses.jpg','ec-villa-facade.jpg','ec-villa-flowers.jpg','ec-villa-fountain.jpg','ec-villa-rose-2.jpg','ec-villa-rose.jpg','ec-villa-side.jpg']},
+  'ec-crm':      {p:'assets/projects/dev/emerald-crm/',f:['01-login-screen.png','02-dashboard-main.png','03-unit-payment-details.png','04-property-list-by-type.png','05-currency-exchange-settings.png','06-monthly-collections-report.png','07-overdue-payments-list.png','08-financial-summary-report.png','09-add-new-property-form.png','10-toolbar-options.png','11-payment-receipt-print.png','12-dashboard-main-dark.png']},
+  'rs-ai':       {p:'assets/projects/dev/royal-smells-ai/',f:['adobe-express-file.jpg','gemini-generated-image-8q1fr8q1fr8q1fr8.jpg','gemini-generated-image-ewna54ewna54ewna.jpg','royal-smells-creed-aventus-perfume-oil.png','royal-smells-perfume-oil-bottle.jpg','royal-smells-perfume-oil-bottle-1.jpg','royal-smells-perfume-oil-bottle-2.jpg','ajm-amber-wood.jpg','allgra-nectar.jpg','ambreine.jpg','apple.jpg','aqua-melon.jpg','aqua-rain.jpg','aquapark-bergama.jpg','aromatic-cedar.jpg','baroq.jpg','bashin-rd.jpg','bay-bolt-fine.jpg','berry-mix.jpg','big-boss.jpg','big-sale.jpg','black-vanilla.jpg','blue-chino.jpg','bragmate-butter-orange-91.jpg','bragmate-butter-orange-92.jpg','calabasas.jpg','candy-mango.jpg','capitano-negro.jpg','cherry.jpg','chorus.jpg','citys-rd.jpg','coconut-reed.jpg','costus-homme.jpg','crystal-rd.jpg','cute.jpg','cute-reed.jpg','dark-amber.jpg','dark-chocolate.jpg','dark-sapphire.jpg','dolphin-11.jpg','elegant-hotel.jpg','erasamus.jpg','european.jpg','eurostar.jpg','exclusive-hotel.jpg','exotic-island.jpg','frag-garden-rose.jpg','frag-jasmin.jpg','frag-lavnde-dalpes.jpg','fresh-vanilla.jpg','fresh-waters.jpg','ginger-lily.jpg','ginger-flower.jpg','ginger-flower-rd.jpg','grape.jpg','hilton.jpg','horizon-rd.jpg','horizon-reed.jpg','hotel-california.jpg','intro-oud.jpg','jasmine-garden.jpg','lady-trillion-one.jpg','lady-trillion-two.jpg','largo-homme.jpg','leather-pelle.jpg','liban-bergama.jpg','liberation.jpg','lime-basil-mandarin.jpg','mandarine.jpg','mango.jpg','miglina-flowers.jpg','miss-diana.jpg','moroccan-florals.jpg','mystical-garden.jpg','nordic-leather.jpg','ny99-oud.jpg','odour-terminator.jpg','oriental-blossom.jpg','oud-amber.jpg','oud-noir.jpg','panthere-emilion.jpg','paradise.jpg','patchouly.jpg','patchouly-intro.jpg','peach.jpg','powdery-cloud.jpg','pretty-in-pink.jpg','pudre.jpg','rhubarb-fresh.jpg','rougebery-mix.jpg','royal-smells-oud-oil-bottle.jpg','santal-royal.jpg','savour.jpg','soft-linen.jpg','sport-style-rd.jpg','sport-synergy.jpg','strawberry.jpg','tanzania-kirby.jpg','turkish-bath.jpg','vanilla.jpg','vanilla-fig-blossom.jpg','vickyland.jpg','w-hotel.jpg','watermelon.jpg','white-jasmin-for-mac.jpg','white-jasmine-reed.jpg','wild-berries.jpg','yes-super-brulee.jpg','zr-blanc-jasmine.jpg','screenshot-2026-04-11-212830.png']},
+  'ec-systems':  {p:'assets/projects/dev/emerald-city-systems/',f:['emerald-city-expenses-dashboard-screenshot.png']},
+  'pipeline-svg':{p:'assets/projects/dev/',f:['royal-smells-pipeline.svg']},
+  'catalogue-svg':{p:'assets/projects/dev/',f:['royal-smells-catalogue.svg']}
+};
 
-  let translations = {};
-  let currentLang = localStorage.getItem('lang') || 'en';
+// ── Lightbox ──────────────────────────────────────────────────
+var lb = (function () {
+  var modal, imgPane, vidPane, img, iframe, counter, btnPrev, btnNext;
+  var curFiles = [], curPath = '', curIdx = 0;
 
-  async function loadLang(lang) {
-    try {
-      const res = await fetch('assets/lang/' + lang + '.json');
-      if (!res.ok) throw new Error('Failed to load ' + lang);
-      translations = await res.json();
-      applyTranslations();
-      setDir(lang);
-      updateLangButtons(lang);
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
-    } catch (e) {
-      console.error('i18n load error:', e);
-    }
-  }
-
-  function applyTranslations() {
-    document.querySelectorAll('[data-i18n]').forEach(function(el) {
-      var key = el.getAttribute('data-i18n');
-      if (translations[key] !== undefined) {
-        el.textContent = translations[key];
-      }
+  function init() {
+    modal   = document.getElementById('lb-modal');
+    imgPane = document.getElementById('lb-img-pane');
+    vidPane = document.getElementById('lb-vid-pane');
+    img     = document.getElementById('lb-img');
+    iframe  = document.getElementById('lb-iframe');
+    counter = document.getElementById('lb-counter');
+    btnPrev = document.getElementById('lb-prev');
+    btnNext = document.getElementById('lb-next');
+    document.addEventListener('keydown', function (e) {
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape')      close();
+      if (e.key === 'ArrowLeft')   nav(-1);
+      if (e.key === 'ArrowRight')  nav(1);
     });
   }
 
-  function setDir(lang) {
-    var isAr = lang === 'ar';
-    document.documentElement.setAttribute('lang', lang);
-    document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+  function openGallery(key, startIdx) {
+    var g = G[key];
+    if (!g) return;
+    curFiles = g.f;
+    curPath  = g.p;
+    curIdx   = startIdx || 0;
+    imgPane.style.display = '';
+    vidPane.style.display = 'none';
+    showImg();
+    open();
   }
 
-  function updateLangButtons(lang) {
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+  function openVideo(vimeoId) {
+    imgPane.style.display = 'none';
+    vidPane.style.display = '';
+    iframe.src = 'https://player.vimeo.com/video/' + vimeoId + '?autoplay=1&badge=0&autopause=0&player_id=0';
+    open();
   }
 
-  window.setLang = function(lang) { loadLang(lang); };
+  function showImg() {
+    img.src = curPath + curFiles[curIdx];
+    img.alt = curFiles[curIdx];
+    var total = curFiles.length;
+    var show  = total > 1;
+    btnPrev.style.display  = show ? '' : 'none';
+    btnNext.style.display  = show ? '' : 'none';
+    counter.style.display  = show ? '' : 'none';
+    if (show) counter.textContent = (curIdx + 1) + ' / ' + total;
+  }
 
-  // ── Portfolio filter ──────────────────────────────────────
-  var filterTabs = document.querySelectorAll('.filter-tab');
-  var projCards  = document.querySelectorAll('.proj-card');
+  function nav(dir) {
+    if (!curFiles.length) return;
+    curIdx = (curIdx + dir + curFiles.length) % curFiles.length;
+    showImg();
+  }
 
-  filterTabs.forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      filterTabs.forEach(function(t) { t.classList.remove('active'); });
+  function open() {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    iframe.src = '';
+    img.src    = '';
+    curFiles   = [];
+  }
+
+  function clickOutside(e) {
+    if (e.target === modal) close();
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+
+  return { openGallery: openGallery, openVideo: openVideo, nav: nav, close: close, clickOutside: clickOutside };
+}());
+
+// ── i18n ──────────────────────────────────────────────────────
+var translations = {};
+var currentLang = localStorage.getItem('lang') || 'en';
+
+function loadLang(lang) {
+  fetch('assets/lang/' + lang + '.json')
+    .then(function (r) { if (!r.ok) throw new Error('fetch ' + lang); return r.json(); })
+    .then(function (data) {
+      translations = data;
+      applyTranslations();
+      setDir(lang);
+      updateLangBtns(lang);
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+    })
+    .catch(function (e) { console.error('i18n:', e); });
+}
+
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var k = el.getAttribute('data-i18n');
+    if (translations[k] !== undefined) el.textContent = translations[k];
+  });
+}
+
+function setDir(lang) {
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+}
+
+function updateLangBtns(lang) {
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+}
+
+function setLang(lang) { loadLang(lang); }
+
+// ── Portfolio filter ──────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function () {
+  var tabs  = document.querySelectorAll('.filter-tab');
+  var cards = document.querySelectorAll('.proj-card');
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('active'); });
       tab.classList.add('active');
-      var filter = tab.dataset.filter;
-      projCards.forEach(function(card) {
-        var show = filter === 'all' || card.dataset.cat === filter;
-        if (show) {
-          card.removeAttribute('data-hidden');
-        } else {
-          card.setAttribute('data-hidden', '');
-        }
+      var f = tab.dataset.filter;
+      cards.forEach(function (c) {
+        var show = f === 'all' || c.dataset.cat === f;
+        if (show) c.removeAttribute('data-hidden');
+        else      c.setAttribute('data-hidden', '');
       });
     });
   });
 
-  // ── Scroll reveal ─────────────────────────────────────────
+  // ── Scroll reveal ───────────────────────────────────────────
   var reveals = document.querySelectorAll('.reveal');
-
-  // Stagger children within grids
-  document.querySelectorAll('.services-grid, .portfolio-grid, .contact-links-col').forEach(function(grid) {
-    var children = grid.querySelectorAll('.reveal');
-    children.forEach(function(el, i) {
+  document.querySelectorAll('.services-grid, .portfolio-grid, .contact-links-col').forEach(function (grid) {
+    grid.querySelectorAll('.reveal').forEach(function (el, i) {
       el.style.transitionDelay = (i * 90) + 'ms';
     });
   });
-
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
     });
   }, { threshold: 0.08 });
+  reveals.forEach(function (el) { io.observe(el); });
 
-  reveals.forEach(function(el) { io.observe(el); });
-
-  // ── cv-card reveal (outside grid) ────────────────────────
-  // Already in .reveal, just no stagger needed
-
-  // ── Init ─────────────────────────────────────────────────
+  // ── load language ───────────────────────────────────────────
   loadLang(currentLang);
-})();
+});
 </script>
 
 </body>
