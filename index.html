@@ -779,6 +779,9 @@
 
 <!-- ═══ SCRIPTS ══════════════════════════════════════════════ -->
 <script>
+// ── Video aspect ratios (populated by oEmbed fetch) ───────────
+var videoAspects = {};
+
 // ── Gallery data ──────────────────────────────────────────────
 var G = {
   'rs-brand':     {p:'assets/projects/design/royal-smells/brand/',f:['royal-smells-armani-code-oil-drop.jpg','royal-smells-armani-code-perfume-bottle.jpg','royal-smells-aroma-oil-collection-flat-lay.jpg','royal-smells-cute-reed-spray-collage.jpg','royal-smells-la-panthere-perfume-guide.jpg','royal-smells-mr-scandal-perfume-bottle.jpg','royal-smells-room-fragrance-sprays-collection.jpg','royal-smells-wild-berries-room-spray.jpg','img-010.jpg']},
@@ -857,9 +860,52 @@ var lb = (function () {
     open();
   }
 
+  function sizeVidPane(vimeoId) {
+    var vw = window.innerWidth;
+    var vh = window.innerHeight;
+    var isMobile = vw <= 768;
+    var aspect = videoAspects[vimeoId];
+    var w, h;
+
+    if (!aspect) {
+      // Fallback: landscape defaults
+      if (isMobile) { w = vw * 0.95; h = w * (9 / 16); }
+      else           { w = vw * 0.82; h = vh * 0.80; }
+    } else {
+      var ratio = aspect.w / aspect.h; // e.g. 0.5625 for 9:16 portrait
+      var isPortrait = aspect.h > aspect.w;
+
+      if (isMobile) {
+        if (isPortrait) {
+          h = vh * 0.75;
+          w = h * ratio;
+          if (w > vw * 0.95) { w = vw * 0.95; h = w / ratio; }
+        } else {
+          w = vw * 0.95;
+          h = w / ratio;
+          if (h > vh * 0.80) { h = vh * 0.80; w = h * ratio; }
+        }
+      } else {
+        if (isPortrait) {
+          h = vh * 0.80;
+          w = h * ratio;
+          if (w > vw * 0.90) { w = vw * 0.90; h = w / ratio; }
+        } else {
+          w = vw * 0.80;
+          h = w / ratio;
+          if (h > vh * 0.80) { h = vh * 0.80; w = h * ratio; }
+        }
+      }
+    }
+
+    vidPane.style.width  = Math.round(w) + 'px';
+    vidPane.style.height = Math.round(h) + 'px';
+  }
+
   function openVideo(vimeoId) {
     imgPane.style.display = 'none';
     vidPane.style.display = '';
+    sizeVidPane(vimeoId);
     iframe.src = 'https://player.vimeo.com/video/' + vimeoId + '?autoplay=1&badge=0&autopause=0&player_id=0';
     open();
   }
@@ -893,6 +939,9 @@ var lb = (function () {
     iframe.src = '';
     img.src    = '';
     curFiles   = [];
+    // Clear inline sizing so CSS defaults apply on next open
+    vidPane.style.width  = '';
+    vidPane.style.height = '';
   }
 
   function clickOutside(e) {
@@ -974,12 +1023,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { threshold: 0.08 });
   reveals.forEach(function (el) { io.observe(el); });
 
-  // ── Vimeo thumbnails ──────────────────────────────────────
+  // ── Vimeo thumbnails + aspect ratio ──────────────────────
   document.querySelectorAll('.proj-vid-thumb[data-vid-id]').forEach(function (thumb) {
     var id = thumb.dataset.vidId;
     fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id)
       .then(function (r) { return r.json(); })
       .then(function (d) {
+        // Store aspect ratio for use when opening the lightbox
+        if (d && d.width && d.height) {
+          videoAspects[id] = { w: d.width, h: d.height };
+        }
         if (d && d.thumbnail_url) {
           var tImg = document.createElement('img');
           tImg.src = d.thumbnail_url;
