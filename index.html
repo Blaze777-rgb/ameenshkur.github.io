@@ -37,8 +37,26 @@
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
     .nav-links a:hover { color: var(--teal); }
     .nav-right { display: flex; align-items: center; gap: 6px; }
-    .lang-btn { background: none; border: 1.5px solid var(--border); border-radius: 6px; padding: 4px 10px; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all .2s; }
-    .lang-btn.active, .lang-btn:hover { border-color: var(--teal); color: var(--teal); background: rgba(13,148,136,.06); }
+
+    /* ── LANG DROPDOWN ── */
+    .lang-dropdown { position: relative; }
+    .lang-trigger { display: flex; align-items: center; gap: 5px; background: none; border: 1.5px solid var(--border); border-radius: 8px; padding: 5px 10px; font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: border-color .2s, color .2s, background .2s; white-space: nowrap; min-height: 34px; }
+    .lang-trigger:hover, .lang-trigger.open { border-color: var(--teal); color: var(--teal); background: rgba(13,148,136,.06); }
+    .lang-trigger-flag { font-size: 15px; line-height: 1; display: flex; align-items: center; }
+    .lang-trigger-code { letter-spacing: .5px; }
+    .lang-trigger-arrow { font-size: 9px; opacity: .55; margin-left: 1px; transition: transform .2s; }
+    .lang-trigger.open .lang-trigger-arrow { transform: rotate(180deg); }
+    .lang-panel { position: absolute; top: calc(100% + 6px); right: 0; background: var(--white); border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,.1); min-width: 170px; z-index: 300; overflow: hidden; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .18s, transform .18s; }
+    .lang-panel.open { opacity: 1; pointer-events: all; transform: translateY(0); }
+    html[dir="rtl"] .lang-panel { right: auto; left: 0; }
+    .lang-option { display: flex; align-items: center; gap: 10px; padding: 0 14px; min-height: 44px; width: 100%; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text); text-align: left; transition: background .15s; border-left: 3px solid transparent; }
+    html[dir="rtl"] .lang-option { text-align: right; border-left: none; border-right: 3px solid transparent; }
+    .lang-option:hover { background: #f0fdf4; }
+    .lang-option.active { border-left-color: var(--teal); background: rgba(13,148,136,.04); color: var(--teal); }
+    html[dir="rtl"] .lang-option.active { border-left-color: transparent; border-right-color: var(--teal); }
+    .lang-option-flag { display: flex; align-items: center; flex-shrink: 0; }
+    .lang-option-name { color: var(--text-muted); font-size: 13px; font-weight: 500; }
+    .lang-option.active .lang-option-name { color: var(--teal); }
 
     /* ── HERO ── */
     #hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
@@ -222,9 +240,11 @@
       .lb-vid-pane { width: 95vw; height: 54vw; }
 
       /* TAP TARGETS */
-      .lang-btn { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+      .lang-trigger { min-height: 44px; }
       .btn-primary, .btn-secondary { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
       .contact-link-card { min-height: 44px; }
+      /* Keep dropdown panel from clipping off right edge on mobile */
+      .lang-panel { right: 0; left: auto; min-width: 160px; }
     }
 
     @media (max-width: 480px) {
@@ -252,8 +272,32 @@
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <button type="button" class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-      <button type="button" class="lang-btn" id="btn-ar" onclick="setLang('ar')">AR</button>
+      <!-- Language dropdown -->
+      <div class="lang-dropdown" id="lang-dropdown">
+        <button type="button" class="lang-trigger" id="lang-trigger" aria-haspopup="listbox" aria-expanded="false">
+          <span class="lang-trigger-flag" id="lang-trigger-flag"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" style="border-radius:2px;vertical-align:middle;display:inline-block;flex-shrink:0;" alt="EN"></span>
+          <span class="lang-trigger-code" id="lang-trigger-code">EN</span>
+          <span class="lang-trigger-arrow">▼</span>
+        </button>
+        <div class="lang-panel" id="lang-panel" role="listbox">
+          <button type="button" class="lang-option active" data-lang="en" role="option">
+            <span class="lang-option-flag"><img src="https://flagcdn.com/w40/us.png" width="20" height="14" style="border-radius:2px;vertical-align:middle;display:inline-block;flex-shrink:0;" alt="EN"></span>
+            <span class="lang-option-name">English</span>
+          </button>
+          <button type="button" class="lang-option" data-lang="ar" role="option">
+            <span class="lang-option-flag"><img src="https://flagcdn.com/w40/ae.png" width="20" height="14" style="border-radius:2px;vertical-align:middle;display:inline-block;flex-shrink:0;" alt="AR"></span>
+            <span class="lang-option-name">العربية</span>
+          </button>
+          <button type="button" class="lang-option" data-lang="zh" role="option">
+            <span class="lang-option-flag"><img src="https://flagcdn.com/w40/cn.png" width="20" height="14" style="border-radius:2px;vertical-align:middle;display:inline-block;flex-shrink:0;" alt="ZH"></span>
+            <span class="lang-option-name">中文</span>
+          </button>
+          <button type="button" class="lang-option" data-lang="ku" role="option">
+            <span class="lang-option-flag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" width="20" height="14" style="border-radius:2px;vertical-align:middle;display:inline-block;flex-shrink:0;"><rect width="30" height="7" y="0" fill="#EF2B2D"/><rect width="30" height="6" y="7" fill="#FFFFFF"/><rect width="30" height="7" y="13" fill="#009A3B"/><circle cx="15" cy="10" r="3.5" fill="#F7C900"/><g fill="#F7C900" transform="translate(15,10)"><rect x="-0.5" y="-6.5" width="1" height="3"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(17.14)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(34.28)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(51.42)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(68.57)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(85.71)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(102.85)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(120)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(137.14)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(154.28)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(171.42)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(188.57)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(205.71)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(222.85)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(240)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(257.14)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(274.28)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(291.42)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(308.57)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(325.71)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(342.85)"/></g></svg></span>
+            <span class="lang-option-name">کوردی</span>
+          </button>
+        </div>
+      </div>
       <button type="button" class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
         <i data-lucide="menu" style="width:22px;height:22px"></i>
       </button>
@@ -953,6 +997,15 @@ var lb = (function () {
   return { openGallery: openGallery, openVideo: openVideo, nav: nav, close: close, clickOutside: clickOutside };
 }());
 
+// ── Language config ───────────────────────────────────────────
+var FLAG_STYLE = 'border-radius:2px;vertical-align:middle;display:inline-block;flex-shrink:0;';
+var LANGS = {
+  en: { flagHtml: '<img src="https://flagcdn.com/w40/us.png" width="20" height="14" style="' + FLAG_STYLE + '" alt="EN">', code: 'EN', rtl: false },
+  ar: { flagHtml: '<img src="https://flagcdn.com/w40/ae.png" width="20" height="14" style="' + FLAG_STYLE + '" alt="AR">', code: 'AR', rtl: true  },
+  zh: { flagHtml: '<img src="https://flagcdn.com/w40/cn.png" width="20" height="14" style="' + FLAG_STYLE + '" alt="ZH">', code: 'ZH', rtl: false },
+  ku: { flagHtml: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 20" width="20" height="14" style="border-radius:2px;vertical-align:middle;display:inline-block;flex-shrink:0;"><rect width="30" height="7" y="0" fill="#EF2B2D"/><rect width="30" height="6" y="7" fill="#FFFFFF"/><rect width="30" height="7" y="13" fill="#009A3B"/><circle cx="15" cy="10" r="3.5" fill="#F7C900"/><g fill="#F7C900" transform="translate(15,10)"><rect x="-0.5" y="-6.5" width="1" height="3"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(17.14)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(34.28)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(51.42)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(68.57)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(85.71)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(102.85)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(120)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(137.14)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(154.28)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(171.42)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(188.57)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(205.71)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(222.85)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(240)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(257.14)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(274.28)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(291.42)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(308.57)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(325.71)"/><rect x="-0.5" y="-6.5" width="1" height="3" transform="rotate(342.85)"/></g></svg>', code: 'KU', rtl: true  }
+};
+
 // ── i18n ──────────────────────────────────────────────────────
 var translations = {};
 var currentLang = localStorage.getItem('lang') || 'en';
@@ -964,7 +1017,7 @@ function loadLang(lang) {
       translations = data;
       applyTranslations();
       setDir(lang);
-      updateLangBtns(lang);
+      updateLangDropdown(lang);
       currentLang = lang;
       localStorage.setItem('lang', lang);
     })
@@ -979,16 +1032,63 @@ function applyTranslations() {
 }
 
 function setDir(lang) {
+  var cfg = LANGS[lang] || LANGS['en'];
   document.documentElement.setAttribute('lang', lang);
-  document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('dir', cfg.rtl ? 'rtl' : 'ltr');
 }
 
-function updateLangBtns(lang) {
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-  document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+function updateLangDropdown(lang) {
+  var cfg = LANGS[lang] || LANGS['en'];
+  var triggerFlag = document.getElementById('lang-trigger-flag');
+  var triggerCode = document.getElementById('lang-trigger-code');
+  if (triggerFlag) triggerFlag.innerHTML = cfg.flagHtml;
+  if (triggerCode) triggerCode.textContent = cfg.code;
+  document.querySelectorAll('.lang-option').forEach(function (opt) {
+    opt.classList.toggle('active', opt.dataset.lang === lang);
+  });
 }
 
 function setLang(lang) { loadLang(lang); }
+
+// ── Lang dropdown behaviour ───────────────────────────────────
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    var trigger = document.getElementById('lang-trigger');
+    var panel   = document.getElementById('lang-panel');
+    if (!trigger || !panel) return;
+
+    function openPanel() {
+      trigger.classList.add('open');
+      panel.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+    function closePanel() {
+      trigger.classList.remove('open');
+      panel.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      panel.classList.contains('open') ? closePanel() : openPanel();
+    });
+
+    panel.querySelectorAll('.lang-option').forEach(function (opt) {
+      opt.addEventListener('click', function () {
+        setLang(opt.dataset.lang);
+        closePanel();
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!trigger.contains(e.target) && !panel.contains(e.target)) closePanel();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closePanel();
+    });
+  });
+}());
 
 // ── DOMContentLoaded ─────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
