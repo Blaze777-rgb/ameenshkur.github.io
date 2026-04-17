@@ -142,9 +142,13 @@
     .contact-link-card { display: flex; align-items: center; gap: 16px; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; text-decoration: none; color: var(--text); transition: border-color .2s, box-shadow .2s, transform .2s; }
     .contact-link-card:hover { border-color: var(--teal); box-shadow: 0 4px 16px rgba(13,148,136,.12); transform: translateY(-2px); }
     .contact-link-card--static { cursor: default; }
-    .contact-link-card--copy { cursor: pointer; position: relative; }
-    .copy-confirm { position: absolute; top: 50%; right: 22px; transform: translateY(-50%); font-size: 12px; font-weight: 600; color: var(--teal); opacity: 0; transition: opacity .2s; pointer-events: none; }
-    .copy-confirm.show { opacity: 1; }
+    .contact-link-card--wechat { cursor: pointer; }
+    .contact-info-group { flex: 1; min-width: 0; }
+    .contact-info-label--wechat, .contact-info-value--wechat { letter-spacing: 0; text-transform: none; }
+    .contact-info-label--wechat { font-size: 12px; color: var(--text-faint); }
+    .contact-info-value--wechat { font-size: 13px; line-height: 1.45; color: var(--text-muted); max-width: 240px; }
+    .contact-cjk { font-family: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif; }
+    .contact-qr-thumb { width: 64px; height: 64px; padding: 4px; border-radius: 6px; border: 1px solid rgba(15,23,42,.08); background: #fff; box-shadow: 0 10px 24px rgba(15,23,42,.08); object-fit: contain; flex-shrink: 0; margin-inline-start: auto; }
     .contact-icon { flex-shrink: 0; color: var(--teal); display: flex; }
     .contact-info-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); margin-bottom: 2px; }
     .contact-info-value { font-size: 14px; font-weight: 500; color: var(--text); }
@@ -779,13 +783,13 @@
             <div class="contact-info-value">+964 771 954 1390</div>
           </div>
         </a>
-        <div class="contact-link-card contact-link-card--copy reveal" onclick="copyWechat(this)" title="Click to copy WeChat ID">
+        <div class="contact-link-card contact-link-card--wechat reveal" onclick="lb.openGallery('wechat-qr', 0)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); lb.openGallery('wechat-qr', 0); }" title="Open WeChat QR code" role="button" tabindex="0">
           <span class="contact-icon"><i data-lucide="message-square" style="width:20px;height:20px"></i></span>
-          <div>
-            <div class="contact-info-label" data-i18n="contact_wechat_label">WeChat</div>
-            <div class="contact-info-value">wxid_hutgj6i9qpkg22</div>
+          <div class="contact-info-group">
+            <div class="contact-info-label contact-info-label--wechat">WeChat · <span class="contact-cjk">微信</span></div>
+            <div class="contact-info-value contact-info-value--wechat">Scan to add me · <span class="contact-cjk">扫码添加</span></div>
           </div>
-          <span class="copy-confirm" data-i18n="wechat_copied">Copied!</span>
+          <img class="contact-qr-thumb" src="assets/contact/wechat-qr.png" alt="WeChat QR code preview" loading="lazy"/>
         </div>
       </div>
       <div class="cv-card reveal">
@@ -845,7 +849,8 @@ var G = {
   'ec-crm':       {p:'assets/projects/dev/',f:['emerald-crm.svg','emerald-crm/01-login-screen.png','emerald-crm/02-dashboard-main.png','emerald-crm/03-unit-payment-details.png','emerald-crm/04-property-list-by-type.png','emerald-crm/05-currency-exchange-settings.png','emerald-crm/06-monthly-collections-report.png','emerald-crm/07-overdue-payments-list.png','emerald-crm/08-financial-summary-report.png','emerald-crm/09-add-new-property-form.png','emerald-crm/10-toolbar-options.png','emerald-crm/11-payment-receipt-print.png','emerald-crm/12-dashboard-main-dark.png']},
   'diffuser-batch':{p:'assets/projects/dev/',f:['diffuser-batch.svg','diffuser-examples/ajm-amber-wood.jpg','diffuser-examples/allgra-nectar.jpg','diffuser-examples/aquapark-bergama.jpg','diffuser-examples/aromatic-cedar.jpg','diffuser-examples/baroq.jpg','diffuser-examples/bashin-rd.jpg','diffuser-examples/bay-bolt-fine.jpg']},
   'ec-systems':   {p:'assets/projects/dev/emerald-city-systems/',f:['emerald-city-expenses-dashboard-screenshot.png']},
-  'catalogue-svg':{p:'assets/projects/dev/',f:['royal-smells-catalogue.svg','catalogue-pages/page-2.jpg','catalogue-pages/page-3.jpg','catalogue-pages/page-4.jpg']}
+  'catalogue-svg':{p:'assets/projects/dev/',f:['royal-smells-catalogue.svg','catalogue-pages/page-2.jpg','catalogue-pages/page-3.jpg','catalogue-pages/page-4.jpg']},
+  'wechat-qr':    {p:'assets/contact/',f:['wechat-qr.png']}
 };
 
 // ── Lightbox ──────────────────────────────────────────────────
@@ -1155,14 +1160,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // ── Language ──────────────────────────────────────────────
   loadLang(currentLang);
 });
-
-function copyWechat(card) {
-  navigator.clipboard.writeText('wxid_hutgj6i9qpkg22').then(function () {
-    var confirm = card.querySelector('.copy-confirm');
-    confirm.classList.add('show');
-    setTimeout(function () { confirm.classList.remove('show'); }, 2000);
-  });
-}
 
 // ── Hamburger menu ────────────────────────────────────────────
 (function () {
