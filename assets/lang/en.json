@@ -102,6 +102,8 @@
   "proj_water_desc": "Promotional video for water company.",
   "proj_zhenghe_door_title": "Door Collection Showcase",
   "proj_zhenghe_door_desc": "Client-commissioned showcase for Chinese manufacturer Zhejiang Zhenghe Industry and Trade.",
+  "proj_id_card_title": "ID Card Extraction & A4 Export Tool",
+  "proj_id_card_desc": "Browser-based Python tool that detects ID cards from image folders, straightens and crops them, supports manual review and correction, and exports clean print-ready A4 JPG sheets.",
   "proj_crm_title": "Emerald CRM",
   "proj_crm_desc": "Python CRM for real estate (SQLite): analytics dashboard, Excel export, receipt printing, and IQD/USD currency converter.",
   "proj_catalogue_title": "Royal Smells Catalogue Generator",

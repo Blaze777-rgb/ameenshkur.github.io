@@ -102,6 +102,8 @@
   "proj_water_desc": "ڤیدیۆی بانگەشە بۆ کۆمپانیای ئاو.",
   "proj_zhenghe_door_title": "پیشاندانی کۆمەڵەی دەرگاکان",
   "proj_zhenghe_door_desc": "ڤیدیۆی پیشاندانی داواکراو بۆ بەرهەمهێنەری چینی Zhejiang Zhenghe Industry and Trade.",
+  "proj_id_card_title": "ئامرازی دەرهێنانی کارتی ناسنامە و هەناردەکردنی A4",
+  "proj_id_card_desc": "ئامرازی Python لەسەر وێبگەڕ کە کارتی ناسنامە لە فۆڵدەرەکانی وێنە دەدۆزێتەوە، ڕاستکردنەوە و بڕین دەکات، پشتیوانی پێداچوونەوە و چاککردنی دەستی دەکات، و پەڕەی JPG ی پاک و ئامادەی چاپ بە قەبارەی A4 هەناردە دەکات.",
   "proj_crm_title": "Emerald CRM",
   "proj_crm_desc": "Python CRM بۆ خانووبەرە (SQLite): داشبۆردێکی شیکاری، هەناردەکردنی Excel، چاپکردنی پسوڵە، و گۆڕینی دراوی IQD/USD.",
   "proj_catalogue_title": "دروستکەری کاتالۆگی Royal Smells",

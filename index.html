@@ -801,8 +801,20 @@
       <!-- ══ PYTHON & AI ══ -->
 
       <div class="proj-card reveal" data-cat="ai">
+        <div class="proj-thumb" onclick="lb.openGallery('id-card-extraction')">
+          <img src="assets/projects/dev/covers/id-card-extraction-a4-export.png" alt="ID Card Extraction and A4 Export Tool" loading="lazy"/>
+          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>1 cover</span>
+        </div>
+        <div class="proj-body">
+          <span class="proj-tag">Computer Vision Automation</span>
+          <div class="proj-title" data-i18n="proj_id_card_title">ID Card Extraction &amp; A4 Export Tool</div>
+          <div class="proj-desc" data-i18n="proj_id_card_desc">Browser-based Python tool that detects ID cards from image folders, straightens and crops them, supports manual review and correction, and exports clean print-ready A4 JPG sheets.</div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal" data-cat="ai">
         <div class="proj-thumb" onclick="lb.openGallery('ec-crm')">
-          <img src="assets/projects/dev/emerald-crm.svg" alt="Emerald CRM"/>
+          <img src="assets/projects/dev/covers/emerald-crm.png" alt="Emerald CRM" loading="lazy"/>
           <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>13 slides</span>
         </div>
         <div class="proj-body">
@@ -814,7 +826,7 @@
 
       <div class="proj-card reveal" data-cat="ai">
         <div class="proj-thumb" onclick="lb.openGallery('diffuser-batch')">
-          <img src="assets/projects/dev/diffuser-batch.svg" alt="AI Diffuser Label Generator"/>
+          <img src="assets/projects/dev/covers/diffuser-label-generator.png" alt="AI Diffuser Label Generator" loading="lazy"/>
           <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>8 slides</span>
         </div>
         <div class="proj-body">
@@ -826,7 +838,7 @@
 
       <div class="proj-card reveal" data-cat="ai">
         <div class="proj-thumb" onclick="lb.openGallery('catalogue-svg')">
-          <img src="assets/projects/dev/royal-smells-catalogue.svg" alt="Royal Smells Catalogue Generator"/>
+          <img src="assets/projects/dev/covers/royal-smells-catalogue-generator.png" alt="Royal Smells Catalogue Generator" loading="lazy"/>
           <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>4 slides</span>
         </div>
         <div class="proj-body">
@@ -838,7 +850,8 @@
 
       <div class="proj-card reveal" data-cat="ai">
         <div class="proj-thumb" onclick="lb.openGallery('ec-systems')">
-          <img src="assets/projects/dev/emerald-city-systems/emerald-city-expenses-dashboard-screenshot.png" alt="Emerald City Systems" loading="lazy"/>
+          <img src="assets/projects/dev/covers/emerald-city-expense-tracker.png" alt="Emerald City Systems" loading="lazy"/>
+          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>2 slides</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Python &amp; AI</span>
@@ -938,10 +951,11 @@ var G = {
   'rs-room-spray':{p:'assets/projects/design/royal-smells/room-spray/',f:['whatsapp-image-2026-04-11-at-24737-pm-1.jpeg','whatsapp-image-2026-04-11-at-24737-pm-2.jpeg','whatsapp-image-2026-04-11-at-24737-pm-3.jpeg','whatsapp-image-2026-04-11-at-24737-pm-4.jpeg','whatsapp-image-2026-04-11-at-24737-pm-5.jpeg','whatsapp-image-2026-04-11-at-24737-pm-6.jpeg','whatsapp-image-2026-04-11-at-24737-pm-7.jpeg','whatsapp-image-2026-04-11-at-24737-pm-8.jpeg','whatsapp-image-2026-04-11-at-24737-pm.jpeg','whatsapp-image-2026-04-11-at-24738-pm-1.jpeg','whatsapp-image-2026-04-11-at-24738-pm-2.jpeg','whatsapp-image-2026-04-11-at-24738-pm.jpeg']},
   'ec-gallery':   {p:'assets/projects/design/emerald-city/',f:['ec-eid-post.jpg','ec-luxury-street.jpg','ec-main-gate.jpg','ec-market.jpg','ec-mosque-dusk.jpg','ec-mosque.jpg','ec-night-view.jpg','ec-park-garden.jpg','ec-park-sunset.jpg','ec-playground.jpg','ec-sports-court.jpg','ec-street-view.jpg','ec-townhouses.jpg','ec-villa-facade.jpg','ec-villa-flowers.jpg','ec-villa-fountain.jpg','ec-villa-rose-2.jpg','ec-villa-rose.jpg','ec-villa-side.jpg']},
   'ec-carousel':  {p:'assets/projects/design/emerald-city/carousel/',f:['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg']},
-  'ec-crm':       {p:'assets/projects/dev/',f:['emerald-crm.svg','emerald-crm/01-login-screen.png','emerald-crm/02-dashboard-main.png','emerald-crm/03-unit-payment-details.png','emerald-crm/04-property-list-by-type.png','emerald-crm/05-currency-exchange-settings.png','emerald-crm/06-monthly-collections-report.png','emerald-crm/07-overdue-payments-list.png','emerald-crm/08-financial-summary-report.png','emerald-crm/09-add-new-property-form.png','emerald-crm/10-toolbar-options.png','emerald-crm/11-payment-receipt-print.png','emerald-crm/12-dashboard-main-dark.png']},
-  'diffuser-batch':{p:'assets/projects/dev/',f:['diffuser-batch.svg','diffuser-examples/ajm-amber-wood.jpg','diffuser-examples/allgra-nectar.jpg','diffuser-examples/aquapark-bergama.jpg','diffuser-examples/aromatic-cedar.jpg','diffuser-examples/baroq.jpg','diffuser-examples/bashin-rd.jpg','diffuser-examples/bay-bolt-fine.jpg']},
-  'ec-systems':   {p:'assets/projects/dev/emerald-city-systems/',f:['emerald-city-expenses-dashboard-screenshot.png']},
-  'catalogue-svg':{p:'assets/projects/dev/',f:['royal-smells-catalogue.svg','catalogue-pages/page-2.jpg','catalogue-pages/page-3.jpg','catalogue-pages/page-4.jpg']},
+  'id-card-extraction':{p:'assets/projects/dev/covers/',f:['id-card-extraction-a4-export.png']},
+  'ec-crm':       {p:'assets/projects/dev/',f:['covers/emerald-crm.png','emerald-crm/01-login-screen.png','emerald-crm/02-dashboard-main.png','emerald-crm/03-unit-payment-details.png','emerald-crm/04-property-list-by-type.png','emerald-crm/05-currency-exchange-settings.png','emerald-crm/06-monthly-collections-report.png','emerald-crm/07-overdue-payments-list.png','emerald-crm/08-financial-summary-report.png','emerald-crm/09-add-new-property-form.png','emerald-crm/10-toolbar-options.png','emerald-crm/11-payment-receipt-print.png','emerald-crm/12-dashboard-main-dark.png']},
+  'diffuser-batch':{p:'assets/projects/dev/',f:['covers/diffuser-label-generator.png','diffuser-examples/ajm-amber-wood.jpg','diffuser-examples/allgra-nectar.jpg','diffuser-examples/aquapark-bergama.jpg','diffuser-examples/aromatic-cedar.jpg','diffuser-examples/baroq.jpg','diffuser-examples/bashin-rd.jpg','diffuser-examples/bay-bolt-fine.jpg']},
+  'ec-systems':   {p:'assets/projects/dev/',f:['covers/emerald-city-expense-tracker.png','emerald-city-systems/emerald-city-expenses-dashboard-screenshot.png']},
+  'catalogue-svg':{p:'assets/projects/dev/',f:['covers/royal-smells-catalogue-generator.png','catalogue-pages/page-2.jpg','catalogue-pages/page-3.jpg','catalogue-pages/page-4.jpg']},
   'wechat-qr':    {p:'assets/contact/',f:['wechat-qr.png']}
 };
 
