@@ -130,6 +130,24 @@
     .proj-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; }
     .proj-title { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; line-height: 1.35; }
     .proj-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .campaign-card { border-color: rgba(13,148,136,.35); box-shadow: 0 0 0 1px rgba(13,148,136,.08); }
+    .campaign-card summary { display: block; list-style: none; cursor: pointer; }
+    .campaign-card summary::-webkit-details-marker { display: none; }
+    .campaign-status { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .campaign-status span { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 9px; font-size: 10px; font-weight: 800; letter-spacing: .7px; text-transform: uppercase; }
+    .campaign-status span:first-child { background: rgba(13,148,136,.12); color: var(--teal-dark); }
+    .campaign-status span:last-child { background: var(--bg2); color: var(--text-muted); }
+    .campaign-toggle { margin-top: 16px; min-height: 42px; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1.5px solid rgba(13,148,136,.34); border-radius: 9px; background: rgba(13,148,136,.08); color: var(--teal-dark); font-size: 13px; font-weight: 800; }
+    .campaign-toggle i { width: 15px; height: 15px; transition: transform .16s; }
+    .campaign-toggle-hide { display: none; }
+    .campaign-card[open] .campaign-toggle-show { display: none; }
+    .campaign-card[open] .campaign-toggle-hide { display: inline; }
+    .campaign-card[open] .campaign-toggle i { transform: rotate(180deg); }
+    .campaign-list { border-top: 1px solid var(--border); padding: 8px 14px 14px; display: grid; gap: 6px; background: rgba(250,250,248,.82); }
+    .campaign-item-btn { width: 100%; min-height: 48px; border: none; border-radius: 8px; background: transparent; color: var(--text); font-family: var(--font-body); font-size: 13px; font-weight: 700; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px; transition: background .16s, color .16s; }
+    .campaign-item-btn:hover { background: rgba(13,148,136,.08); color: var(--teal-dark); }
+    .campaign-item-btn i { color: var(--teal); flex-shrink: 0; }
+    html[dir="rtl"] .campaign-item-btn { text-align: right; }
 
     /* gallery / clickable image thumbnails */
     .proj-thumb { height: 200px; overflow: hidden; background: var(--bg2); position: relative; cursor: pointer; }
@@ -322,6 +340,36 @@
       footer { font-size: 14px; padding: 32px 24px; }
     }
 
+    @media (min-width: 769px) and (max-width: 1100px) {
+      body { font-size: 16px; }
+      .nav-inner, .container { max-width: 92vw; }
+      .nav-inner { padding: 0 22px; }
+      .nav-links { gap: 24px; }
+      .nav-links a { font-size: 13px; }
+
+      #hero {
+        min-height: auto;
+        align-items: flex-start;
+        padding: 132px 32px 86px;
+      }
+      .hero-inner { max-width: 680px; }
+      .hero-tag { font-size: 12px; margin-bottom: 22px; }
+      .hero-name { font-size: clamp(56px, 8vw, 74px); margin-bottom: 18px; }
+      .hero-bio { font-size: 16px; max-width: 560px; margin-bottom: 32px; }
+      .hero-btns { margin-bottom: 44px; }
+      .hero-stats { max-width: 680px; margin: 0 auto; padding-top: 32px; }
+
+      section { padding: 88px 32px; }
+      .section-heading { margin-bottom: 46px; }
+      .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .featured-grid { grid-template-columns: 1fr; }
+      .featured-card { grid-template-columns: minmax(260px, .8fr) 1fr; min-height: 240px; }
+      .featured-media, .featured-media .proj-thumb, .featured-media .proj-vid-thumb { min-height: 240px; }
+      .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .cv-card { min-height: 0; }
+    }
+
     /* RTL */
     html[dir="rtl"] .stat-item { border-right: none; border-left: none; }
     html[dir="rtl"] .hero-name, html[dir="rtl"] .section-heading { letter-spacing: 0; }
@@ -472,7 +520,7 @@
         </div>
         <div class="featured-copy">
           <div class="featured-meta" data-i18n="featured_summer_meta">Design</div>
-          <div class="featured-title" data-i18n="proj_rs_summer_ai_title">Royal Smells — Summer AI Video</div>
+          <div class="featured-title" data-i18n="proj_rs_summer_ai_title">Royal Smells — Summer AI Perfume Ad</div>
           <div class="featured-desc" data-i18n="proj_rs_summer_ai_desc">Short-form summer campaign for Royal Smells using AI-generated visuals, AI voice-over, and editing for social media promotion.</div>
           <div class="featured-action" data-i18n="featured_action">Open project</div>
         </div>
@@ -559,111 +607,72 @@
 
       <div class="proj-card reveal" data-cat="design">
         <div class="proj-thumb" onclick="lb.openGallery('rs-brand')">
-          <img src="assets/projects/design/royal-smells/brand/thumbs/royal-smells-armani-code-perfume-bottle-thumb.jpg" alt="Royal Smells Brand Photography" loading="lazy" decoding="async"/>
+          <img src="assets/projects/design/royal-smells/brand/thumbs/royal-smells-armani-code-perfume-bottle-thumb.jpg" alt="Royal Smells Visual Gallery" loading="lazy" decoding="async"/>
           <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>8 photos</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_brand_title">Royal Smells — Brand Photography</div>
+          <div class="proj-title" data-i18n="proj_rs_brand_title">Royal Smells — Visual Gallery</div>
           <div class="proj-desc" data-i18n="proj_rs_brand_desc">Product photography and brand visuals for a perfume and home-fragrance line, shaped for social media and product promotion.</div>
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-thumb" onclick="lb.openGallery('rs-edited')">
-          <img src="assets/projects/design/royal-smells/edited/thumbs/cover-edited-thumb.jpg" alt="Royal Smells Edited Collection" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>8 photos</span>
+      <details class="proj-card campaign-card reveal" data-cat="design">
+        <summary>
+          <div class="proj-thumb" onclick="event.preventDefault(); event.stopPropagation(); lb.openGallery('rs-diffuser')">
+            <img src="assets/projects/design/royal-smells/diffuser/thumbs/royal-smells-mango-coconut-vanilla-diffuser-thumb.jpg" alt="Royal Smells Image Sets" loading="lazy" decoding="async"/>
+            <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>68 images</span>
+          </div>
+          <div class="proj-body">
+            <div class="campaign-status">
+              <span data-i18n="campaign_expandable_label">Expandable</span>
+              <span data-i18n="campaign_carousel_count">8 image sets</span>
+            </div>
+            <span class="proj-tag">Design</span>
+            <div class="proj-title" data-i18n="proj_rs_carousel_campaign_title">Royal Smells — Image Sets &amp; Carousels</div>
+            <div class="proj-desc" data-i18n="proj_rs_carousel_campaign_desc">Eight Royal Smells visual sets grouped together: product edits, oils, diffusers, room sprays, and social media carousels.</div>
+            <span class="campaign-toggle">
+              <span class="campaign-toggle-show" data-i18n="campaign_show_carousels">Show image sets</span>
+              <span class="campaign-toggle-hide" data-i18n="campaign_hide_carousels">Hide image sets</span>
+              <i data-lucide="chevron-down"></i>
+            </span>
+          </div>
+        </summary>
+        <div class="campaign-list">
+          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-edited')">
+            <span data-i18n="proj_rs_edited_title">Royal Smells — Retouched Product Image Collection</span>
+            <i data-lucide="images" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-candy')">
+            <span data-i18n="proj_rs_candy_title">Royal Smells — Eid Candy Carousel Visuals</span>
+            <i data-lucide="images" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-spray')">
+            <span data-i18n="proj_rs_spray_guide_title">Royal Smells — Fragrance Application Guide Carousel</span>
+            <i data-lucide="images" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-ramadan')">
+            <span data-i18n="proj_rs_ramadan_carousel_title">Royal Smells — Ramadan Social Carousel</span>
+            <i data-lucide="images" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-spray-overlay')">
+            <span data-i18n="proj_rs_home_sprays_title">Royal Smells — Home Spray Product Carousel</span>
+            <i data-lucide="images" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-oil')">
+            <span data-i18n="proj_rs_oil_title">Royal Smells — Perfume Oil Product Shots</span>
+            <i data-lucide="images" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-diffuser')">
+            <span data-i18n="proj_rs_diffuser_title">Royal Smells — Diffuser Product Shots</span>
+            <i data-lucide="images" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-room-spray')">
+            <span data-i18n="proj_rs_room_spray_title">Royal Smells — Room Spray Launch Product Photos</span>
+            <i data-lucide="images" style="width:16px;height:16px"></i>
+          </button>
         </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_edited_title">Royal Smells — Edited Collection</div>
-          <div class="proj-desc" data-i18n="proj_rs_edited_desc">Retouched product images prepared for Royal Smells campaign posts, with cleaner lighting, color, and presentation.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-thumb" onclick="lb.openGallery('rs-candy')">
-          <img src="assets/projects/design/royal-smells/candy/thumbs/gemini-generated-image-lsxd4llsxd4llsxd-eid-thumb.jpg" alt="Royal Smells Candy Campaign" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>7 photos</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_candy_title">Royal Smells — Candy Campaign</div>
-          <div class="proj-desc" data-i18n="proj_rs_candy_desc">AI-assisted Eid campaign visuals for a candy-themed Royal Smells product line, designed for festive social media promotion.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-thumb" onclick="lb.openGallery('rs-spray')">
-          <img src="assets/projects/design/royal-smells/how-to-spray/thumbs/how-to-spray-la-panthere-perfume-thumb.jpg" alt="How to Use Guide" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>5 photos</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_spray_guide_title">How to Use — Application Guide</div>
-          <div class="proj-desc" data-i18n="proj_rs_spray_guide_desc">Instructional carousel explaining how to apply fragrance, designed to make product use clear and easy to follow.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-thumb" onclick="lb.openGallery('rs-ramadan')">
-          <img src="assets/projects/design/royal-smells/ramadan-carousel/thumbs/temp-pers1-thumb.jpg" alt="Ramadan Carousel" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>10 photos</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_ramadan_carousel_title">Royal Smells — Ramadan Carousel</div>
-          <div class="proj-desc" data-i18n="proj_rs_ramadan_carousel_desc">Ramadan-themed carousel posts created to keep Royal Smells campaigns seasonal, warm, and consistent.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-thumb" onclick="lb.openGallery('rs-oil')">
-          <img src="assets/projects/design/royal-smells/oil-images/thumbs/royal-smells-baccarat-rouge-540-oil-perfume-thumb.jpg" alt="Oil Product Shots" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>10 photos</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_oil_title">Royal Smells — Oil Product Shots</div>
-          <div class="proj-desc" data-i18n="proj_rs_oil_desc">Set of 10 retouched perfume oil product shots for Royal Smells' luxury fragrance range.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-thumb" onclick="lb.openGallery('rs-diffuser')">
-          <img src="assets/projects/design/royal-smells/diffuser/thumbs/royal-smells-mango-coconut-vanilla-diffuser-thumb.jpg" alt="Diffuser Product Shots" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>10 photos</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_diffuser_title">Diffuser Product Shots</div>
-          <div class="proj-desc" data-i18n="proj_rs_diffuser_desc">Polished diffuser product visuals for Royal Smells, prepared for catalogue and social media use.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-thumb" onclick="lb.openGallery('rs-room-spray')">
-          <img src="assets/projects/design/royal-smells/room-spray/thumbs/whatsapp-image-2026-04-11-at-24737-pm-4-thumb.jpg" alt="Room Spray Launch" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>12 photos</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_room_spray_title">Royal Smells — Room Spray Launch</div>
-          <div class="proj-desc" data-i18n="proj_rs_room_spray_desc">Launch photography for the Royal Smells room spray collection, focused on clear product presentation.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design">
-        <div class="proj-thumb" onclick="lb.openGallery('rs-spray-overlay')">
-          <img src="assets/projects/design/royal-smells/spray-overlay/thumbs/1-thumb.jpg" alt="Royal Smells Home Sprays" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>6 photos</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_home_sprays_title">Royal Smells — Home Sprays</div>
-          <div class="proj-desc" data-i18n="proj_rs_home_sprays_desc">Social carousel showing the Royal Smells home spray range with layered product and lifestyle visuals.</div>
-        </div>
-      </div>
+      </details>
 
       <div class="proj-card reveal" data-cat="design">
         <div class="proj-thumb" onclick="lb.openGallery('ec-gallery')">
@@ -777,77 +786,54 @@
 
       <!-- ══ DESIGN — VIDEO ══ -->
 
-      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1194503780')">
-        <div class="proj-vid-thumb" data-vid-id="1194503780">
-          <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
-          <span class="vid-label">Vimeo</span>
+      <details class="proj-card campaign-card reveal" data-cat="design">
+        <summary>
+          <div class="proj-vid-thumb" data-vid-id="1194503780" onclick="event.preventDefault(); event.stopPropagation(); lb.openVideo('1194503780')">
+            <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
+            <span class="vid-label">Vimeo</span>
+          </div>
+          <div class="proj-body">
+            <div class="campaign-status">
+              <span data-i18n="campaign_expandable_label">Expandable</span>
+              <span data-i18n="campaign_video_count">6 videos</span>
+            </div>
+            <span class="proj-tag">Design</span>
+            <div class="proj-title" data-i18n="proj_rs_video_campaign_title">Royal Smells — Video Campaigns</div>
+            <div class="proj-desc" data-i18n="proj_rs_video_campaign_desc">Six short-form Royal Smells videos grouped as one campaign, including AI visuals, brand montage, and social ads.</div>
+            <span class="campaign-toggle">
+              <span class="campaign-toggle-show" data-i18n="campaign_show_videos">Show videos</span>
+              <span class="campaign-toggle-hide" data-i18n="campaign_hide_videos">Hide videos</span>
+              <i data-lucide="chevron-down"></i>
+            </span>
+          </div>
+        </summary>
+        <div class="campaign-list">
+          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1194503780')">
+            <span data-i18n="proj_rs_summer_ai_title">Royal Smells — Summer AI Perfume Ad</span>
+            <i data-lucide="play" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182085378')">
+            <span data-i18n="proj_rs_montage_title">Royal Smells — Product Montage Edit</span>
+            <i data-lucide="play" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182083368')">
+            <span data-i18n="proj_rs_ai4_title">Royal Smells — AI Fragrance Concept Video 4</span>
+            <i data-lucide="play" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182081407')">
+            <span data-i18n="proj_rs_ai3_title">Royal Smells — AI Fragrance Concept Video 3</span>
+            <i data-lucide="play" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182076962')">
+            <span data-i18n="proj_rs_ai2_title">Royal Smells — AI Fragrance Concept Video 2</span>
+            <i data-lucide="play" style="width:16px;height:16px"></i>
+          </button>
+          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182074801')">
+            <span data-i18n="proj_rs_aiad_title">Royal Smells — Short AI Perfume Ad</span>
+            <i data-lucide="play" style="width:16px;height:16px"></i>
+          </button>
         </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_summer_ai_title">Royal Smells — Summer AI Video</div>
-          <div class="proj-desc" data-i18n="proj_rs_summer_ai_desc">Short-form summer campaign for Royal Smells using AI-generated visuals, AI voice-over, and editing for social media promotion.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182085378')">
-        <div class="proj-vid-thumb" data-vid-id="1182085378">
-          <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
-          <span class="vid-label">Vimeo</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_montage_title">Royal Smells Montage Video</div>
-          <div class="proj-desc" data-i18n="proj_rs_montage_desc">Brand montage video combining Royal Smells product visuals into a polished short-form promotional edit.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182083368')">
-        <div class="proj-vid-thumb" data-vid-id="1182083368">
-          <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
-          <span class="vid-label">Vimeo</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_ai4_title">Royal Smells — AI Brand Video 4</div>
-          <div class="proj-desc" data-i18n="proj_rs_ai4_desc">AI-assisted brand video for Royal Smells, created as part of a short-form promotional content series.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182081407')">
-        <div class="proj-vid-thumb" data-vid-id="1182081407">
-          <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
-          <span class="vid-label">Vimeo</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_ai3_title">Royal Smells — AI Brand Video 3</div>
-          <div class="proj-desc" data-i18n="proj_rs_ai3_desc">AI-assisted brand video exploring another visual style for Royal Smells short-form campaigns.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182076962')">
-        <div class="proj-vid-thumb" data-vid-id="1182076962">
-          <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
-          <span class="vid-label">Vimeo</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_ai2_title">Royal Smells — AI Brand Video 2</div>
-          <div class="proj-desc" data-i18n="proj_rs_ai2_desc">AI-assisted promotional video for Royal Smells, built for fast social media delivery.</div>
-        </div>
-      </div>
-
-      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182074801')">
-        <div class="proj-vid-thumb" data-vid-id="1182074801">
-          <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
-          <span class="vid-label">Vimeo</span>
-        </div>
-        <div class="proj-body">
-          <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_aiad_title">Royal Smells AI AD</div>
-          <div class="proj-desc" data-i18n="proj_rs_aiad_desc">Short Royal Smells advertisement designed to present the fragrance brand clearly in a compact format.</div>
-        </div>
-      </div>
+      </details>
 
       <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182101135')">
         <div class="proj-vid-thumb" data-vid-id="1182101135">
@@ -909,13 +895,13 @@
         </div>
       </div>
 
-      <div class="proj-card reveal" data-cat="design" onclick="lb.openVideo('1182055253')">
+      <div class="proj-card reveal" data-cat="3d" onclick="lb.openVideo('1182055253')">
         <div class="proj-vid-thumb" data-vid-id="1182055253">
           <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
           <span class="vid-label">Vimeo</span>
         </div>
         <div class="proj-body">
-          <span class="proj-tag">Design</span>
+          <span class="proj-tag">3D Animation</span>
           <div class="proj-title" data-i18n="proj_water_title">Slemani Water Company Video</div>
           <div class="proj-desc" data-i18n="proj_water_desc">Promotional video for Slemani Water Company, created for simple and direct brand communication.</div>
         </div>
