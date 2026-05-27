@@ -143,7 +143,8 @@
     .campaign-card[open] .campaign-toggle-show { display: none; }
     .campaign-card[open] .campaign-toggle-hide { display: inline; }
     .campaign-card[open] .campaign-toggle i { transform: rotate(180deg); }
-    .campaign-list { border-top: 1px solid var(--border); padding: 8px 14px 14px; display: grid; gap: 6px; background: rgba(250,250,248,.82); }
+    .campaign-list { border-top: 1px solid var(--border); padding: 8px 14px 14px; display: grid; gap: 6px; background: rgba(250,250,248,.82); overflow: hidden; }
+    .campaign-card.is-animating .campaign-list { will-change: height, opacity; }
     .campaign-item-btn { width: 100%; min-height: 48px; border: none; border-radius: 8px; background: transparent; color: var(--text); font-family: var(--font-body); font-size: 13px; font-weight: 700; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px; transition: background .16s, color .16s; }
     .campaign-item-btn:hover { background: rgba(13,148,136,.08); color: var(--teal-dark); }
     .campaign-item-btn i { color: var(--teal); flex-shrink: 0; }
@@ -211,6 +212,10 @@
     /* ── ANIMATIONS ── */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .32s ease, transform .32s ease; }
     .reveal.visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .campaign-card.is-animating .campaign-list { will-change: auto; }
+    }
 
     /* ── HAMBURGER ── */
     .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--text); width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0; padding: 0; }
@@ -1343,6 +1348,59 @@ document.addEventListener('DOMContentLoaded', function () {
         if (show) c.removeAttribute('data-hidden');
         else      c.setAttribute('data-hidden', '');
       });
+    });
+  });
+
+  // ── Expandable campaign card animation ───────────────────
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('details.campaign-card').forEach(function (card) {
+    var summary = card.querySelector('summary');
+    var list = card.querySelector('.campaign-list');
+    var animation = null;
+    if (!summary || !list) return;
+
+    function finish(open) {
+      card.open = open;
+      card.classList.remove('is-animating');
+      list.style.height = '';
+      list.style.opacity = '';
+      list.style.overflow = '';
+      animation = null;
+    }
+
+    function toggleCard() {
+      var opening = !card.open;
+
+      if (animation) return;
+      if (reduceMotion || typeof list.animate !== 'function') {
+        card.open = opening;
+        return;
+      }
+
+      card.classList.add('is-animating');
+      list.style.overflow = 'hidden';
+
+      if (opening) {
+        card.open = true;
+        list.style.height = '0px';
+        list.style.opacity = '0';
+        animation = list.animate([
+          { height: '0px', opacity: 0 },
+          { height: list.scrollHeight + 'px', opacity: 1 }
+        ], { duration: 220, easing: 'cubic-bezier(.22,.61,.36,1)' });
+      } else {
+        animation = list.animate([
+          { height: list.scrollHeight + 'px', opacity: 1 },
+          { height: '0px', opacity: 0 }
+        ], { duration: 190, easing: 'cubic-bezier(.4,0,.2,1)' });
+      }
+
+      animation.onfinish = function () { finish(opening); };
+    }
+
+    summary.addEventListener('click', function (e) {
+      e.preventDefault();
+      toggleCard();
     });
   });
 
