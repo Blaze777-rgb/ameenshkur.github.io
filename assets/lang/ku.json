@@ -1,5 +1,6 @@
 {
   "nav_services": "خزمەتگوزارییەکان",
+  "nav_featured": "دیاریکراو",
   "nav_work": "کار",
   "nav_contact": "پەیوەندی",
   "lang_en": "EN",
@@ -126,5 +127,5 @@
   "contact_cv_subtext": "مێژووی تەواوی کارکردن و لێهاتوویی و ئاماژەکان.",
   "contact_cv_btn": "داگرتنی سیڤی",
 
-  "footer_copy": "© 2026 ئەمین شکوور · کەرکوک، هەرێمی کوردستان · ameenshkur@gmail.com"
+  "footer_copy": "© 2026 ئەمین شکوور · کەرکوک، هەرێمی کوردستان"
 }

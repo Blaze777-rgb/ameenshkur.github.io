@@ -1,5 +1,6 @@
 {
   "nav_services": "الخدمات",
+  "nav_featured": "المميزة",
   "nav_work": "الأعمال",
   "nav_contact": "التواصل",
   "lang_en": "EN",
@@ -126,5 +127,5 @@
   "contact_cv_subtext": "تاريخ العمل الكامل والمهارات والمراجع.",
   "contact_cv_btn": "تحميل السيرة الذاتية",
 
-  "footer_copy": "© 2026 أمين شكر · كركوك، إقليم كردستان · ameenshkur@gmail.com"
+  "footer_copy": "© 2026 أمين شكر · كركوك، إقليم كردستان"
 }

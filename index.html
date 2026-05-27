@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ameen Shkur — Portfolio</title>
-  <meta name="description" content="Graphic Designer, 3D Artist, and AI Automation developer based in Kirkuk, Kurdistan Region."/>
+  <title>Ameen Shkur — Graphic Design, 3D & AI Automation Portfolio</title>
+  <meta name="description" content="Portfolio of Ameen Shkur, a graphic designer, 3D artist, and AI automation developer creating brand visuals, product videos, and custom Python tools."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -104,6 +104,20 @@
     .lang-level { font-size: 12px; color: var(--teal-dark); background: var(--teal-light); padding: 3px 10px; border-radius: 20px; font-weight: 600; }
 
     /* ── PORTFOLIO ── */
+    #featured { background: var(--bg); }
+    .featured-intro { color: var(--text-muted); font-size: 16px; max-width: 620px; margin-top: -32px; margin-bottom: 40px; }
+    .featured-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; margin-bottom: 10px; }
+    .featured-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; cursor: pointer; display: grid; grid-template-columns: minmax(190px, .9fr) 1fr; min-height: 230px; transition: box-shadow .25s, transform .25s, border-color .25s; }
+    .featured-card:hover { border-color: rgba(13,148,136,.34); box-shadow: var(--card-shadow); transform: translateY(-3px); }
+    .featured-media { min-height: 230px; background: var(--bg2); }
+    .featured-media .proj-thumb, .featured-media .proj-vid-thumb { height: 100%; min-height: 230px; }
+    .featured-media .proj-thumb img { object-fit: contain; background: var(--bg2); }
+    .featured-copy { padding: 24px 24px 26px; display: flex; flex-direction: column; justify-content: center; }
+    .featured-meta { font-size: 11px; font-weight: 700; letter-spacing: .9px; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .featured-title { font-family: var(--font-head); font-size: 19px; font-weight: 700; line-height: 1.25; color: var(--text); margin-bottom: 10px; }
+    .featured-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px; }
+    .featured-action { display: inline-flex; align-items: center; gap: 7px; color: var(--teal-dark); font-size: 13px; font-weight: 700; }
+
     .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
     .filter-tab { background: none; border: 1.5px solid var(--border); border-radius: 8px; padding: 7px 18px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all .2s; }
     .filter-tab.active, .filter-tab:hover { border-color: var(--teal); color: var(--teal); background: rgba(13,148,136,.07); }
@@ -222,6 +236,10 @@
 
       /* GRID LAYOUTS */
       .portfolio-grid { grid-template-columns: 1fr; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .featured-card { grid-template-columns: 1fr; min-height: 0; }
+      .featured-media, .featured-media .proj-thumb, .featured-media .proj-vid-thumb { min-height: 210px; height: 210px; }
+      .featured-copy { padding: 22px 20px 24px; }
       .services-grid { grid-template-columns: 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
 
@@ -283,6 +301,8 @@
       .service-tools { font-size: 13px; }
       .filter-tab { font-size: 14px; padding: 9px 20px; }
       .portfolio-grid { gap: 26px; }
+      .featured-grid { gap: 24px; }
+      .featured-title { font-size: 20px; }
       .proj-body { padding: 24px 26px 28px; }
       .proj-tag { font-size: 12px; margin-bottom: 10px; }
       .proj-title { font-size: 17px; margin-bottom: 8px; }
@@ -319,6 +339,7 @@
     <a href="#" class="nav-logo">Ameen Shkur</a>
     <ul class="nav-links">
       <li><a href="#services" data-i18n="nav_services">Services</a></li>
+      <li><a href="#featured" data-i18n="nav_featured">Featured</a></li>
       <li><a href="#portfolio" data-i18n="nav_work">Work</a></li>
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
@@ -359,16 +380,16 @@
 <!-- ═══ HERO ════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-inner">
-    <span class="hero-tag" data-i18n="hero_subtitle">Graphic Designer · 3D Artist · AI Automation</span>
+    <span class="hero-tag" data-i18n="hero_subtitle">Graphic Design · 3D Product Video · AI Automation</span>
     <h1 class="hero-name" data-i18n="hero_name">Ameen Shkur</h1>
-    <p class="hero-bio" data-i18n="hero_bio">I create visual identities, 3D animations, and AI-powered automation tools. Based in Kirkuk, working with clients across the region and beyond.</p>
+    <p class="hero-bio" data-i18n="hero_bio">I create brand visuals, product animations, and custom automation tools for businesses that need faster, more professional creative workflows.</p>
     <div class="hero-btns">
-      <a href="#portfolio" class="btn-primary" data-i18n="hero_cta_work">View My Work</a>
+      <a href="#featured" class="btn-primary" data-i18n="hero_cta_work">View Selected Work</a>
       <a href="assets/cv.pdf" class="btn-secondary" download data-i18n="hero_cta_cv">Download CV</a>
     </div>
     <div class="hero-stats">
       <div class="stat-item"><span class="stat-value" data-i18n="stat_experience">4+ Years Experience</span></div>
-      <div class="stat-item"><span class="stat-value" data-i18n="stat_countries">4+ Countries</span></div>
+      <div class="stat-item"><span class="stat-value" data-i18n="stat_countries">Clients across 4+ countries</span></div>
     </div>
   </div>
 </section>
@@ -382,29 +403,29 @@
 
       <div class="service-card reveal">
         <span class="service-icon"><i data-lucide="pen-tool" style="width:28px;height:28px"></i></span>
-        <div class="service-title" data-i18n="service_design_title">Graphic Design</div>
-        <div class="service-desc" data-i18n="service_design_desc">Brand identity, social media content, product photography editing, carousels, and promotional materials.</div>
+        <div class="service-title" data-i18n="service_design_title">Brand &amp; Social Design</div>
+        <div class="service-desc" data-i18n="service_design_desc">Visual identities, campaign graphics, product edits, and social content for brands that need consistent, polished marketing.</div>
         <div class="service-tools" data-i18n="service_design_tools">Photoshop · Illustrator · InDesign</div>
       </div>
 
       <div class="service-card reveal">
         <span class="service-icon"><i data-lucide="box" style="width:28px;height:28px"></i></span>
-        <div class="service-title" data-i18n="service_3d_title">3D Animation &amp; Anamorphic Video</div>
-        <div class="service-desc" data-i18n="service_3d_desc">3D product animation, motion graphics, and anamorphic billboard content for large screens.</div>
+        <div class="service-title" data-i18n="service_3d_title">3D Product Animation</div>
+        <div class="service-desc" data-i18n="service_3d_desc">Product renders, motion graphics, and anamorphic billboard content for launches, ads, and large-format screens.</div>
         <div class="service-tools" data-i18n="service_3d_tools">Blender · After Effects</div>
       </div>
 
       <div class="service-card reveal">
         <span class="service-icon"><i data-lucide="cpu" style="width:28px;height:28px"></i></span>
-        <div class="service-title" data-i18n="service_ai_title">AI Automation &amp; Python Development</div>
-        <div class="service-desc" data-i18n="service_ai_desc">Custom Python automation pipelines, AI-powered content generation, CRM systems, and batch processing tools.</div>
+        <div class="service-title" data-i18n="service_ai_title">AI &amp; Python Automation</div>
+        <div class="service-desc" data-i18n="service_ai_desc">Custom tools for batch image generation, catalogue creation, CRM workflows, document processing, and repetitive business tasks.</div>
         <div class="service-tools" data-i18n="service_ai_tools">Python · Django · Gemini API · Google Imagen</div>
       </div>
 
       <div class="service-card reveal">
         <span class="service-icon"><i data-lucide="languages" style="width:28px;height:28px"></i></span>
-        <div class="service-title" data-i18n="service_translation_title">Translation Services</div>
-        <div class="service-desc" data-i18n="service_translation_desc">Professional translation between Kurdish, Arabic, and English. Documents, subtitles, business content, and UI localization.</div>
+        <div class="service-title" data-i18n="service_translation_title">Translation &amp; Localization</div>
+        <div class="service-desc" data-i18n="service_translation_desc">Kurdish, Arabic, and English translation for business content, UI text, documents, and subtitles.</div>
         <div class="service-tools" data-i18n="service_translation_tools">Kurdish · Arabic · English</div>
       </div>
 
@@ -419,11 +440,113 @@
   </div>
 </section>
 
+<!-- ═══ FEATURED WORK ═══════════════════════════════════════ -->
+<section id="featured">
+  <div class="container">
+    <p class="section-label" data-i18n="featured_label">Featured Work</p>
+    <h2 class="section-heading" data-i18n="featured_heading">Selected projects with the strongest results.</h2>
+    <p class="featured-intro" data-i18n="featured_intro">A focused view of my strongest design, 3D, AI video, and automation work before the full project archive.</p>
+    <div class="featured-grid">
+
+      <div class="featured-card reveal" onclick="lb.openVideo('1182042232')" role="button" tabindex="0" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); lb.openVideo('1182042232'); }">
+        <div class="featured-media">
+          <div class="proj-vid-thumb" data-vid-id="1182042232">
+            <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
+            <span class="vid-label">Vimeo</span>
+          </div>
+        </div>
+        <div class="featured-copy">
+          <div class="featured-meta" data-i18n="featured_hadeel_meta">3D Animation</div>
+          <div class="featured-title" data-i18n="proj_hadeel_ana_title">Hadeel Azaweey Anamorphic Video</div>
+          <div class="featured-desc" data-i18n="proj_hadeel_ana_desc">Large-format 3D product video created for Nogat Baghdad's anamorphic screen, built to make a cosmetics campaign feel dimensional and high-impact.</div>
+          <div class="featured-action" data-i18n="featured_action">Open project</div>
+        </div>
+      </div>
+
+      <div class="featured-card reveal" onclick="lb.openVideo('1194503780')" role="button" tabindex="0" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); lb.openVideo('1194503780'); }">
+        <div class="featured-media">
+          <div class="proj-vid-thumb" data-vid-id="1194503780">
+            <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
+            <span class="vid-label">Vimeo</span>
+          </div>
+        </div>
+        <div class="featured-copy">
+          <div class="featured-meta" data-i18n="featured_summer_meta">Design</div>
+          <div class="featured-title" data-i18n="proj_rs_summer_ai_title">Royal Smells — Summer AI Video</div>
+          <div class="featured-desc" data-i18n="proj_rs_summer_ai_desc">Short-form summer campaign for Royal Smells using AI-generated visuals, AI voice-over, and editing for social media promotion.</div>
+          <div class="featured-action" data-i18n="featured_action">Open project</div>
+        </div>
+      </div>
+
+      <div class="featured-card reveal" onclick="lb.openGallery('ec-crm')" role="button" tabindex="0" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); lb.openGallery('ec-crm'); }">
+        <div class="featured-media">
+          <div class="proj-thumb">
+            <img src="assets/projects/dev/covers/thumbs/emerald-crm-thumb.jpg" alt="Emerald CRM dashboard" loading="lazy" decoding="async"/>
+            <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>13 slides</span>
+          </div>
+        </div>
+        <div class="featured-copy">
+          <div class="featured-meta" data-i18n="featured_crm_meta">Python &amp; AI</div>
+          <div class="featured-title" data-i18n="proj_crm_title">Emerald CRM</div>
+          <div class="featured-desc" data-i18n="proj_crm_desc">Custom Python CRM for real estate operations with analytics, payment tracking, Excel export, receipt printing, and IQD/USD currency tools.</div>
+          <div class="featured-action" data-i18n="featured_action">Open project</div>
+        </div>
+      </div>
+
+      <div class="featured-card reveal" onclick="lb.openGallery('diffuser-batch')" role="button" tabindex="0" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); lb.openGallery('diffuser-batch'); }">
+        <div class="featured-media">
+          <div class="proj-thumb">
+            <img src="assets/projects/dev/covers/thumbs/diffuser-label-generator-thumb.jpg" alt="AI Diffuser Label Generator" loading="lazy" decoding="async"/>
+            <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>8 slides</span>
+          </div>
+        </div>
+        <div class="featured-copy">
+          <div class="featured-meta" data-i18n="featured_diffuser_meta">Python &amp; AI</div>
+          <div class="featured-title" data-i18n="proj_diffuser_batch_title">AI Diffuser Label Generator</div>
+          <div class="featured-desc" data-i18n="proj_diffuser_batch_desc">Python automation pipeline that turned one CSV file into 110 labeled diffuser product images with Arabic and English names applied to bottle mockups.</div>
+          <div class="featured-action" data-i18n="featured_action">Open project</div>
+        </div>
+      </div>
+
+      <div class="featured-card reveal" onclick="lb.openVideo('1188692408')" role="button" tabindex="0" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); lb.openVideo('1188692408'); }">
+        <div class="featured-media">
+          <div class="proj-vid-thumb" data-vid-id="1188692408">
+            <div class="play-btn"><i data-lucide="play-circle" style="width:24px;height:24px"></i></div>
+            <span class="vid-label">Vimeo</span>
+          </div>
+        </div>
+        <div class="featured-copy">
+          <div class="featured-meta" data-i18n="featured_ec_tour_meta">Design</div>
+          <div class="featured-title" data-i18n="proj_ec_ai_tour_title">Emerald City AI Tour Video</div>
+          <div class="featured-desc" data-i18n="proj_ec_ai_tour_desc">Cinematic real estate tour built from on-site photography, then refined with AI to create a polished marketing video for the compound.</div>
+          <div class="featured-action" data-i18n="featured_action">Open project</div>
+        </div>
+      </div>
+
+      <div class="featured-card reveal" onclick="lb.openGallery('id-card-extraction')" role="button" tabindex="0" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); lb.openGallery('id-card-extraction'); }">
+        <div class="featured-media">
+          <div class="proj-thumb">
+            <img src="assets/projects/dev/covers/thumbs/id-card-extraction-a4-export-thumb.jpg" alt="ID Card Extraction and A4 Export Tool" loading="lazy" decoding="async"/>
+            <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>3 slides</span>
+          </div>
+        </div>
+        <div class="featured-copy">
+          <div class="featured-meta" data-i18n="featured_id_meta">Python &amp; AI</div>
+          <div class="featured-title" data-i18n="proj_id_card_title">ID Card Extraction &amp; A4 Export Tool</div>
+          <div class="featured-desc" data-i18n="proj_id_card_desc">Browser-based Python tool that detects ID cards from image folders, straightens and crops them, supports manual review, and exports print-ready A4 JPG sheets.</div>
+          <div class="featured-action" data-i18n="featured_action">Open project</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ═══ PORTFOLIO ════════════════════════════════════════════ -->
 <section id="portfolio">
   <div class="container">
-    <p class="section-label">Selected Work</p>
-    <h2 class="section-heading" data-i18n="portfolio_heading">Selected Work</h2>
+    <p class="section-label" data-i18n="portfolio_label">Project Archive</p>
+    <h2 class="section-heading" data-i18n="portfolio_heading">Explore more work by category.</h2>
     <div class="filter-tabs">
       <button type="button" class="filter-tab active" data-filter="all"    data-i18n="filter_all">All</button>
       <button type="button" class="filter-tab"        data-filter="design" data-i18n="filter_design">Design</button>
@@ -437,12 +560,12 @@
       <div class="proj-card reveal" data-cat="design">
         <div class="proj-thumb" onclick="lb.openGallery('rs-brand')">
           <img src="assets/projects/design/royal-smells/brand/thumbs/royal-smells-armani-code-perfume-bottle-thumb.jpg" alt="Royal Smells Brand Photography" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>9 photos</span>
+          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>8 photos</span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_brand_title">Royal Smells — Brand Photography</div>
-          <div class="proj-desc" data-i18n="proj_rs_brand_desc">Product photography and brand visuals for Royal Smells perfume and fragrance line.</div>
+          <div class="proj-desc" data-i18n="proj_rs_brand_desc">Product photography and brand visuals for a perfume and home-fragrance line, shaped for social media and product promotion.</div>
         </div>
       </div>
 
@@ -454,7 +577,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_edited_title">Royal Smells — Edited Collection</div>
-          <div class="proj-desc" data-i18n="proj_rs_edited_desc">Retouched product photos for Royal Smells social media campaigns.</div>
+          <div class="proj-desc" data-i18n="proj_rs_edited_desc">Retouched product images prepared for Royal Smells campaign posts, with cleaner lighting, color, and presentation.</div>
         </div>
       </div>
 
@@ -466,7 +589,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_candy_title">Royal Smells — Candy Campaign</div>
-          <div class="proj-desc" data-i18n="proj_rs_candy_desc">AI-generated Eid campaign visuals for Royal Smells candy-themed product line.</div>
+          <div class="proj-desc" data-i18n="proj_rs_candy_desc">AI-assisted Eid campaign visuals for a candy-themed Royal Smells product line, designed for festive social media promotion.</div>
         </div>
       </div>
 
@@ -478,7 +601,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_spray_guide_title">How to Use — Application Guide</div>
-          <div class="proj-desc" data-i18n="proj_rs_spray_guide_desc">Step-by-step visual guide carousel for Royal Smells fragrance application.</div>
+          <div class="proj-desc" data-i18n="proj_rs_spray_guide_desc">Instructional carousel explaining how to apply fragrance, designed to make product use clear and easy to follow.</div>
         </div>
       </div>
 
@@ -490,7 +613,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_ramadan_carousel_title">Royal Smells — Ramadan Carousel</div>
-          <div class="proj-desc" data-i18n="proj_rs_ramadan_carousel_desc">Ramadan-themed social media carousel posts designed for Royal Smells.</div>
+          <div class="proj-desc" data-i18n="proj_rs_ramadan_carousel_desc">Ramadan-themed carousel posts created to keep Royal Smells campaigns seasonal, warm, and consistent.</div>
         </div>
       </div>
 
@@ -502,7 +625,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_oil_title">Royal Smells — Oil Product Shots</div>
-          <div class="proj-desc" data-i18n="proj_rs_oil_desc">10 retouched perfume oil product shots for Royal Smells luxury fragrance range.</div>
+          <div class="proj-desc" data-i18n="proj_rs_oil_desc">Set of 10 retouched perfume oil product shots for Royal Smells' luxury fragrance range.</div>
         </div>
       </div>
 
@@ -514,7 +637,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_diffuser_title">Diffuser Product Shots</div>
-          <div class="proj-desc" data-i18n="proj_rs_diffuser_desc">Product photography and visual edits for the Royal Smells reed diffuser range.</div>
+          <div class="proj-desc" data-i18n="proj_rs_diffuser_desc">Polished diffuser product visuals for Royal Smells, prepared for catalogue and social media use.</div>
         </div>
       </div>
 
@@ -526,7 +649,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_room_spray_title">Royal Smells — Room Spray Launch</div>
-          <div class="proj-desc" data-i18n="proj_rs_room_spray_desc">Launch photography for the Royal Smells room fragrance spray collection.</div>
+          <div class="proj-desc" data-i18n="proj_rs_room_spray_desc">Launch photography for the Royal Smells room spray collection, focused on clear product presentation.</div>
         </div>
       </div>
 
@@ -538,7 +661,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_home_sprays_title">Royal Smells — Home Sprays</div>
-          <div class="proj-desc" data-i18n="proj_rs_home_sprays_desc">Social media carousel for Royal Smells home fragrance spray collection.</div>
+          <div class="proj-desc" data-i18n="proj_rs_home_sprays_desc">Social carousel showing the Royal Smells home spray range with layered product and lifestyle visuals.</div>
         </div>
       </div>
 
@@ -550,7 +673,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_ec_gallery_title">Emerald City — Visual Gallery</div>
-          <div class="proj-desc" data-i18n="proj_ec_gallery_desc">AI-generated and rendered visuals for Emerald City residential compound marketing.</div>
+          <div class="proj-desc" data-i18n="proj_ec_gallery_desc">AI-generated and rendered visuals for Emerald City residential compound marketing, covering villas, streets, parks, and lifestyle scenes.</div>
         </div>
       </div>
 
@@ -576,7 +699,7 @@
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
           <div class="proj-title" data-i18n="proj_hadeel_ana_title">Hadeel Azaweey Anamorphic Video</div>
-          <div class="proj-desc" data-i18n="proj_hadeel_ana_desc">Featured on Nogat Baghdad, the largest anamorphic screen in Baghdad.</div>
+          <div class="proj-desc" data-i18n="proj_hadeel_ana_desc">Large-format 3D product video created for Nogat Baghdad's anamorphic screen, built to make a cosmetics campaign feel dimensional and high-impact.</div>
         </div>
       </div>
 
@@ -588,7 +711,7 @@
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
           <div class="proj-title" data-i18n="proj_hadeel_render_title">Hadeel Azaweey Make-up Remover Render</div>
-          <div class="proj-desc" data-i18n="proj_hadeel_render_desc">3D product render for cosmetics campaign.</div>
+          <div class="proj-desc" data-i18n="proj_hadeel_render_desc">3D product render for a cosmetics campaign, focused on clean materials, lighting, and premium product presentation.</div>
         </div>
       </div>
 
@@ -600,7 +723,7 @@
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
           <div class="proj-title" data-i18n="proj_ramadan_title">Ramadan 2026 Baghdad</div>
-          <div class="proj-desc" data-i18n="proj_ramadan_desc">Commissioned anamorphic Ramadan video for Nogat Baghdad.</div>
+          <div class="proj-desc" data-i18n="proj_ramadan_desc">Commissioned anamorphic Ramadan video for Nogat Baghdad, designed for large-screen public display.</div>
         </div>
       </div>
 
@@ -612,7 +735,7 @@
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
           <div class="proj-title" data-i18n="proj_rs_3d_title">Royal Smells 3D Video</div>
-          <div class="proj-desc" data-i18n="proj_rs_3d_desc">3D product video for luxury perfume brand.</div>
+          <div class="proj-desc" data-i18n="proj_rs_3d_desc">3D perfume product video for Royal Smells, built around premium lighting, movement, and campaign-ready presentation.</div>
         </div>
       </div>
 
@@ -624,7 +747,7 @@
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
           <div class="proj-title" data-i18n="proj_fw1_title">Face Wash Video 1</div>
-          <div class="proj-desc" data-i18n="proj_fw1_desc">Product video for face wash.</div>
+          <div class="proj-desc" data-i18n="proj_fw1_desc">Short product video for a face wash campaign, using motion and clean composition to highlight the packaging.</div>
         </div>
       </div>
 
@@ -636,7 +759,7 @@
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
           <div class="proj-title" data-i18n="proj_fw2_title">Face Wash Video 2</div>
-          <div class="proj-desc" data-i18n="proj_fw2_desc">Product video for face wash.</div>
+          <div class="proj-desc" data-i18n="proj_fw2_desc">Second face wash product video exploring a different visual direction for beauty and skincare promotion.</div>
         </div>
       </div>
 
@@ -648,7 +771,7 @@
         <div class="proj-body">
           <span class="proj-tag">3D Animation</span>
           <div class="proj-title" data-i18n="proj_spray1_title">Splash Spray Video 1</div>
-          <div class="proj-desc" data-i18n="proj_spray1_desc">Product video for splash spray.</div>
+          <div class="proj-desc" data-i18n="proj_spray1_desc">Product video for splash spray, designed for fast social media viewing and clear brand presentation.</div>
         </div>
       </div>
 
@@ -662,7 +785,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_summer_ai_title">Royal Smells — Summer AI Video</div>
-          <div class="proj-desc" data-i18n="proj_rs_summer_ai_desc">AI-generated summer campaign video for Royal Smells, featuring AI-created voice-over for short-form social media promotion.</div>
+          <div class="proj-desc" data-i18n="proj_rs_summer_ai_desc">Short-form summer campaign for Royal Smells using AI-generated visuals, AI voice-over, and editing for social media promotion.</div>
         </div>
       </div>
 
@@ -674,7 +797,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_montage_title">Royal Smells Montage Video</div>
-          <div class="proj-desc" data-i18n="proj_rs_montage_desc">Brand montage video for Royal Smells.</div>
+          <div class="proj-desc" data-i18n="proj_rs_montage_desc">Brand montage video combining Royal Smells product visuals into a polished short-form promotional edit.</div>
         </div>
       </div>
 
@@ -685,8 +808,8 @@
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_ai4_title">Royal Smells AI Video 4</div>
-          <div class="proj-desc" data-i18n="proj_rs_ai4_desc">AI-generated brand video.</div>
+          <div class="proj-title" data-i18n="proj_rs_ai4_title">Royal Smells — AI Brand Video 4</div>
+          <div class="proj-desc" data-i18n="proj_rs_ai4_desc">AI-assisted brand video for Royal Smells, created as part of a short-form promotional content series.</div>
         </div>
       </div>
 
@@ -697,8 +820,8 @@
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_ai3_title">Royal Smells AI Video 3</div>
-          <div class="proj-desc" data-i18n="proj_rs_ai3_desc">AI-generated brand video.</div>
+          <div class="proj-title" data-i18n="proj_rs_ai3_title">Royal Smells — AI Brand Video 3</div>
+          <div class="proj-desc" data-i18n="proj_rs_ai3_desc">AI-assisted brand video exploring another visual style for Royal Smells short-form campaigns.</div>
         </div>
       </div>
 
@@ -709,8 +832,8 @@
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
-          <div class="proj-title" data-i18n="proj_rs_ai2_title">Royal Smells AI Video 2</div>
-          <div class="proj-desc" data-i18n="proj_rs_ai2_desc">AI-generated brand video.</div>
+          <div class="proj-title" data-i18n="proj_rs_ai2_title">Royal Smells — AI Brand Video 2</div>
+          <div class="proj-desc" data-i18n="proj_rs_ai2_desc">AI-assisted promotional video for Royal Smells, built for fast social media delivery.</div>
         </div>
       </div>
 
@@ -722,7 +845,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_rs_aiad_title">Royal Smells AI AD</div>
-          <div class="proj-desc" data-i18n="proj_rs_aiad_desc">Short advertisement for Royal Smells.</div>
+          <div class="proj-desc" data-i18n="proj_rs_aiad_desc">Short Royal Smells advertisement designed to present the fragrance brand clearly in a compact format.</div>
         </div>
       </div>
 
@@ -734,7 +857,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_ec_motion2_title">Emerald City Motion Graphic 2</div>
-          <div class="proj-desc" data-i18n="proj_ec_motion2_desc">Motion graphic for Emerald City.</div>
+          <div class="proj-desc" data-i18n="proj_ec_motion2_desc">Motion graphic for Emerald City real estate marketing, created for social media and campaign communication.</div>
         </div>
       </div>
 
@@ -746,7 +869,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_ec_motion1_title">Emerald City Motion Graphic Video</div>
-          <div class="proj-desc" data-i18n="proj_ec_motion1_desc">Motion graphic for Emerald City.</div>
+          <div class="proj-desc" data-i18n="proj_ec_motion1_desc">Motion graphic video for Emerald City, focused on presenting residential compound features in a concise format.</div>
         </div>
       </div>
 
@@ -758,7 +881,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_ec_ai_tour_title">Emerald City AI Tour Video</div>
-          <div class="proj-desc" data-i18n="proj_ec_ai_tour_desc">AI-crafted cinematic tour of Emerald City compound, built from real on-site photography refined with AI.</div>
+          <div class="proj-desc" data-i18n="proj_ec_ai_tour_desc">Cinematic real estate tour built from on-site photography, then refined with AI to create a polished marketing video for the compound.</div>
         </div>
       </div>
 
@@ -770,7 +893,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_ec_ai_title">Emerald House Building AI Video</div>
-          <div class="proj-desc" data-i18n="proj_ec_ai_desc">AI video for Emerald House Building.</div>
+          <div class="proj-desc" data-i18n="proj_ec_ai_desc">AI-assisted video for Emerald House Building, turning real estate visuals into a more dynamic promotional sequence.</div>
         </div>
       </div>
 
@@ -794,7 +917,7 @@
         <div class="proj-body">
           <span class="proj-tag">Design</span>
           <div class="proj-title" data-i18n="proj_water_title">Slemani Water Company Video</div>
-          <div class="proj-desc" data-i18n="proj_water_desc">Promotional video for water company.</div>
+          <div class="proj-desc" data-i18n="proj_water_desc">Promotional video for Slemani Water Company, created for simple and direct brand communication.</div>
         </div>
       </div>
 
@@ -820,7 +943,7 @@
         <div class="proj-body">
           <span class="proj-tag">Computer Vision Automation</span>
           <div class="proj-title" data-i18n="proj_id_card_title">ID Card Extraction &amp; A4 Export Tool</div>
-          <div class="proj-desc" data-i18n="proj_id_card_desc">Browser-based Python tool that detects ID cards from image folders, straightens and crops them, supports manual review and correction, and exports clean print-ready A4 JPG sheets.</div>
+          <div class="proj-desc" data-i18n="proj_id_card_desc">Browser-based Python tool that detects ID cards from image folders, straightens and crops them, supports manual review, and exports print-ready A4 JPG sheets.</div>
         </div>
       </div>
 
@@ -832,7 +955,7 @@
         <div class="proj-body">
           <span class="proj-tag">Python &amp; AI</span>
           <div class="proj-title" data-i18n="proj_crm_title">Emerald CRM</div>
-          <div class="proj-desc" data-i18n="proj_crm_desc">Python CRM for real estate (SQLite): analytics dashboard, Excel export, receipt printing, and IQD/USD currency converter.</div>
+          <div class="proj-desc" data-i18n="proj_crm_desc">Custom Python CRM for real estate operations with analytics, payment tracking, Excel export, receipt printing, and IQD/USD currency tools.</div>
         </div>
       </div>
 
@@ -844,7 +967,7 @@
         <div class="proj-body">
           <span class="proj-tag">Python &amp; AI</span>
           <div class="proj-title" data-i18n="proj_diffuser_batch_title">AI Diffuser Label Generator</div>
-          <div class="proj-desc" data-i18n="proj_diffuser_batch_desc">Python automation pipeline that generates product label images in batch. Applies Arabic and English product names to diffuser bottle mockups using Pillow. Produced 110 unique labeled images from a single CSV file.</div>
+          <div class="proj-desc" data-i18n="proj_diffuser_batch_desc">Python automation pipeline that turned one CSV file into 110 labeled diffuser product images with Arabic and English names applied to bottle mockups.</div>
         </div>
       </div>
 
@@ -856,7 +979,7 @@
         <div class="proj-body">
           <span class="proj-tag">Python &amp; AI</span>
           <div class="proj-title" data-i18n="proj_catalogue_title">Royal Smells Catalogue Generator</div>
-          <div class="proj-desc" data-i18n="proj_catalogue_desc">Python script that compiles product images and data into an Arabic HTML catalogue and exports it as a print-ready A4 PDF.</div>
+          <div class="proj-desc" data-i18n="proj_catalogue_desc">Python catalogue generator that compiles product images and data into an Arabic HTML catalogue, then exports a print-ready A4 PDF.</div>
         </div>
       </div>
 
@@ -868,7 +991,7 @@
         <div class="proj-body">
           <span class="proj-tag">Python &amp; AI</span>
           <div class="proj-title" data-i18n="proj_ec_systems_title">Emerald City — Expense Tracker</div>
-          <div class="proj-desc" data-i18n="proj_ec_systems_desc">Internal expenses dashboard built for Emerald City to track and report project-level costs.</div>
+          <div class="proj-desc" data-i18n="proj_ec_systems_desc">Internal expense tracking dashboard for Emerald City, built to monitor project-level costs and reporting.</div>
         </div>
       </div>
 
@@ -879,9 +1002,9 @@
 <!-- ═══ CONTACT ══════════════════════════════════════════════ -->
 <section id="contact">
   <div class="container">
-    <p class="section-label">Get in touch</p>
-    <h2 class="section-heading" data-i18n="contact_heading">Let's work together.</h2>
-    <p class="contact-subtext" data-i18n="contact_subtext">Available for freelance projects, collaborations, and full-time opportunities. Reach out through any of the channels below.</p>
+    <p class="section-label" data-i18n="contact_label">Get in touch</p>
+    <h2 class="section-heading" data-i18n="contact_heading">Have a project in mind?</h2>
+    <p class="contact-subtext" data-i18n="contact_subtext">Send me a message for design, 3D, AI automation, or translation work. I am available for freelance projects, collaborations, and full-time opportunities.</p>
     <div class="contact-grid">
       <div class="contact-links-col">
         <a href="mailto:ameenshkur@gmail.com" class="contact-link-card reveal">
@@ -908,8 +1031,8 @@
         </div>
       </div>
       <div class="cv-card reveal">
-        <div class="cv-card-heading" data-i18n="contact_cv_heading">Download my CV</div>
-        <div class="cv-card-subtext" data-i18n="contact_cv_subtext">Full work history, skills, and references.</div>
+        <div class="cv-card-heading" data-i18n="contact_cv_heading">Need more details?</div>
+        <div class="cv-card-subtext" data-i18n="contact_cv_subtext">Download my CV for work history, tools, languages, and project experience.</div>
         <a href="assets/cv.pdf" download class="btn-white" data-i18n="contact_cv_btn">Download CV</a>
       </div>
     </div>
@@ -918,7 +1041,7 @@
 
 <!-- ═══ FOOTER ═══════════════════════════════════════════════ -->
 <footer>
-  <span data-i18n="footer_copy">© 2026 Ameen Shkur · Kirkuk, Kurdistan Region · ameenshkur@gmail.com</span>
+  <span data-i18n="footer_copy">© 2026 Ameen Shkur · Kirkuk, Kurdistan Region</span>
 </footer>
 
 <!-- ═══ LIGHTBOX ══════════════════════════════════════════════ -->
@@ -952,10 +1075,10 @@ var videoAspects = {};
 
 // ── Gallery data ──────────────────────────────────────────────
 var G = {
-  'rs-brand':     {p:'assets/projects/design/royal-smells/brand/',f:['royal-smells-armani-code-oil-drop.jpg','royal-smells-armani-code-perfume-bottle.jpg','royal-smells-aroma-oil-collection-flat-lay.jpg','royal-smells-cute-reed-spray-collage.jpg','royal-smells-la-panthere-perfume-guide.jpg','royal-smells-mr-scandal-perfume-bottle.jpg','royal-smells-room-fragrance-sprays-collection.jpg','royal-smells-wild-berries-room-spray.jpg','img-010.jpg']},
+  'rs-brand':     {p:'assets/projects/design/royal-smells/brand/',f:['royal-smells-armani-code-perfume-bottle.jpg','royal-smells-aroma-oil-collection-flat-lay.jpg','royal-smells-cute-reed-spray-collage.jpg','royal-smells-la-panthere-perfume-guide.jpg','royal-smells-mr-scandal-perfume-bottle.jpg','royal-smells-room-fragrance-sprays-collection.jpg','royal-smells-wild-berries-room-spray.jpg','img-010.jpg']},
   'rs-edited':    {p:'assets/projects/design/royal-smells/edited/',f:['1-edited.jpg','2-edited.jpg','3-edited.jpg','4-edited.jpg','5-edited.jpg','6-edited.jpg','cover-edited.jpg','cta-edited.jpg']},
   'rs-candy':     {p:'assets/projects/design/royal-smells/candy/',f:['gemini-generated-image-3ltgjf3ltgjf3ltg-eid.jpg','gemini-generated-image-6ejk016ejk016ejk-eid.jpg','gemini-generated-image-cyj254cyj254cyj2-eid.jpg','gemini-generated-image-l38mhul38mhul38m-eid.jpg','gemini-generated-image-lsxd4llsxd4llsxd-eid.jpg','gemini-generated-image-spucadspucadspuc-eid.jpg','gemini-generated-image-wiv7tgwiv7tgwiv7-eid.jpg']},
-  'rs-spray':     {p:'assets/projects/design/royal-smells/how-to-spray/',f:['how-to-spray-behind-ear-step.jpg','how-to-spray-la-panthere-guide.jpg','how-to-spray-la-panthere-perfume.jpg','how-to-spray-neck-step.jpg','how-to-spray-wrist-step.jpg']},
+  'rs-spray':     {p:'assets/projects/design/royal-smells/how-to-spray/',f:['how-to-spray-la-panthere-perfume.jpg','how-to-spray-la-panthere-guide.jpg','how-to-spray-wrist-step.jpg','how-to-spray-neck-step.jpg','how-to-spray-behind-ear-step.jpg']},
   'rs-ramadan':   {p:'assets/projects/design/royal-smells/ramadan-carousel/',f:['temp-pers1.jpg','temp-pers10.jpg','temp-pers2.jpg','temp-pers3.jpg','temp-pers4.jpg','temp-pers5.jpg','temp-pers6.jpg','temp-pers7.jpg','temp-pers8.jpg','temp-pers9.jpg']},
   'rs-oil':       {p:'assets/projects/design/royal-smells/oil-images/',f:['louis-vuitton-imagination-oil-product-shot.jpg','royal-smells-azzaro-wanted-oil-product-shot.jpg','royal-smells-baccarat-rouge-540-oil-perfume.jpg','royal-smells-chopard-oud-malaki-product-shot.jpg','royal-smells-christian-dior-addict-oil.jpg','royal-smells-creed-aventus-oil-product-shot.jpg','royal-smells-hudson-valley-oil-product-shot.jpg','royal-smells-nasomatto-black-afgano-oil.jpg','royal-smells-xerjoff-alexandria-iii-oil.jpg','royal-smells-ysl-myslf-oil-product-shot.jpg']},
   'rs-diffuser':  {p:'assets/projects/design/royal-smells/diffuser/',f:['10changeing.jpg','1smaller.jpg','2darker.jpg','3changeing.jpg','7changeing.jpg','8changeing.jpg','9changeingri.jpg','royal-smells-diffuser-set-product-shot.jpg','royal-smells-mango-coconut-vanilla-diffuser.jpg','royal-smells-s5-diffuser-and-refill-bottle.jpg']},

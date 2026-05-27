@@ -1,5 +1,6 @@
 {
   "nav_services": "服务",
+  "nav_featured": "精选",
   "nav_work": "作品",
   "nav_contact": "联系",
   "lang_en": "EN",
@@ -126,5 +127,5 @@
   "contact_cv_subtext": "完整工作经历、技能列表与推荐人信息。",
   "contact_cv_btn": "下载简历",
 
-  "footer_copy": "© 2026 阿明 · 基尔库克，库尔德斯坦地区 · ameenshkur@gmail.com"
+  "footer_copy": "© 2026 阿明 · 基尔库克，库尔德斯坦地区"
 }
