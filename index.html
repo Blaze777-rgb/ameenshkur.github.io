@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ameen Shkur — Graphic Design, 3D & AI Automation Portfolio</title>
-  <meta name="description" content="Portfolio of Ameen Shkur, a graphic designer, 3D artist, and AI automation developer creating brand visuals, product videos, and custom Python tools."/>
+  <title>Ameen Zangana — Graphic Designer, 3D Product Visualizer & AI Automation Specialist</title>
+  <meta name="description" content="Portfolio of Ameen Zangana, a graphic designer, 3D product visualizer, and AI workflow automation specialist creating brand visuals, product videos, and custom Python tools."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -117,6 +117,10 @@
     .featured-title { font-family: var(--font-head); font-size: 19px; font-weight: 700; line-height: 1.25; color: var(--text); margin-bottom: 10px; }
     .featured-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px; }
     .featured-action { display: inline-flex; align-items: center; gap: 7px; color: var(--teal-dark); font-size: 13px; font-weight: 700; }
+    .case-points { display: grid; gap: 7px; list-style: none; margin: 0 0 16px; padding: 0; }
+    .case-points li { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+    .case-points span { color: inherit; font-weight: 500; }
+    .case-points li > span:first-child { color: var(--text); font-weight: 800; }
 
     .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
     .filter-tab { background: none; border: 1.5px solid var(--border); border-radius: 8px; padding: 7px 18px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all .2s; }
@@ -188,8 +192,12 @@
     .cv-card { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); border-radius: var(--radius); padding: 40px 32px; color: #fff; display: flex; flex-direction: column; gap: 12px; min-height: 220px; justify-content: center; }
     .cv-card-heading { font-family: var(--font-head); font-size: 24px; font-weight: 700; line-height: 1.2; }
     .cv-card-subtext { font-size: 14px; opacity: .8; line-height: 1.6; }
+    .cv-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
     .cv-card .btn-white { display: inline-block; align-self: flex-start; background: #fff; color: var(--teal-dark); border: none; border-radius: 10px; padding: 12px 26px; font-family: var(--font-body); font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; margin-top: 8px; transition: opacity .2s, transform .15s; }
     .cv-card .btn-white:hover { opacity: .92; transform: translateY(-1px); }
+    .cv-card .btn-white, .cv-card .btn-outline-white { margin-top: 0; }
+    .cv-card .btn-outline-white { display: inline-block; align-self: flex-start; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.55); border-radius: 10px; padding: 11px 24px; font-family: var(--font-body); font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; }
+    .cv-card .btn-outline-white:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
 
     /* ── FOOTER ── */
     footer { background: var(--text); color: rgba(255,255,255,.5); text-align: center; padding: 28px 24px; font-size: 13px; }
@@ -276,11 +284,15 @@
       .proj-vid-thumb { height: 220px; }
 
       /* HERO */
-      .hero-inner { text-align: center; }
+      #hero { max-width: 100vw; padding-left: 16px; padding-right: 16px; }
+      .hero-inner { width: 100%; max-width: calc(100vw - 32px); min-width: 0; text-align: center; }
+      .hero-tag { display: block; width: auto; max-width: 320px; white-space: normal; line-height: 1.45; margin-left: auto; margin-right: auto; font-size: 11px; padding-left: 8px; padding-right: 8px; overflow-wrap: anywhere; }
+      .hero-name { font-size: clamp(31px, 8.5vw, 38px); letter-spacing: -.5px; overflow-wrap: anywhere; }
+      .hero-bio { width: 100%; max-width: 330px; overflow-wrap: break-word; }
       .hero-btns { flex-direction: column; align-items: stretch; gap: 10px; }
-      .hero-btns a { text-align: center; width: 100%; box-sizing: border-box; }
-      .hero-stats { flex-wrap: wrap; }
-      .stat-item { flex: 0 0 50%; border-right: none; padding: 14px 0; text-align: center; }
+      .hero-btns a { text-align: center; width: 100%; max-width: 330px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+      .hero-stats { flex-direction: column; flex-wrap: nowrap; gap: 8px; }
+      .stat-item { flex: none; border-right: none; padding: 8px 0; text-align: center; }
 
       /* LIGHTBOX */
       .lb-arr { display: none; }
@@ -298,7 +310,7 @@
     }
 
     @media (max-width: 480px) {
-      .hero-name { font-size: clamp(36px, 10.5vw, 54px); }
+      .hero-name { font-size: clamp(31px, 8.5vw, 36px); }
     }
 
     @media (min-width: 769px) {
@@ -342,6 +354,7 @@
       .cv-card-heading { font-size: 26px; }
       .cv-card-subtext { font-size: 15px; }
       .cv-card .btn-white { padding: 13px 28px; font-size: 15px; }
+      .cv-card .btn-outline-white { padding: 12px 26px; font-size: 15px; }
       footer { font-size: 14px; padding: 32px 24px; }
     }
 
@@ -389,7 +402,7 @@
 <!-- ═══ NAVBAR ═══════════════════════════════════════════════ -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo">Ameen Shkur</a>
+    <a href="#" class="nav-logo">Ameen Zangana</a>
     <ul class="nav-links">
       <li><a href="#services" data-i18n="nav_services">Services</a></li>
       <li><a href="#featured" data-i18n="nav_featured">Featured</a></li>
@@ -433,8 +446,8 @@
 <!-- ═══ HERO ════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-inner">
-    <span class="hero-tag" data-i18n="hero_subtitle">Graphic Design · 3D Product Video · AI Automation</span>
-    <h1 class="hero-name" data-i18n="hero_name">Ameen Shkur</h1>
+    <span class="hero-tag" data-i18n="hero_subtitle">Graphic Designer · 3D Product Visualizer · AI Automation Specialist</span>
+    <h1 class="hero-name" data-i18n="hero_name">Ameen Zangana</h1>
     <p class="hero-bio" data-i18n="hero_bio">I create brand visuals, product animations, and custom automation tools for businesses that need faster, more professional creative workflows.</p>
     <div class="hero-btns">
       <a href="#featured" class="btn-primary" data-i18n="hero_cta_work">View Selected Work</a>
@@ -512,6 +525,11 @@
           <div class="featured-meta" data-i18n="featured_hadeel_meta">3D Animation</div>
           <div class="featured-title" data-i18n="proj_hadeel_ana_title">Hadeel Azaweey Anamorphic Video</div>
           <div class="featured-desc" data-i18n="proj_hadeel_ana_desc">Large-format 3D product video created for Nogat Baghdad's anamorphic screen, built to make a cosmetics campaign feel dimensional and high-impact.</div>
+          <ul class="case-points">
+            <li><span data-i18n="case_role_label">Role:</span> <span data-i18n="case_hadeel_role">3D product visualization, lighting, animation</span></li>
+            <li><span data-i18n="case_tools_label">Tools:</span> <span data-i18n="case_hadeel_tools">Blender, After Effects</span></li>
+            <li><span data-i18n="case_result_label">Result:</span> <span data-i18n="case_hadeel_result">Displayed on Nogat Baghdad's large anamorphic screen</span></li>
+          </ul>
           <div class="featured-action" data-i18n="featured_action">Open project</div>
         </div>
       </div>
@@ -527,6 +545,11 @@
           <div class="featured-meta" data-i18n="featured_summer_meta">Design</div>
           <div class="featured-title" data-i18n="proj_rs_summer_ai_title">Royal Smells — Summer AI Perfume Ad</div>
           <div class="featured-desc" data-i18n="proj_rs_summer_ai_desc">Short-form summer campaign for Royal Smells using AI-generated visuals, AI voice-over, and editing for social media promotion.</div>
+          <ul class="case-points">
+            <li><span data-i18n="case_role_label">Role:</span> <span data-i18n="case_summer_role">Creative direction, AI visuals, edit planning</span></li>
+            <li><span data-i18n="case_tools_label">Tools:</span> <span data-i18n="case_summer_tools">AI video tools, voice-over, editing workflow</span></li>
+            <li><span data-i18n="case_result_label">Result:</span> <span data-i18n="case_summer_result">Campaign-ready social ad for fragrance promotion</span></li>
+          </ul>
           <div class="featured-action" data-i18n="featured_action">Open project</div>
         </div>
       </div>
@@ -542,6 +565,11 @@
           <div class="featured-meta" data-i18n="featured_crm_meta">Python &amp; AI</div>
           <div class="featured-title" data-i18n="proj_crm_title">Emerald CRM</div>
           <div class="featured-desc" data-i18n="proj_crm_desc">Custom Python CRM for real estate operations with analytics, payment tracking, Excel export, receipt printing, and IQD/USD currency tools.</div>
+          <ul class="case-points">
+            <li><span data-i18n="case_role_label">Role:</span> <span data-i18n="case_crm_role">Workflow design, Python development, reporting logic</span></li>
+            <li><span data-i18n="case_tools_label">Tools:</span> <span data-i18n="case_crm_tools">Python, Django, Excel export, print views</span></li>
+            <li><span data-i18n="case_result_label">Result:</span> <span data-i18n="case_crm_result">Centralized sales, payments, receipts, and currency operations</span></li>
+          </ul>
           <div class="featured-action" data-i18n="featured_action">Open project</div>
         </div>
       </div>
@@ -557,6 +585,11 @@
           <div class="featured-meta" data-i18n="featured_diffuser_meta">Python &amp; AI</div>
           <div class="featured-title" data-i18n="proj_diffuser_batch_title">AI Diffuser Label Generator</div>
           <div class="featured-desc" data-i18n="proj_diffuser_batch_desc">Python automation pipeline that turned one CSV file into 110 labeled diffuser product images with Arabic and English names applied to bottle mockups.</div>
+          <ul class="case-points">
+            <li><span data-i18n="case_role_label">Role:</span> <span data-i18n="case_diffuser_role">Automation architecture and batch image generation</span></li>
+            <li><span data-i18n="case_tools_label">Tools:</span> <span data-i18n="case_diffuser_tools">Python, Pillow, CSV product data</span></li>
+            <li><span data-i18n="case_result_label">Result:</span> <span data-i18n="case_diffuser_result">Produced 110 labeled product images from one workflow</span></li>
+          </ul>
           <div class="featured-action" data-i18n="featured_action">Open project</div>
         </div>
       </div>
@@ -572,6 +605,11 @@
           <div class="featured-meta" data-i18n="featured_ec_tour_meta">Design</div>
           <div class="featured-title" data-i18n="proj_ec_ai_tour_title">Emerald City AI Tour Video</div>
           <div class="featured-desc" data-i18n="proj_ec_ai_tour_desc">Cinematic real estate tour built from on-site photography, then refined with AI to create a polished marketing video for the compound.</div>
+          <ul class="case-points">
+            <li><span data-i18n="case_role_label">Role:</span> <span data-i18n="case_ec_tour_role">Visual planning, AI refinement, motion edit</span></li>
+            <li><span data-i18n="case_tools_label">Tools:</span> <span data-i18n="case_ec_tour_tools">AI image/video workflow, editing tools</span></li>
+            <li><span data-i18n="case_result_label">Result:</span> <span data-i18n="case_ec_tour_result">Turned site material into a premium real-estate marketing asset</span></li>
+          </ul>
           <div class="featured-action" data-i18n="featured_action">Open project</div>
         </div>
       </div>
@@ -587,6 +625,11 @@
           <div class="featured-meta" data-i18n="featured_id_meta">Python &amp; AI</div>
           <div class="featured-title" data-i18n="proj_id_card_title">ID Card Extraction &amp; A4 Export Tool</div>
           <div class="featured-desc" data-i18n="proj_id_card_desc">Browser-based Python tool that detects ID cards from image folders, straightens and crops them, supports manual review, and exports print-ready A4 JPG sheets.</div>
+          <ul class="case-points">
+            <li><span data-i18n="case_role_label">Role:</span> <span data-i18n="case_id_role">Computer-vision workflow and review UI</span></li>
+            <li><span data-i18n="case_tools_label">Tools:</span> <span data-i18n="case_id_tools">Python, browser UI, image processing</span></li>
+            <li><span data-i18n="case_result_label">Result:</span> <span data-i18n="case_id_result">Reduced manual ID preparation into a guided export process</span></li>
+          </ul>
           <div class="featured-action" data-i18n="featured_action">Open project</div>
         </div>
       </div>
@@ -1024,7 +1067,10 @@
       <div class="cv-card reveal">
         <div class="cv-card-heading" data-i18n="contact_cv_heading">Need more details?</div>
         <div class="cv-card-subtext" data-i18n="contact_cv_subtext">Download my CV for work history, tools, languages, and project experience.</div>
-        <a href="assets/cv.pdf" download class="btn-white" data-i18n="contact_cv_btn">Download CV</a>
+        <div class="cv-actions">
+          <a href="assets/cv.pdf" download class="btn-white" data-i18n="contact_cv_btn">Download CV</a>
+          <a href="assets/cv-ats.pdf" download class="btn-outline-white" data-i18n="contact_cv_ats_btn">ATS version</a>
+        </div>
       </div>
     </div>
   </div>
@@ -1032,7 +1078,7 @@
 
 <!-- ═══ FOOTER ═══════════════════════════════════════════════ -->
 <footer>
-  <span data-i18n="footer_copy">© 2026 Ameen Shkur · Kirkuk, Kurdistan Region</span>
+  <span data-i18n="footer_copy">© 2026 Ameen Zangana · Kirkuk, Kurdistan Region</span>
 </footer>
 
 <!-- ═══ LIGHTBOX ══════════════════════════════════════════════ -->
