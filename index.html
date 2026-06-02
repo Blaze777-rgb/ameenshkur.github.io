@@ -230,7 +230,7 @@
     .nav-hamburger:active { background: var(--bg2); }
 
     /* ── SWIPE HINT ── */
-    .lb-swipe-hint { position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.7); color: #fff; font-size: 13px; font-family: var(--font-body); padding: 7px 18px; border-radius: 20px; pointer-events: none; opacity: 0; transition: opacity .4s; white-space: nowrap; z-index: 9010; }
+    .lb-swipe-hint { position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.7); color: #fff; font-size: 13px; font-family: var(--font-body); padding: 7px 18px; border-radius: 20px; pointer-events: none; opacity: 0; transition: opacity .4s; white-space: nowrap; z-index: 9010; direction: ltr; unicode-bidi: isolate; }
     .lb-swipe-hint.show { opacity: 1; }
 
     /* ── RESPONSIVE ── */
@@ -408,6 +408,7 @@
     html[dir="rtl"] .hero-name, html[dir="rtl"] .section-heading { letter-spacing: 0; }
     html[dir="rtl"] .lb-prev { left: auto; right: -56px; }
     html[dir="rtl"] .lb-next { right: auto; left: -56px; }
+    html[dir="rtl"] .lb-arr svg { transform: scaleX(-1); }
     html[dir="rtl"] .gallery-badge { right: auto; left: 8px; }
     html[dir="rtl"] .vid-label { right: auto; left: 12px; }
 
@@ -1121,7 +1122,7 @@
     <iframe id="lb-iframe" src="" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe>
   </div>
   <!-- swipe hint (mobile) -->
-  <div class="lb-swipe-hint" id="lb-swipe-hint">← Swipe to navigate →</div>
+  <div class="lb-swipe-hint" id="lb-swipe-hint" data-i18n="lb_swipe_hint">← Swipe to navigate →</div>
 </div>
 
 <!-- ═══ SCRIPTS ══════════════════════════════════════════════ -->
