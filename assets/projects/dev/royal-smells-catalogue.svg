@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" font-family="'Outfit', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" font-family="'Inter', Arial, sans-serif">
   <!-- Background -->
   <rect width="800" height="460" fill="#fafaf8" rx="12"/>
 
   <!-- Title -->
-  <text x="400" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a" font-family="'Syne', Arial, sans-serif">Royal Smells Catalogue Generator</text>
+  <text x="400" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a" font-family="'Agoma', 'Inter', Arial, sans-serif">Royal Smells Catalogue Generator</text>
   <text x="400" y="68" text-anchor="middle" font-size="13" fill="#64748b">Arabic product catalogue — from data to print-ready A4 PDF</text>
 
   <!-- Step 1 -->

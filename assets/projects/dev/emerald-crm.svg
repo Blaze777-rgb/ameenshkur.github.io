@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480" font-family="'Outfit', Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="800" height="480" font-family="'Inter', Arial, sans-serif">
   <!-- Background -->
   <rect width="800" height="480" fill="#fafaf8" rx="12"/>
 
   <!-- Title -->
-  <text x="400" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a" font-family="'Syne', Arial, sans-serif">Emerald CRM</text>
+  <text x="400" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a" font-family="'Agoma', 'Inter', Arial, sans-serif">Emerald CRM</text>
   <text x="400" y="68" text-anchor="middle" font-size="13" fill="#64748b">Django-based Real Estate Management System</text>
 
   <!-- Flow line -->
