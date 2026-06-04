@@ -759,7 +759,7 @@
       <div class="proj-card reveal" data-cat="design">
         <div class="proj-thumb" onclick="lb.openGallery('ec-gallery')">
           <img src="assets/projects/design/emerald-city/thumbs/ec-villa-fountain-thumb.jpg" alt="Emerald City Gallery" loading="lazy" decoding="async"/>
-          <span class="gallery-badge"><i data-lucide="images" style="width:12px;height:12px"></i>19 photos</span>
+          <span class="gallery-badge" data-gallery-count="ec-gallery" data-gallery-label="images"><i data-lucide="images" style="width:12px;height:12px"></i><span class="gallery-badge-text">21 images</span></span>
         </div>
         <div class="proj-body">
           <span class="proj-tag">Design</span>
@@ -1519,6 +1519,13 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ── Lucide icons ──────────────────────────────────────────
+  document.querySelectorAll('[data-gallery-count]').forEach(function (badge) {
+    var key = badge.dataset.galleryCount;
+    var label = badge.dataset.galleryLabel || 'images';
+    var text = badge.querySelector('.gallery-badge-text');
+    if (G[key] && text) text.textContent = G[key].f.length + ' ' + label;
+  });
+
   if (typeof lucide !== 'undefined') lucide.createIcons();
 
   // ── Language ──────────────────────────────────────────────
