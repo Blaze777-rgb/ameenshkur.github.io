@@ -73,9 +73,9 @@
     .lang-option.active .lang-option-name { color: var(--teal); }
 
     /* ── HERO ── */
-    #hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 24px 80px; position: relative; overflow: hidden; }
-    #hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, #0d948822 1px, transparent 1px); background-size: 28px 28px; opacity: .45; pointer-events: none; }
-    #hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, var(--bg) 100%); pointer-events: none; }
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 24px 80px; position: relative; overflow: hidden; background: var(--bg); }
+    #hero::before { content: ''; position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(90deg, rgba(250,250,248,.99) 0%, rgba(250,250,248,.96) 34%, rgba(250,250,248,.76) 54%, rgba(250,250,248,.24) 78%, rgba(250,250,248,.1) 100%), url('assets/hero/hero-glass-jorgen-haland.jpg'); background-position: center, right center; background-size: cover, auto 100%; background-repeat: no-repeat; pointer-events: none; }
+    #hero::after { content: ''; position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 68% at 28% 50%, rgba(250,250,248,.14), transparent 62%), radial-gradient(circle, rgba(13,148,136,.14) 1px, transparent 1px); background-size: auto, 28px 28px; opacity: .46; pointer-events: none; }
     .hero-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
     .hero-tag { display: inline-block; background: var(--teal-light); color: var(--teal-dark); font-size: 12px; font-weight: 600; padding: 4px 14px; border-radius: 20px; margin-bottom: 22px; letter-spacing: .3px; }
     .hero-name { font-family: var(--font-head); font-size: clamp(48px, 8vw, 80px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; color: var(--text); margin-bottom: 16px; }
@@ -236,8 +236,22 @@
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .32s ease, transform .32s ease; }
     .reveal.visible { opacity: 1; transform: none; }
 
+    /* ── HOVER PREVIEWS ── */
+    .hover-preview { display: none; }
+
+    @media (hover: hover) and (pointer: fine) {
+      .hover-preview { position: fixed; left: 0; top: 0; z-index: 9400; display: block; width: 220px; height: 145px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(15,23,42,.12); background: #fff; box-shadow: 0 18px 45px rgba(15,23,42,.22); pointer-events: none; opacity: 0; transform: translate3d(18px, 18px, 0) scale(.96); transform-origin: 0 0; transition: opacity .14s, transform .14s; will-change: left, top, width, height, transform; }
+      .hover-preview.is-visible { opacity: 1; }
+      .hover-preview img { width: 100%; height: 100%; display: block; object-fit: cover; }
+      .hover-preview-label { position: absolute; left: 8px; right: 8px; bottom: 8px; display: inline-flex; align-items: center; width: fit-content; max-width: calc(100% - 16px); min-height: 24px; padding: 4px 8px; border-radius: 999px; background: rgba(15,23,42,.78); color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .hover-preview-play { position: absolute; top: 9px; right: 9px; width: 30px; height: 30px; display: none; align-items: center; justify-content: center; border-radius: 50%; background: rgba(15,23,42,.72); color: #fff; box-shadow: 0 8px 18px rgba(15,23,42,.22); }
+      .hover-preview.is-video .hover-preview-play { display: flex; }
+      .hover-preview-play svg { width: 13px; height: 13px; fill: currentColor; transform: translateX(1px); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .campaign-card.is-animating .campaign-list { will-change: auto; }
+      .hover-preview { transition: none; }
     }
 
     /* ── HAMBURGER ── */
@@ -300,14 +314,17 @@
 
       /* HERO */
       #hero { max-width: 100vw; min-height: auto; align-items: flex-start; padding: 100px 16px 48px; }
+      #hero::before { background-image: linear-gradient(180deg, rgba(250,250,248,.995) 0%, rgba(250,250,248,.985) 48%, rgba(250,250,248,.92) 72%, rgba(250,250,248,.76) 100%), url('assets/hero/hero-glass-mobile-jorgen-haland.jpg'); background-position: center, center bottom; background-size: cover, auto 52%; opacity: 1; }
+      #hero::after { opacity: .24; }
       .hero-inner { width: 100%; max-width: calc(100vw - 32px); min-width: 0; text-align: center; }
       .hero-tag { display: inline-flex; align-items: center; justify-content: center; max-width: calc(100vw - 48px); white-space: nowrap; line-height: 1.2; margin-left: auto; margin-right: auto; margin-bottom: 16px; font-size: clamp(7.8px, 2.15vw, 10.5px); padding: 6px 10px; letter-spacing: 0; overflow: hidden; text-overflow: ellipsis; }
       .hero-name { font-size: clamp(32px, 9vw, 40px); letter-spacing: -.35px; margin-bottom: 12px; overflow-wrap: anywhere; }
       .hero-bio { width: 100%; max-width: 330px; margin-bottom: 26px; line-height: 1.62; overflow-wrap: break-word; }
       .hero-btns { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 28px; }
       .hero-btns a { text-align: center; width: 100%; max-width: 330px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+      .btn-secondary { background: rgba(255,255,255,.74); }
       .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-width: 330px; margin: 0 auto; padding-top: 18px; }
-      .stat-item { min-height: 58px; display: flex; align-items: center; justify-content: center; flex: none; border-right: none; border: 1px solid var(--border); border-radius: 10px; padding: 10px 8px; text-align: center; background: rgba(255,255,255,.56); }
+      .stat-item { min-height: 58px; display: flex; align-items: center; justify-content: center; flex: none; border-right: none; border: 1px solid var(--border); border-radius: 10px; padding: 10px 8px; text-align: center; background: rgba(255,255,255,.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
       .stat-value { font-size: 12px; line-height: 1.35; }
 
       /* LIGHTBOX */
@@ -342,6 +359,7 @@
 
     @media (max-width: 480px) {
       #hero { padding-top: 92px; padding-bottom: 42px; }
+      #hero::before { background-position: center, center bottom; background-size: cover, auto 46%; }
       .hero-tag { max-width: calc(100vw - 40px); padding-left: 8px; padding-right: 8px; }
       .hero-name { font-size: clamp(31px, 9vw, 36px); }
       .hero-bio { max-width: 310px; font-size: 15px; }
@@ -352,14 +370,17 @@
       body { font-size: 17.5px; }
       .nav-inner, .container { max-width: 1200px; }
       #hero { padding: 110px 24px 88px; }
-      .hero-inner { max-width: 760px; }
+      #hero::before { background-position: center, right center; background-size: cover, auto 104%; }
+      .hero-inner { width: 100%; max-width: 1200px; text-align: start; display: block; }
+      .hero-copy { max-width: 760px; min-width: 0; }
       .hero-tag { font-size: 13px; padding: 5px 16px; margin-bottom: 26px; }
       .hero-name { font-size: clamp(52px, 7.2vw, 84px); margin-bottom: 20px; }
-      .hero-bio { font-size: 17px; margin-bottom: 36px; }
-      .hero-btns { gap: 14px; margin-bottom: 58px; }
+      .hero-bio { font-size: 17px; margin: 0 0 36px; }
+      .hero-btns { justify-content: flex-start; gap: 14px; margin-bottom: 58px; }
       .btn-primary, .btn-secondary { padding: 14px 32px; font-size: 16px; }
-      .hero-stats { padding-top: 40px; }
+      .hero-stats { justify-content: flex-start; max-width: 560px; padding-top: 40px; }
       .stat-item { padding: 0 30px; }
+      .stat-item:first-child { padding-inline-start: 0; }
       .stat-value { font-size: 16px; }
       section { padding: 110px 24px; }
       .section-label { font-size: 12px; margin-bottom: 16px; }
@@ -405,12 +426,13 @@
         align-items: flex-start;
         padding: 132px 32px 86px;
       }
-      .hero-inner { max-width: 680px; }
+      #hero::before { background-image: linear-gradient(90deg, rgba(250,250,248,.99) 0%, rgba(250,250,248,.95) 39%, rgba(250,250,248,.8) 61%, rgba(250,250,248,.36) 100%), url('assets/hero/hero-glass-jorgen-haland.jpg'); background-position: center, right center; background-size: cover, auto 100%; }
+      .hero-inner { max-width: 92vw; }
       .hero-tag { font-size: 12px; margin-bottom: 22px; }
       .hero-name { font-size: clamp(56px, 8vw, 74px); margin-bottom: 18px; }
       .hero-bio { font-size: 16px; max-width: 560px; margin-bottom: 32px; }
       .hero-btns { margin-bottom: 44px; }
-      .hero-stats { max-width: 680px; margin: 0 auto; padding-top: 32px; }
+      .hero-stats { max-width: 560px; margin: 0; padding-top: 32px; }
 
       section { padding: 88px 32px; }
       .section-heading { margin-bottom: 46px; }
@@ -445,6 +467,7 @@
   <div class="nav-inner">
     <a href="#" class="nav-logo">Ameen Zangana</a>
     <ul class="nav-links">
+      <li><a href="#hero" data-i18n="nav_home">Home</a></li>
       <li><a href="#services" data-i18n="nav_services">Services</a></li>
       <li><a href="#featured" data-i18n="nav_featured">Featured</a></li>
       <li><a href="#portfolio" data-i18n="nav_work">Work</a></li>
@@ -487,12 +510,14 @@
 <!-- ═══ HERO ════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-inner">
-    <span class="hero-tag" data-i18n="hero_subtitle">Graphic Designer · 3D Product Visualizer · AI Automation Specialist</span>
-    <h1 class="hero-name" data-i18n="hero_name">Ameen Zangana</h1>
-    <p class="hero-bio" data-i18n="hero_bio">I create brand visuals, product animations, and custom automation tools for businesses that need faster, more professional creative workflows.</p>
-    <div class="hero-btns">
-      <a href="#featured" class="btn-primary" data-i18n="hero_cta_work">View Selected Work</a>
-      <a href="assets/cv.pdf" class="btn-secondary" download="Ameen_Zangana_CV.pdf" data-i18n="hero_cta_cv">Download CV</a>
+    <div class="hero-copy">
+      <span class="hero-tag" data-i18n="hero_subtitle">Graphic Designer · 3D Product Visualizer · AI Automation Specialist</span>
+      <h1 class="hero-name" data-i18n="hero_name">Ameen Zangana</h1>
+      <p class="hero-bio" data-i18n="hero_bio">I create brand visuals, product animations, and custom automation tools for businesses that need faster, more professional creative workflows.</p>
+      <div class="hero-btns">
+        <a href="#featured" class="btn-primary" data-i18n="hero_cta_work">View Selected Work</a>
+        <a href="assets/cv.pdf" class="btn-secondary" download="Ameen_Zangana_CV.pdf" data-i18n="hero_cta_cv">Download CV</a>
+      </div>
     </div>
     <div class="hero-stats">
       <div class="stat-item"><span class="stat-value" data-i18n="stat_experience">4+ Years Experience</span></div>
@@ -685,10 +710,10 @@
     <p class="section-label" data-i18n="portfolio_label">Project Archive</p>
     <h2 class="section-heading" data-i18n="portfolio_heading">Explore more work by category.</h2>
     <div class="filter-tabs">
-      <button type="button" class="filter-tab active" data-filter="all"    data-i18n="filter_all">All</button>
-      <button type="button" class="filter-tab"        data-filter="design" data-i18n="filter_design">Design</button>
-      <button type="button" class="filter-tab"        data-filter="3d"     data-i18n="filter_3d">3D Animation</button>
-      <button type="button" class="filter-tab"        data-filter="ai"     data-i18n="filter_ai">Python &amp; AI</button>
+      <button type="button" class="filter-tab active" data-filter="all" data-preview="assets/projects/design/emerald-city/ec-villa-fountain.jpg" data-preview-label="Project archive" data-i18n="filter_all">All</button>
+      <button type="button" class="filter-tab" data-filter="design" data-preview="assets/projects/design/royal-smells/edited/cover-edited.jpg" data-preview-label="Design work" data-i18n="filter_design">Design</button>
+      <button type="button" class="filter-tab" data-filter="3d" data-preview="assets/projects/design/royal-smells/spray-overlay/1.jpg" data-preview-label="3D & motion" data-i18n="filter_3d">3D Animation</button>
+      <button type="button" class="filter-tab" data-filter="ai" data-preview="assets/projects/dev/covers/thumbs/id-card-extraction-a4-export-thumb.jpg" data-preview-label="Python & AI" data-i18n="filter_ai">Python &amp; AI</button>
     </div>
     <div class="portfolio-grid">
 
@@ -728,35 +753,35 @@
           </div>
         </summary>
         <div class="campaign-list">
-          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-edited')">
+          <button type="button" class="campaign-item-btn" data-preview="assets/projects/design/royal-smells/edited/cover-edited.jpg" data-preview-label="Product edits" onclick="lb.openGallery('rs-edited')">
             <span data-i18n="proj_rs_edited_title">Royal Smells — Retouched Product Image Collection</span>
             <i data-lucide="images" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-candy')">
+          <button type="button" class="campaign-item-btn" data-preview="assets/projects/design/royal-smells/candy/gemini-generated-image-lsxd4llsxd4llsxd-eid.jpg" data-preview-label="Eid carousel" onclick="lb.openGallery('rs-candy')">
             <span data-i18n="proj_rs_candy_title">Royal Smells — Eid Candy Carousel Visuals</span>
             <i data-lucide="images" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-spray')">
+          <button type="button" class="campaign-item-btn" data-preview="assets/projects/design/royal-smells/how-to-spray/how-to-spray-la-panthere-perfume.jpg" data-preview-label="How-to guide" onclick="lb.openGallery('rs-spray')">
             <span data-i18n="proj_rs_spray_guide_title">Royal Smells — Fragrance Application Guide Carousel</span>
             <i data-lucide="images" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-ramadan')">
+          <button type="button" class="campaign-item-btn" data-preview="assets/projects/design/royal-smells/ramadan-carousel/temp-pers1.jpg" data-preview-label="Ramadan carousel" onclick="lb.openGallery('rs-ramadan')">
             <span data-i18n="proj_rs_ramadan_carousel_title">Royal Smells — Ramadan Social Carousel</span>
             <i data-lucide="images" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-spray-overlay')">
+          <button type="button" class="campaign-item-btn" data-preview="assets/projects/design/royal-smells/spray-overlay/1.jpg" data-preview-label="Home sprays" onclick="lb.openGallery('rs-spray-overlay')">
             <span data-i18n="proj_rs_home_sprays_title">Royal Smells — Home Spray Product Carousel</span>
             <i data-lucide="images" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-oil')">
+          <button type="button" class="campaign-item-btn" data-preview="assets/projects/design/royal-smells/oil-images/royal-smells-baccarat-rouge-540-oil-perfume.jpg" data-preview-label="Perfume oils" onclick="lb.openGallery('rs-oil')">
             <span data-i18n="proj_rs_oil_title">Royal Smells — Perfume Oil Product Shots</span>
             <i data-lucide="images" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-diffuser')">
+          <button type="button" class="campaign-item-btn" data-preview="assets/projects/design/royal-smells/diffuser/royal-smells-mango-coconut-vanilla-diffuser.jpg" data-preview-label="Diffusers" onclick="lb.openGallery('rs-diffuser')">
             <span data-i18n="proj_rs_diffuser_title">Royal Smells — Diffuser Product Shots</span>
             <i data-lucide="images" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openGallery('rs-room-spray')">
+          <button type="button" class="campaign-item-btn" data-preview="assets/projects/design/royal-smells/room-spray/whatsapp-image-2026-04-11-at-24737-pm-4.jpeg" data-preview-label="Room sprays" onclick="lb.openGallery('rs-room-spray')">
             <span data-i18n="proj_rs_room_spray_title">Royal Smells — Room Spray Launch Product Photos</span>
             <i data-lucide="images" style="width:16px;height:16px"></i>
           </button>
@@ -897,27 +922,27 @@
           </div>
         </summary>
         <div class="campaign-list">
-          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1194503780')">
+          <button type="button" class="campaign-item-btn" data-preview-video-id="1194503780" data-preview-label="Summer ad" onclick="lb.openVideo('1194503780')">
             <span data-i18n="proj_rs_summer_ai_title">Royal Smells — Summer AI Perfume Ad</span>
             <i data-lucide="play" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182085378')">
+          <button type="button" class="campaign-item-btn" data-preview-video-id="1182085378" data-preview-label="Product montage" onclick="lb.openVideo('1182085378')">
             <span data-i18n="proj_rs_montage_title">Royal Smells — Product Montage Edit</span>
             <i data-lucide="play" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182083368')">
+          <button type="button" class="campaign-item-btn" data-preview-video-id="1182083368" data-preview-label="AI concept" onclick="lb.openVideo('1182083368')">
             <span data-i18n="proj_rs_ai4_title">Royal Smells — AI Fragrance Concept Video 4</span>
             <i data-lucide="play" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182081407')">
+          <button type="button" class="campaign-item-btn" data-preview-video-id="1182081407" data-preview-label="AI concept" onclick="lb.openVideo('1182081407')">
             <span data-i18n="proj_rs_ai3_title">Royal Smells — AI Fragrance Concept Video 3</span>
             <i data-lucide="play" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182076962')">
+          <button type="button" class="campaign-item-btn" data-preview-video-id="1182076962" data-preview-label="AI concept" onclick="lb.openVideo('1182076962')">
             <span data-i18n="proj_rs_ai2_title">Royal Smells — AI Fragrance Concept Video 2</span>
             <i data-lucide="play" style="width:16px;height:16px"></i>
           </button>
-          <button type="button" class="campaign-item-btn" onclick="lb.openVideo('1182074801')">
+          <button type="button" class="campaign-item-btn" data-preview-video-id="1182074801" data-preview-label="Short ad" onclick="lb.openVideo('1182074801')">
             <span data-i18n="proj_rs_aiad_title">Royal Smells — Short AI Perfume Ad</span>
             <i data-lucide="play" style="width:16px;height:16px"></i>
           </button>
@@ -1442,6 +1467,148 @@ function setLang(lang) { loadLang(lang); }
 
 // ── DOMContentLoaded ─────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
+
+  // ── Hover previews ────────────────────────────────────────
+  (function () {
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!canHover) return;
+
+    var preview = document.createElement('div');
+    preview.className = 'hover-preview';
+    preview.innerHTML = '<img alt="" decoding="async"><span class="hover-preview-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="hover-preview-label"></span>';
+
+    document.body.appendChild(preview);
+
+    var previewImg = preview.querySelector('img');
+    var previewLabel = preview.querySelector('.hover-preview-label');
+    var activePreview = null;
+    var activeMeta = { w: 220, h: 145 };
+    var imageMetaCache = {};
+    var videoMetaCache = {};
+
+    function sizedMeta(w, h) {
+      var ratio = (w && h) ? w / h : 16 / 10;
+      var maxW = 260;
+      var maxH = 190;
+      var width = maxW;
+      var height = width / ratio;
+
+      if (height > maxH) {
+        height = maxH;
+        width = height * ratio;
+      }
+      if (width < 118) {
+        width = 118;
+        height = width / ratio;
+      }
+      if (height < 88) {
+        height = 88;
+        width = height * ratio;
+      }
+
+      return {
+        w: Math.round(width),
+        h: Math.round(height)
+      };
+    }
+
+    function getImageMeta(src) {
+      if (imageMetaCache[src]) return imageMetaCache[src];
+
+      imageMetaCache[src] = new Promise(function (resolve) {
+        var img = new Image();
+        img.onload = function () {
+          var meta = sizedMeta(img.naturalWidth, img.naturalHeight);
+          resolve({ src: src, w: meta.w, h: meta.h });
+        };
+        img.onerror = function () {
+          var meta = sizedMeta(16, 10);
+          resolve({ src: src, w: meta.w, h: meta.h });
+        };
+        img.src = src;
+      });
+
+      return imageMetaCache[src];
+    }
+
+    function getVideoMeta(id) {
+      if (videoMetaCache[id]) return videoMetaCache[id];
+
+      videoMetaCache[id] = fetch('https://vimeo.com/api/oembed.json?url=https://vimeo.com/' + id)
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          var src = d && d.thumbnail_url;
+          var meta = sizedMeta(d && (d.thumbnail_width || d.width), d && (d.thumbnail_height || d.height));
+          return { src: src, w: meta.w, h: meta.h };
+        })
+        .catch(function () {
+          var meta = sizedMeta(16, 9);
+          return { src: '', w: meta.w, h: meta.h };
+        });
+
+      return videoMetaCache[id];
+    }
+
+    function getTargetMeta(target) {
+      if (target.dataset.previewVideoId) return getVideoMeta(target.dataset.previewVideoId);
+      return getImageMeta(target.dataset.preview);
+    }
+
+    function movePreview(e, scale) {
+      if (!scale) scale = 1;
+      var gap = 18;
+      var width = activeMeta.w;
+      var height = activeMeta.h;
+      var offsetX = gap;
+      var offsetY = -height - gap;
+
+      if (e.clientX + offsetX + width > window.innerWidth - 12) offsetX = window.innerWidth - width - 12 - e.clientX;
+      if (e.clientX + offsetX < 12) offsetX = 12 - e.clientX;
+      if (e.clientY + offsetY < 12) offsetY = 12 - e.clientY;
+
+      preview.style.left = e.clientX + 'px';
+      preview.style.top = e.clientY + 'px';
+      preview.style.transform = 'translate3d(' + offsetX + 'px,' + offsetY + 'px,0) scale(' + scale + ')';
+    }
+
+    document.addEventListener('pointermove', function (e) {
+      if (activePreview) movePreview(e);
+    }, { passive: true });
+
+    document.querySelectorAll('[data-preview], [data-preview-video-id]').forEach(function (target) {
+      if (!target.dataset.preview && !target.dataset.previewVideoId) return;
+
+      var metaPromise = getTargetMeta(target);
+
+      target.addEventListener('pointerenter', function (e) {
+        activePreview = target;
+        metaPromise.then(function (meta) {
+          if (activePreview !== target || !meta.src) return;
+
+          activeMeta = { w: meta.w, h: meta.h };
+          preview.style.width = activeMeta.w + 'px';
+          preview.style.height = activeMeta.h + 'px';
+          previewImg.src = meta.src;
+          previewLabel.textContent = target.dataset.previewLabel || '';
+          previewLabel.style.display = previewLabel.textContent ? 'inline-flex' : 'none';
+          preview.classList.toggle('is-video', !!target.dataset.previewVideoId);
+          movePreview(e, .96);
+          preview.classList.add('is-visible');
+          requestAnimationFrame(function () {
+            if (activePreview === target) movePreview(e, 1);
+          });
+        });
+      });
+
+      target.addEventListener('pointerleave', function () {
+        if (activePreview !== target) return;
+        activePreview = null;
+        preview.classList.remove('is-visible');
+        preview.classList.remove('is-video');
+        preview.style.transform = preview.style.transform.replace('scale(1)', 'scale(.96)');
+      });
+    });
+  }());
 
   // ── Portfolio filter ──────────────────────────────────────
   var tabs  = document.querySelectorAll('.filter-tab');
