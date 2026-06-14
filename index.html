@@ -133,7 +133,7 @@
 
     .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
     .filter-tab { background: none; border: 1.5px solid var(--border); border-radius: 8px; padding: 7px 18px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all .2s; }
-    .filter-tab.active, .filter-tab:hover { border-color: var(--teal); color: var(--teal); background: rgba(13,148,136,.07); }
+    .filter-tab.active { border-color: var(--teal); color: var(--teal); background: rgba(13,148,136,.07); }
     .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 22px; }
     .proj-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: box-shadow .25s, transform .25s; }
     .proj-card:hover { box-shadow: var(--card-shadow); transform: translateY(-3px); }
@@ -710,10 +710,10 @@
     <p class="section-label" data-i18n="portfolio_label">Project Archive</p>
     <h2 class="section-heading" data-i18n="portfolio_heading">Explore more work by category.</h2>
     <div class="filter-tabs">
-      <button type="button" class="filter-tab active" data-filter="all" data-preview="assets/projects/design/emerald-city/ec-villa-fountain.jpg" data-preview-label="Project archive" data-i18n="filter_all">All</button>
-      <button type="button" class="filter-tab" data-filter="design" data-preview="assets/projects/design/royal-smells/edited/cover-edited.jpg" data-preview-label="Design work" data-i18n="filter_design">Design</button>
-      <button type="button" class="filter-tab" data-filter="3d" data-preview="assets/projects/design/royal-smells/spray-overlay/1.jpg" data-preview-label="3D & motion" data-i18n="filter_3d">3D Animation</button>
-      <button type="button" class="filter-tab" data-filter="ai" data-preview="assets/projects/dev/covers/thumbs/id-card-extraction-a4-export-thumb.jpg" data-preview-label="Python & AI" data-i18n="filter_ai">Python &amp; AI</button>
+      <button type="button" class="filter-tab active" data-filter="all" data-i18n="filter_all">All</button>
+      <button type="button" class="filter-tab" data-filter="design" data-i18n="filter_design">Design</button>
+      <button type="button" class="filter-tab" data-filter="3d" data-i18n="filter_3d">3D Animation</button>
+      <button type="button" class="filter-tab" data-filter="ai" data-i18n="filter_ai">Python &amp; AI</button>
     </div>
     <div class="portfolio-grid">
 
