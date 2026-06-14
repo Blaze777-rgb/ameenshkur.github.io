@@ -446,6 +446,8 @@
     }
 
     /* RTL */
+    html[dir="rtl"] #hero::before,
+    html[dir="rtl"] #hero::after { transform: scaleX(-1); transform-origin: center; }
     html[dir="rtl"] .stat-item { border-right: none; border-left: none; }
     html[dir="rtl"] .hero-name, html[dir="rtl"] .section-heading { letter-spacing: 0; }
     html[dir="rtl"] .lb-prev { left: auto; right: -56px; }
