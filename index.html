@@ -103,8 +103,8 @@
     .service-card:hover { box-shadow: var(--card-shadow); transform: translateY(-3px); }
     .service-icon { margin-bottom: 16px; display: block; color: var(--teal); }
     .service-title { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-    .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
-    .service-tools { font-size: 12px; color: var(--teal); font-weight: 600; }
+    .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+    .service-highlight { color: var(--teal); font-weight: 700; }
     /* ── PORTFOLIO ── */
     #featured { background: var(--bg); }
     .featured-intro { color: var(--text-muted); font-size: 16px; max-width: 620px; margin-top: -32px; margin-bottom: 40px; }
@@ -382,8 +382,7 @@
       .services-grid { gap: 24px; }
       .service-card { padding: 36px 32px; }
       .service-title { font-size: 19px; margin-bottom: 12px; }
-      .service-desc { font-size: 15px; margin-bottom: 16px; }
-      .service-tools { font-size: 13px; }
+      .service-desc { font-size: 15px; }
       .filter-tab { font-size: 14px; padding: 9px 20px; }
       .portfolio-grid { gap: 26px; }
       .featured-grid { gap: 24px; }
@@ -533,29 +532,25 @@
       <div class="service-card reveal">
         <span class="service-icon"><i data-lucide="pen-tool" style="width:28px;height:28px"></i></span>
         <div class="service-title" data-i18n="service_design_title">Brand &amp; Social Design</div>
-        <div class="service-desc" data-i18n="service_design_desc">Visual identities, campaign graphics, product edits, and social content for brands that need consistent, polished marketing.</div>
-        <div class="service-tools" data-i18n="service_design_tools">Photoshop · Illustrator · InDesign</div>
+        <div class="service-desc" data-i18n-html="service_design_desc"><span class="service-highlight">Visual identities</span>, campaign graphics, product edits, and social content for brands that need <span class="service-highlight">consistent, polished marketing</span>.</div>
       </div>
 
       <div class="service-card reveal">
         <span class="service-icon"><i data-lucide="box" style="width:28px;height:28px"></i></span>
         <div class="service-title" data-i18n="service_3d_title">3D Product Animation</div>
-        <div class="service-desc" data-i18n="service_3d_desc">Product renders, motion graphics, and anamorphic billboard content for launches, ads, and large-format screens.</div>
-        <div class="service-tools" data-i18n="service_3d_tools">Blender · After Effects</div>
+        <div class="service-desc" data-i18n-html="service_3d_desc"><span class="service-highlight">Product renders</span>, motion graphics, and <span class="service-highlight">anamorphic billboard content</span> for launches, ads, and large-format screens.</div>
       </div>
 
       <div class="service-card reveal">
         <span class="service-icon"><i data-lucide="cpu" style="width:28px;height:28px"></i></span>
         <div class="service-title" data-i18n="service_ai_title">AI &amp; Python Automation</div>
-        <div class="service-desc" data-i18n="service_ai_desc">Custom tools for batch image generation, catalogue creation, CRM workflows, document processing, and repetitive business tasks.</div>
-        <div class="service-tools" data-i18n="service_ai_tools">Python · Django · Gemini API · Google Imagen</div>
+        <div class="service-desc" data-i18n-html="service_ai_desc">Custom tools for <span class="service-highlight">batch image generation</span>, catalogue creation, <span class="service-highlight">CRM workflows</span>, document processing, and repetitive business tasks.</div>
       </div>
 
       <div class="service-card reveal">
         <span class="service-icon"><i data-lucide="languages" style="width:28px;height:28px"></i></span>
         <div class="service-title" data-i18n="service_translation_title">Translation &amp; Localization</div>
-        <div class="service-desc" data-i18n="service_translation_desc">Kurdish, Arabic, and English translation for business content, UI text, documents, and subtitles.</div>
-        <div class="service-tools" data-i18n="service_translation_tools">Kurdish · Arabic · English</div>
+        <div class="service-desc" data-i18n-html="service_translation_desc"><span class="service-highlight">Kurdish, Arabic, and English translation</span> for business content, UI text, documents, and subtitles.</div>
       </div>
 
     </div>
@@ -1393,6 +1388,11 @@ function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(function (el) {
     var k = el.getAttribute('data-i18n');
     if (translations[k] !== undefined) el.textContent = translations[k];
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+    var k = el.getAttribute('data-i18n-html');
+    if (translations[k] !== undefined) el.innerHTML = translations[k];
   });
 }
 
