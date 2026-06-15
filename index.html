@@ -1369,9 +1369,10 @@ var LANGS = {
 // ── i18n ──────────────────────────────────────────────────────
 var translations = {};
 var currentLang = localStorage.getItem('lang') || 'en';
+var I18N_VERSION = '2026-06-15-service-highlights';
 
 function loadLang(lang) {
-  fetch('assets/lang/' + lang + '.json')
+  fetch('assets/lang/' + lang + '.json?v=' + encodeURIComponent(I18N_VERSION))
     .then(function (r) { if (!r.ok) throw new Error('fetch ' + lang); return r.json(); })
     .then(function (data) {
       translations = data;
