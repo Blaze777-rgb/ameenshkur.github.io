@@ -201,6 +201,21 @@
     .cv-card .btn-white, .cv-card .btn-outline-white { margin-top: 0; }
     .cv-card .btn-outline-white { display: inline-block; align-self: flex-start; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.55); border-radius: 10px; padding: 11px 24px; font-family: var(--font-body); font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; }
     .cv-card .btn-outline-white:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
+    .cv-download-btn { position: relative; overflow: hidden; }
+    .cv-download-label { position: relative; z-index: 1; display: inline-block; }
+    .cv-download-icon { position: absolute; left: 50%; top: 50%; z-index: 2; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; color: currentColor; opacity: 0; pointer-events: none; transform: translate(-50%, -58%) scale(.92); }
+    .cv-download-icon svg { position: absolute; left: 4px; top: 1px; width: 16px; height: 16px; stroke-width: 2.45; transform-origin: 50% 74%; }
+    .cv-download-tray { position: absolute; left: 4px; right: 4px; bottom: 3px; height: 2px; border-radius: 999px; background: currentColor; transform: scaleX(.58); transform-origin: 50% 50%; }
+    .cv-download-tray::before,
+    .cv-download-tray::after { content: ''; position: absolute; top: -4px; width: 2px; height: 5px; border-radius: 999px; background: currentColor; opacity: .72; transform: scaleY(.1); transform-origin: bottom; }
+    .cv-download-tray::before { left: 0; }
+    .cv-download-tray::after { right: 0; }
+    .cv-download-btn.is-downloading .cv-download-label { animation: cvLabelPause .86s cubic-bezier(.22,.61,.36,1); }
+    .cv-download-btn.is-downloading .cv-download-icon { animation: cvIconReveal .86s cubic-bezier(.22,.61,.36,1); }
+    .cv-download-btn.is-downloading .cv-download-icon svg { animation: cvArrowDrop .86s cubic-bezier(.22,.61,.36,1); }
+    .cv-download-btn.is-downloading .cv-download-tray { animation: cvTrayCatch .86s cubic-bezier(.22,.61,.36,1); }
+    .cv-download-btn.is-downloading .cv-download-tray::before,
+    .cv-download-btn.is-downloading .cv-download-tray::after { animation: cvTraySides .86s cubic-bezier(.22,.61,.36,1); }
 
     /* ── FOOTER ── */
     footer { background: var(--text); color: rgba(255,255,255,.5); padding: 28px 24px; font-size: 13px; }
@@ -228,6 +243,32 @@
     /* ── ANIMATIONS ── */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .32s ease, transform .32s ease; }
     .reveal.visible { opacity: 1; transform: none; }
+    @keyframes cvLabelPause {
+      0%, 100% { opacity: 1; transform: translateY(0); }
+      18%, 72% { opacity: 0; transform: translateY(4px); }
+    }
+    @keyframes cvIconReveal {
+      0% { opacity: 0; transform: translate(-50%, -70%) scale(.9); }
+      18%, 68% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -42%) scale(.96); }
+    }
+    @keyframes cvArrowDrop {
+      0% { opacity: 0; transform: translateY(-8px) scale(.96); }
+      18% { opacity: 1; transform: translateY(-7px) scale(1); }
+      46% { opacity: 1; transform: translateY(5px) scaleY(.92); }
+      58% { transform: translateY(2px) scaleY(1.03); }
+      72%, 100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes cvTrayCatch {
+      0%, 22% { opacity: .38; transform: scaleX(.58); box-shadow: none; }
+      48% { opacity: 1; transform: scaleX(1.1); box-shadow: 0 0 0 5px rgba(13,148,136,.09); }
+      70%, 100% { opacity: .78; transform: scaleX(.86); box-shadow: none; }
+    }
+    @keyframes cvTraySides {
+      0%, 26% { transform: scaleY(.1); opacity: 0; }
+      46%, 68% { transform: scaleY(1); opacity: .72; }
+      100% { transform: scaleY(.1); opacity: 0; }
+    }
 
     /* ── HOVER PREVIEWS ── */
     .hover-preview { display: none; }
@@ -245,6 +286,12 @@
     @media (prefers-reduced-motion: reduce) {
       .campaign-card.is-animating .campaign-list { will-change: auto; }
       .hover-preview { transition: none; }
+      .cv-download-btn.is-downloading .cv-download-label,
+      .cv-download-btn.is-downloading .cv-download-icon,
+      .cv-download-btn.is-downloading .cv-download-icon svg,
+      .cv-download-btn.is-downloading .cv-download-tray,
+      .cv-download-btn.is-downloading .cv-download-tray::before,
+      .cv-download-btn.is-downloading .cv-download-tray::after { animation: none; }
     }
 
     /* ── HAMBURGER ── */
@@ -511,7 +558,10 @@
       <p class="hero-bio" data-i18n="hero_bio">I create brand visuals, product animations, and custom automation tools for businesses that need faster, more professional creative workflows.</p>
       <div class="hero-btns">
         <a href="#featured" class="btn-primary" data-i18n="hero_cta_work">View Selected Work</a>
-        <a href="assets/cv.pdf" class="btn-secondary" download="Ameen_Zangana_CV.pdf" data-i18n="hero_cta_cv">Download CV</a>
+        <a href="assets/cv.pdf" class="btn-secondary cv-download-btn" download="Ameen_Zangana_CV.pdf">
+          <span class="cv-download-icon" aria-hidden="true"><i data-lucide="arrow-down" style="width:16px;height:16px"></i><span class="cv-download-tray"></span></span>
+          <span class="cv-download-label" data-i18n="hero_cta_cv">Download CV</span>
+        </a>
       </div>
     </div>
     <div class="hero-stats">
@@ -1127,7 +1177,10 @@
         <div class="cv-card-heading" data-i18n="contact_cv_heading">Need more details?</div>
         <div class="cv-card-subtext" data-i18n="contact_cv_subtext">Download my CV for work history, tools, and project experience.</div>
         <div class="cv-actions">
-          <a href="assets/cv.pdf" download="Ameen_Zangana_CV.pdf" class="btn-white" data-i18n="contact_cv_btn">Download CV</a>
+          <a href="assets/cv.pdf" download="Ameen_Zangana_CV.pdf" class="btn-white cv-download-btn">
+            <span class="cv-download-icon" aria-hidden="true"><i data-lucide="arrow-down" style="width:16px;height:16px"></i><span class="cv-download-tray"></span></span>
+            <span class="cv-download-label" data-i18n="contact_cv_btn">Download CV</span>
+          </a>
         </div>
       </div>
     </div>
@@ -1667,6 +1720,18 @@ document.addEventListener('DOMContentLoaded', function () {
     summary.addEventListener('click', function (e) {
       e.preventDefault();
       toggleCard();
+    });
+  });
+
+  // ── CV download button feedback ──────────────────────────
+  document.querySelectorAll('.cv-download-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btn.classList.remove('is-downloading');
+      void btn.offsetWidth;
+      btn.classList.add('is-downloading');
+      window.setTimeout(function () {
+        btn.classList.remove('is-downloading');
+      }, 900);
     });
   });
 
