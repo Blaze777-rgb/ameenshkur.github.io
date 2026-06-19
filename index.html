@@ -89,6 +89,19 @@
     .stat-item { padding: 0 28px; text-align: center; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
     .stat-value { font-family: var(--font-head); font-size: 15px; font-weight: 700; color: var(--text); display: block; }
+    .hero-scroll-cue { position: fixed; left: 50%; bottom: 26px; z-index: 120; width: 56px; height: 56px; border: 0; background: transparent; color: #334155; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; pointer-events: none; transform: translate3d(-50%, 10px, 0); transition: opacity .36s ease, transform .36s cubic-bezier(.22,.61,.36,1), color .2s ease; -webkit-tap-highlight-color: transparent; }
+    .hero-scroll-cue.is-visible { opacity: 1; pointer-events: auto; transform: translate3d(-50%, 0, 0); }
+    .hero-scroll-cue:hover { color: var(--teal); }
+    .hero-scroll-cue:focus-visible { outline: 2px solid rgba(13,148,136,.42); outline-offset: 5px; }
+    .hero-scroll-cue i,
+    .hero-scroll-cue svg { width: 42px; height: 42px; stroke-width: 1.85; filter: drop-shadow(0 7px 12px rgba(15,23,42,.16)); transform-origin: center; will-change: transform, opacity; }
+    .hero-scroll-cue.is-visible i,
+    .hero-scroll-cue.is-visible svg { animation: heroArrowDrift 1.85s cubic-bezier(.45,0,.25,1) infinite; }
+    @keyframes heroArrowDrift {
+      0% { transform: translate3d(0, -8px, 0) scale(.98); opacity: .62; }
+      50% { transform: translate3d(0, 8px, 0) scale(1.03); opacity: 1; }
+      100% { transform: translate3d(0, -8px, 0) scale(.98); opacity: .62; }
+    }
 
     /* ── SECTIONS ── */
     section { padding: 96px 24px; }
@@ -393,6 +406,9 @@
       /* TAP TARGETS */
       .lang-trigger { min-height: 44px; }
       .btn-primary, .btn-secondary { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+      .hero-scroll-cue { width: 50px; height: 50px; bottom: 18px; }
+      .hero-scroll-cue i,
+      .hero-scroll-cue svg { width: 36px; height: 36px; }
       .contact-link-card { min-height: 44px; }
       /* Keep dropdown panel from clipping off right edge on mobile */
       .lang-panel { right: 0; left: auto; min-width: 160px; }
@@ -500,6 +516,15 @@
       html[dir="rtl"] .lb-prev { left: auto; right: calc(50% - 112px); }
       html[dir="rtl"] .lb-next { right: auto; left: calc(50% - 112px); }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-scroll-cue,
+      .hero-scroll-cue i,
+      .hero-scroll-cue svg {
+        animation: none !important;
+        transition: opacity .2s ease;
+      }
+    }
   </style>
 </head>
 <body>
@@ -570,6 +595,9 @@
       <div class="stat-item stat-item--languages"><span class="stat-value" data-i18n="stat_languages">Speaks Kurdish, Arabic &amp; English</span></div>
     </div>
   </div>
+  <button class="hero-scroll-cue" type="button" aria-label="Scroll to services" aria-hidden="true" tabindex="-1">
+    <i data-lucide="chevron-down" aria-hidden="true"></i>
+  </button>
 </section>
 
 <!-- ═══ SERVICES ════════════════════════════════════════════ -->
@@ -1734,6 +1762,74 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 900);
     });
   });
+
+  // ── Delayed hero scroll cue ──────────────────────────────
+  (function () {
+    var hero = document.getElementById('hero');
+    var services = document.getElementById('services');
+    var cue = document.querySelector('.hero-scroll-cue');
+    var timer = null;
+    var heroActive = false;
+
+    if (!hero || !services || !cue) return;
+
+    function hideCue() {
+      cue.classList.remove('is-visible');
+      cue.setAttribute('aria-hidden', 'true');
+      cue.setAttribute('tabindex', '-1');
+    }
+
+    function showCue() {
+      if (!heroActive) return;
+      cue.classList.add('is-visible');
+      cue.setAttribute('aria-hidden', 'false');
+      cue.removeAttribute('tabindex');
+    }
+
+    function clearCueTimer() {
+      if (!timer) return;
+      window.clearTimeout(timer);
+      timer = null;
+    }
+
+    function startCueTimer() {
+      clearCueTimer();
+      hideCue();
+      timer = window.setTimeout(function () {
+        timer = null;
+        showCue();
+      }, 5000);
+    }
+
+    function isHeroCurrent(entry) {
+      var rect = entry.boundingClientRect;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      return entry.isIntersecting && rect.top <= vh * .24 && rect.bottom >= vh * .58;
+    }
+
+    cue.addEventListener('click', function () {
+      hideCue();
+      services.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+
+    if ('IntersectionObserver' in window) {
+      var heroObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          heroActive = isHeroCurrent(entry);
+          if (heroActive) startCueTimer();
+          else {
+            clearCueTimer();
+            hideCue();
+          }
+        });
+      }, { threshold: [0, .01, .25, .5, .75, 1] });
+
+      heroObserver.observe(hero);
+    } else {
+      heroActive = true;
+      startCueTimer();
+    }
+  }());
 
   // ── Scroll reveal ─────────────────────────────────────────
   var reveals = document.querySelectorAll('.reveal');
