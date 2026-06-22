@@ -238,6 +238,16 @@
     .footer-social-link:hover { color: #fff; border-color: rgba(255,255,255,.34); background: rgba(255,255,255,.08); transform: translateY(-1px); }
     .footer-social-link .brand-icon { width: 18px; height: 18px; }
 
+    /* ── WECHAT QR MODAL ── */
+    .qr-modal { position: fixed; inset: 0; z-index: 9100; display: grid; place-items: center; padding: 24px; background: rgba(0,0,0,.68); }
+    .qr-modal[hidden] { display: none; }
+    .qr-dialog { position: relative; width: min(100%, 440px); padding: 22px; border-radius: 8px; background: #fff; box-shadow: 0 24px 70px rgba(0,0,0,.24); text-align: center; }
+    .qr-dialog h2 { font-family: var(--font-head); font-size: 20px; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
+    .qr-dialog p { color: var(--text-muted); font-size: 14px; line-height: 1.5; margin-bottom: 16px; white-space: nowrap; }
+    .qr-dialog img { display: block; width: min(100%, 260px); height: auto; margin: 0 auto; border: 1px solid var(--border); border-radius: 8px; }
+    .qr-close { position: absolute; top: 10px; inset-inline-end: 10px; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 999px; background: #fff; color: var(--text); font-size: 24px; line-height: 1; cursor: pointer; }
+    .qr-close:focus-visible { outline: 3px solid rgba(13,148,136,.25); outline-offset: 3px; }
+
     /* ── LIGHTBOX ── */
     .lb { position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .22s; }
     .lb.open { opacity: 1; pointer-events: all; }
@@ -402,6 +412,7 @@
       .lb-img-pane img { max-width: 100vw; max-height: 85vh; object-fit: contain; border-radius: 4px; }
       .lb-counter { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 14px; font-weight: 600; background: rgba(0,0,0,.45); padding: 5px 16px; border-radius: 20px; white-space: nowrap; z-index: 9010; }
       .lb-vid-pane { width: 95vw; height: 54vw; }
+      .qr-dialog p { white-space: normal; }
 
       /* TAP TARGETS */
       .lang-trigger { min-height: 44px; }
@@ -1170,14 +1181,14 @@
     <p class="contact-subtext" data-i18n="contact_subtext">Send me a message for design, 3D, AI automation, or translation work. I am available for freelance projects, collaborations, and full-time opportunities.</p>
     <div class="contact-grid">
       <div class="contact-links-col">
-        <a href="mailto:ameenshkur@gmail.com" class="contact-link-card reveal">
+        <a href="mailto:ameenshkur@gmail.com?subject=Project%20inquiry%20from%20your%20portfolio&body=Hi%20Ameen%2C%0A%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project." class="contact-link-card reveal">
           <span class="contact-icon"><i data-lucide="mail" style="width:20px;height:20px"></i></span>
           <div>
             <div class="contact-info-label" data-i18n="contact_email_label">Email</div>
             <div class="contact-info-value">ameenshkur@gmail.com</div>
           </div>
         </a>
-        <a href="https://wa.me/9647719541390" target="_blank" rel="noopener" class="contact-link-card reveal">
+        <a href="https://wa.me/9647719541390?text=Hi%20Ameen%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="contact-link-card reveal">
           <span class="contact-icon" aria-hidden="true">
             <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M20.52 3.48A11.78 11.78 0 0 0 12.14 0C5.66 0 .39 5.27.39 11.75c0 2.07.54 4.09 1.57 5.87L.3 23.69l6.22-1.63a11.73 11.73 0 0 0 5.62 1.43h.01c6.48 0 11.75-5.27 11.75-11.75 0-3.14-1.22-6.09-3.38-8.26ZM12.15 21.5h-.01c-1.68 0-3.32-.45-4.76-1.3l-.34-.2-3.69.97.99-3.6-.22-.37a9.72 9.72 0 0 1-1.49-5.18c0-5.37 4.37-9.74 9.75-9.74 2.6 0 5.04 1.01 6.88 2.85a9.67 9.67 0 0 1 2.85 6.88c0 5.37-4.37 9.69-9.96 9.69Zm5.35-7.29c-.29-.15-1.74-.86-2.01-.96-.27-.1-.47-.15-.67.15-.2.29-.77.96-.94 1.16-.17.2-.35.22-.64.07-.29-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.03-.17-.29-.02-.45.13-.6.13-.13.29-.35.44-.52.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.29-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.74-.71 1.99-1.39.25-.68.25-1.27.17-1.39-.07-.12-.27-.2-.56-.34Z"/>
@@ -1188,7 +1199,7 @@
             <div class="contact-info-value">+964 771 954 1390</div>
           </div>
         </a>
-        <div class="contact-link-card contact-link-card--wechat reveal" onclick="lb.openGallery('wechat-qr', 0)" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); lb.openGallery('wechat-qr', 0); }" title="Open WeChat QR code" role="button" tabindex="0">
+        <div class="contact-link-card contact-link-card--wechat reveal" id="wechat-qr-trigger" title="Open WeChat QR code" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="wechat-modal">
           <span class="contact-icon" aria-hidden="true">
             <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M9.5 3.5C4.81 3.5 1 6.69 1 10.62c0 2.17 1.16 4.12 2.98 5.43l-.79 2.38 2.77-1.39c1.06.45 2.26.7 3.54.7.42 0 .83-.03 1.24-.08-.17-.55-.26-1.13-.26-1.73 0-3.6 3.29-6.52 7.33-6.52.05 0 .1 0 .15.01-.67-3.36-4.2-5.92-8.46-5.92Zm-2.83 5.26a.91.91 0 1 1 0-1.82.91.91 0 0 1 0 1.82Zm5.66 0a.91.91 0 1 1 0-1.82.91.91 0 0 1 0 1.82Zm5.49 1.93c-3.31 0-6 2.34-6 5.23s2.69 5.23 6 5.23c.9 0 1.75-.17 2.51-.49l2.17 1.09-.61-1.86C23.2 18.93 24 17.51 24 15.92c0-2.89-2.87-5.23-6.18-5.23Zm-1.95 3.78a.71.71 0 1 1 0-1.42.71.71 0 0 1 0 1.42Zm4.25 0a.71.71 0 1 1 0-1.42.71.71 0 0 1 0 1.42Z"/>
@@ -1230,9 +1241,23 @@
           <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.96h-1.51c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/>
         </svg>
       </a>
+      <a class="footer-social-link" href="https://t.me/AmeenShkur" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram">
+        <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M23.91 3.79 20.3 20.82c-.27 1.2-.98 1.5-1.98.93l-5.5-4.05-2.65 2.55c-.29.29-.54.54-1.11.54l.39-5.6L19.65 6c.44-.39-.1-.61-.68-.22L6.35 13.72.91 12.02c-1.18-.37-1.2-1.18.25-1.75L22.45 2.06c.99-.37 1.85.24 1.46 1.73Z"/>
+        </svg>
+      </a>
     </div>
   </div>
 </footer>
+
+<div class="qr-modal" id="wechat-modal" hidden>
+  <div class="qr-dialog" role="dialog" aria-modal="true" aria-labelledby="wechat-modal-title">
+    <button class="qr-close" id="wechat-modal-close" type="button" aria-label="Close">&times;</button>
+    <h2 id="wechat-modal-title" data-i18n="wechat_modal_title">Add me on WeChat</h2>
+    <p id="wechat-modal-body" data-i18n="wechat_modal_body">Scan this QR code in WeChat to contact me directly.</p>
+    <img id="wechat-modal-image" src="assets/contact/wechat-qr.png" alt="WeChat QR code" data-i18n-alt="wechat_modal_alt" />
+  </div>
+</div>
 
 <!-- ═══ LIGHTBOX ══════════════════════════════════════════════ -->
 <div id="lb-modal" class="lb" onclick="lb.clickOutside(event)" role="dialog" aria-modal="true">
@@ -1472,6 +1497,11 @@ function applyTranslations() {
     if (translations[k] !== undefined) el.textContent = translations[k];
   });
 
+  document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
+    var k = el.getAttribute('data-i18n-alt');
+    if (translations[k] !== undefined) el.setAttribute('alt', translations[k]);
+  });
+
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
     var k = el.getAttribute('data-i18n-html');
     if (translations[k] !== undefined) el.innerHTML = translations[k];
@@ -1535,6 +1565,52 @@ function setLang(lang) { loadLang(lang); }
       if (e.key === 'Escape') closePanel();
     });
   });
+}());
+
+// ── WeChat QR modal ──────────────────────────────────────────
+(function () {
+  var previousBodyOverflow = '';
+
+  function initWeChatModal() {
+    var trigger = document.getElementById('wechat-qr-trigger');
+    var modal = document.getElementById('wechat-modal');
+    var close = document.getElementById('wechat-modal-close');
+    var image = document.getElementById('wechat-modal-image');
+    if (!trigger || !modal || !close || !image) return;
+
+    function openModal() {
+      image.src = image.getAttribute('src') || 'assets/contact/wechat-qr.png';
+      previousBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      modal.hidden = false;
+      trigger.setAttribute('aria-expanded', 'true');
+      close.focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = previousBodyOverflow;
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.focus();
+    }
+
+    trigger.addEventListener('click', openModal);
+    trigger.addEventListener('keydown', function (event) {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      openModal();
+    });
+
+    close.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) closeModal();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initWeChatModal);
 }());
 
 // ── DOMContentLoaded ─────────────────────────────────────────

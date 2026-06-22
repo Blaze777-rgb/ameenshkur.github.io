@@ -195,6 +195,9 @@
   "contact_cv_heading": "سیڤیەکەم دابەزێنە",
   "contact_cv_subtext": "مێژووی تەواوی کارکردن و لێهاتوویی و ئاماژەکان.",
   "contact_cv_btn": "داگرتنی سیڤی",
+  "wechat_modal_title": "لە WeChat زیادم بکە",
+  "wechat_modal_body": "ئەم کۆدی QR ـە لە WeChat سکان بکە بۆ پەیوەندیکردن بە ڕاستەوخۆ.",
+  "wechat_modal_alt": "کۆدی QR ـی WeChat",
 
   "lb_swipe_hint": "\u2190 بۆ گەڕان بسڕە \u2192",
   "footer_copy": "© 2026 ئەمین زەنگەنە · کەرکوک، هەرێمی کوردستان"

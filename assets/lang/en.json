@@ -196,6 +196,9 @@
   "contact_cv_heading": "Need more details?",
   "contact_cv_subtext": "Download my CV for work history, tools, and project experience.",
   "contact_cv_btn": "Download CV",
+  "wechat_modal_title": "Add me on WeChat",
+  "wechat_modal_body": "Scan this QR code in WeChat to contact me directly.",
+  "wechat_modal_alt": "WeChat QR code",
 
   "lb_swipe_hint": "\u2190 Swipe to navigate \u2192",
   "footer_copy": "© 2026 Ameen Zangana · Kirkuk, Kurdistan Region"
