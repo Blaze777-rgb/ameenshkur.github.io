@@ -11,6 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+  <script>
+    document.documentElement.classList.add('liberation-pending');
+    window.setTimeout(function () { document.documentElement.classList.remove('liberation-pending'); }, 1600);
+  </script>
   <style>
     @font-face {
       font-family: 'Agoma';
@@ -88,6 +92,49 @@
     .hero-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
     .hero-tag { display: inline-block; background: var(--teal-light); color: var(--teal-dark); font-size: 12px; font-weight: 600; padding: 4px 14px; border-radius: 20px; margin-bottom: 22px; letter-spacing: .3px; }
     .hero-name { font-family: var(--font-head); font-size: clamp(48px, 8vw, 80px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; color: var(--text); margin-bottom: 16px; }
+    html.liberation-pending .hero-name,
+    html.liberation-pending .hero-tag,
+    html.liberation-pending .hero-bio,
+    html.liberation-pending .hero-btns,
+    html.liberation-pending .hero-stats { visibility: hidden; }
+    .hero-name.liberation-running,
+    .hero-name.liberation-complete { visibility: visible; }
+    .liberation-word { display: inline-block; white-space: nowrap; }
+    .liberation-word + .liberation-word { margin-inline-start: .22em; }
+    .liberation-unit { display: inline-block; transform-origin: 50% 100%; }
+    .hero-name.liberation-running .liberation-unit {
+      animation: liberationReveal .9s cubic-bezier(.65,0,.35,1) both;
+      animation-delay: var(--liberation-delay, 0ms);
+      will-change: transform, filter, opacity;
+    }
+    .hero-name.liberation-complete .liberation-unit { opacity: 1; filter: none; transform: none; }
+    @keyframes liberationReveal {
+      from {
+        opacity: 0;
+        filter: blur(12px);
+        transform: translate3d(0, var(--liberation-y, 0px), 0) rotate(var(--liberation-rotation, 0deg)) scale(var(--liberation-scale, 1));
+      }
+      to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    }
+    .split-text-word { display: inline-block; white-space: nowrap; }
+    .split-text-word + .split-text-word { margin-inline-start: .28em; }
+    .split-text-compact .split-text-word + .split-text-word { margin-inline-start: 0; }
+    .split-text-running .split-text-word {
+      animation: splitTextReveal .48s cubic-bezier(.22,1,.36,1) both;
+      animation-delay: var(--split-delay, 0ms);
+      will-change: transform, opacity;
+    }
+    .split-text-complete .split-text-word { opacity: 1; transform: none; }
+    @keyframes splitTextReveal {
+      from { opacity: 0; transform: translate3d(0, 14px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero-btns.hero-support-running { animation: heroSupportReveal .44s .7s cubic-bezier(.22,1,.36,1) both; }
+    .hero-btns.hero-support-complete { opacity: 1; transform: none; }
+    @keyframes heroSupportReveal {
+      from { opacity: 0; transform: translate3d(0, 10px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
     .hero-bio { font-size: 16px; color: var(--text-muted); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
     .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 52px; }
     .btn-primary { background: var(--teal); color: #fff; border: none; border-radius: 10px; padding: 13px 28px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; display: inline-block; }
@@ -553,6 +600,14 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html.liberation-pending .hero-name,
+      html.liberation-pending .hero-tag,
+      html.liberation-pending .hero-bio,
+      html.liberation-pending .hero-btns,
+      html.liberation-pending .hero-stats { visibility: visible; }
+      .hero-name.liberation-running .liberation-unit { animation: none !important; opacity: 1; filter: none; transform: none; }
+      .split-text-running .split-text-word,
+      .hero-btns.hero-support-running { animation: none !important; opacity: 1; transform: none; }
       .hero-scroll-cue,
       .hero-scroll-cue i,
       .hero-scroll-cue svg {
@@ -1493,6 +1548,147 @@ var lb = (function () {
 }());
 
 // ── Language config ───────────────────────────────────────────
+var heroLiberationTimer = null;
+var heroSupportTimers = [];
+
+function heroNameSegments(text, lang) {
+  var rtl = (LANGS[lang] || LANGS.en).rtl;
+  if (rtl) return text.trim().split(/\s+/);
+
+  var words = text.trim().split(/\s+/);
+  return words.map(function (word) {
+    if (window.Intl && typeof Intl.Segmenter === 'function') {
+      return Array.from(new Intl.Segmenter(lang, { granularity: 'grapheme' }).segment(word), function (part) { return part.segment; });
+    }
+    return Array.from(word);
+  });
+}
+
+function supportingTextPieces(text, lang) {
+  if (lang === 'zh' && window.Intl && typeof Intl.Segmenter === 'function') {
+    return Array.from(new Intl.Segmenter(lang, { granularity: 'grapheme' }).segment(text.replace(/\s+/g, '')), function (part) { return part.segment; });
+  }
+  return text.trim().split(/\s+/);
+}
+
+function prepareSplitText(element, lang, startDelay, stagger) {
+  if (!element) return;
+
+  var text = element.textContent.trim();
+  var pieces = supportingTextPieces(text, lang);
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  element.textContent = '';
+  element.setAttribute('aria-label', text);
+  element.classList.remove('split-text-running', 'split-text-complete', 'split-text-compact');
+  if (lang === 'zh') element.classList.add('split-text-compact');
+
+  pieces.forEach(function (piece, index) {
+    var word = document.createElement('span');
+    word.className = 'split-text-word';
+    word.setAttribute('aria-hidden', 'true');
+    word.textContent = piece;
+    word.style.setProperty('--split-delay', Math.round(startDelay + index * stagger) + 'ms');
+    element.appendChild(word);
+  });
+
+  if (reduceMotion) {
+    element.classList.add('split-text-complete');
+    return;
+  }
+
+  element.classList.add('split-text-running');
+  heroSupportTimers.push(window.setTimeout(function () {
+    element.classList.remove('split-text-running');
+    element.classList.add('split-text-complete');
+  }, startDelay + Math.max(pieces.length - 1, 0) * stagger + 560));
+}
+
+function prepareHeroSupportingMotion(lang) {
+  heroSupportTimers.forEach(function (timer) { window.clearTimeout(timer); });
+  heroSupportTimers = [];
+
+  prepareSplitText(document.querySelector('.hero-tag'), lang, 360, 26);
+  prepareSplitText(document.querySelector('.hero-bio'), lang, 460, 19);
+  document.querySelectorAll('.hero-stats .stat-value').forEach(function (stat, index) {
+    prepareSplitText(stat, lang, 760 + index * 70, 22);
+  });
+
+  var buttons = document.querySelector('.hero-btns');
+  if (!buttons) return;
+  buttons.classList.remove('hero-support-running', 'hero-support-complete');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    buttons.classList.add('hero-support-complete');
+    return;
+  }
+  buttons.classList.add('hero-support-running');
+  heroSupportTimers.push(window.setTimeout(function () {
+    buttons.classList.remove('hero-support-running');
+    buttons.classList.add('hero-support-complete');
+  }, 1250));
+}
+
+function playHeroLiberation(lang) {
+  var name = document.querySelector('.hero-name');
+  if (!name) return;
+
+  if (heroLiberationTimer) window.clearTimeout(heroLiberationTimer);
+  name.getAnimations().forEach(function (animation) { animation.cancel(); });
+
+  var text = name.textContent.trim();
+  var rtl = (LANGS[lang] || LANGS.en).rtl;
+  var segments = heroNameSegments(text, lang);
+  var units = [];
+
+  name.textContent = '';
+  name.setAttribute('aria-label', text);
+  name.classList.remove('liberation-running', 'liberation-complete');
+
+  segments.forEach(function (segment) {
+    var word = document.createElement('span');
+    word.className = 'liberation-word';
+    word.setAttribute('aria-hidden', 'true');
+
+    var pieces = rtl ? [segment] : segment;
+    pieces.forEach(function (piece) {
+      var unit = document.createElement('span');
+      unit.className = 'liberation-unit';
+      unit.textContent = piece;
+      word.appendChild(unit);
+      units.push(unit);
+    });
+
+    name.appendChild(word);
+  });
+
+  var center = (units.length - 1) / 2;
+  var radius = Math.max(center, 1);
+  units.forEach(function (unit, index) {
+    var proximity = 1 - Math.abs(index - center) / radius;
+    var direction = index < center ? -1 : index > center ? 1 : 0;
+    unit.style.setProperty('--liberation-scale', (.55 + proximity * 1.55).toFixed(3));
+    unit.style.setProperty('--liberation-y', Math.round(proximity * 58) + 'px');
+    unit.style.setProperty('--liberation-rotation', (direction * proximity * 4).toFixed(2) + 'deg');
+    unit.style.setProperty('--liberation-delay', Math.round(45 + Math.abs(index - center) * 18) + 'ms');
+  });
+
+  prepareHeroSupportingMotion(lang);
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    name.classList.add('liberation-complete');
+    document.documentElement.classList.remove('liberation-pending');
+    return;
+  }
+
+  name.classList.add('liberation-running');
+  document.documentElement.classList.remove('liberation-pending');
+
+  heroLiberationTimer = window.setTimeout(function () {
+    name.classList.remove('liberation-running');
+    name.classList.add('liberation-complete');
+  }, 1250);
+}
+
 var FLAG_STYLE = 'border-radius:2px;vertical-align:middle;display:inline-block;flex-shrink:0;';
 var LANGS = {
   en: { flagHtml: '<img src="https://flagcdn.com/w40/us.png" width="20" height="14" style="' + FLAG_STYLE + '" alt="EN">', code: 'EN', rtl: false },
@@ -1516,8 +1712,12 @@ function loadLang(lang) {
       updateLangDropdown(lang);
       currentLang = lang;
       localStorage.setItem('lang', lang);
+      playHeroLiberation(lang);
     })
-    .catch(function (e) { console.error('i18n:', e); });
+    .catch(function (e) {
+      console.error('i18n:', e);
+      playHeroLiberation(lang);
+    });
 }
 
 function applyTranslations() {
