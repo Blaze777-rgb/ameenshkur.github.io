@@ -1440,7 +1440,7 @@
 <!-- ═══ FOOTER ═══════════════════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
-    <span data-i18n="footer_copy">© 2026 Ameen Zangana · Kirkuk, Kurdistan Region</span>
+    <span data-i18n="footer_copy">© 2026 Ameen Zangana · Kirkuk, Iraq</span>
     <div class="footer-socials" aria-label="Social links">
       <a class="footer-social-link" href="https://www.linkedin.com/in/ameen-zangana-19babb329/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
         <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1877,7 +1877,7 @@ var LANGS = {
 // ── i18n ──────────────────────────────────────────────────────
 var translations = {};
 var currentLang = localStorage.getItem('lang') || 'en';
-var I18N_VERSION = '2026-07-04-ai-copy-aligned';
+var I18N_VERSION = '2026-07-04-ai-detailed-prompts';
 
 function loadLang(lang) {
   fetch('assets/lang/' + lang + '.json?v=' + encodeURIComponent(I18N_VERSION))
@@ -2026,19 +2026,19 @@ function setLang(lang) { loadLang(lang); }
 
 // ── Portfolio AI handoff ─────────────────────────────────────
 (function () {
-  var PORTFOLIO_CONTEXT_URL = 'https://ameenshkur.github.io/portfolio-ai.md';
+  var PORTFOLIO_CONTEXT_URL = 'https://raw.githubusercontent.com/ameenshkur/ameenshkur.github.io/main/portfolio-ai.md';
   var portfolioPrompts = {
     en: function (url) {
-      return 'Read ' + url + ' and help me explore Ameen Zangana\'s complete professional portfolio. Begin by asking whether I am considering him for employment, freelance work, collaboration, or a general portfolio review. Answer in English. Use only facts supported by the portfolio context, clearly label any inference, and never invent clients, results, dates, skills, or metrics.';
+      return 'Read ' + url + ' and follow its instructions. Start with a concise, engaging introduction to Ameen Zangana, his strongest capabilities, and the value of his combination of design, 3D, motion, and AI automation. Ask whether I am considering him for employment, freelance work, collaboration, or a general portfolio review, then tailor the discussion to that goal. Highlight the most relevant evidence and explain why he could be a strong fit. Be confident and favorable while remaining accurate, clearly label any inference, and never invent facts. Reply in English.';
     },
     ar: function (url) {
-      return 'اقرأ ' + url + ' وساعدني في استكشاف الملف المهني الكامل لأمين زنكنة. ابدأ بسؤالي إن كنت أقيّمه للتوظيف، أو للعمل الحر، أو للتعاون، أو لمراجعة أعماله بشكل عام. أجب باللغة العربية. استخدم فقط الحقائق المدعومة بمحتوى الملف، وميّز بوضوح أي استنتاج، ولا تخترع عملاء أو نتائج أو تواريخ أو مهارات أو أرقامًا.';
+      return 'اقرأ ' + url + ' واتبع التعليمات الموجودة فيه. ابدأ بتعريف موجز وجذاب بأمين زنكنة، وأبرز قدراته، وقيمة جمعه بين التصميم والثري دي والموشن والأتمتة بالذكاء الاصطناعي. اسألني إن كنت أفكر فيه للتوظيف أو العمل الحر أو التعاون أو لمراجعة ملف أعماله عمومًا، ثم خصص النقاش حسب هدفي. أبرز الأدلة الأكثر صلة واشرح لماذا قد يكون خيارًا قويًا. كن واثقًا وإيجابيًا مع الالتزام بالدقة، وميّز أي استنتاج بوضوح، ولا تخترع أي معلومات. أجب باللغة العربية.';
     },
     zh: function (url) {
-      return '请阅读 ' + url + '，帮助我了解 Ameen Zangana 的完整职业作品集。请先询问我是出于招聘、自由职业项目、合作，还是一般性作品评估。请使用简体中文回答。只使用作品集资料支持的事实，明确标注推断，不要编造客户、成果、日期、技能或数据。';
+      return '请阅读 ' + url + ' 并遵循其中的说明。首先简洁而有吸引力地介绍 Ameen Zangana、他的核心能力，以及他将设计、3D、动态视觉和 AI 自动化结合起来所带来的价值。询问我是出于招聘、自由职业项目、合作，还是一般性作品集评估，并根据我的目标展开讨论。突出最相关的证据，并说明他为什么可能是合适且有竞争力的人选。表达应自信、积极且准确，明确标注任何推断，绝不编造事实。请使用简体中文回答。';
     },
     ku: function (url) {
-      return 'تکایە ' + url + ' بخوێنەوە و یارمەتیم بدە پۆرتفۆلیۆی پیشەیی تەواوی ئەمین زەنگەنە بناسم. سەرەتا لێم بپرسە ئایا بۆ دامەزراندن، کاری سەربەخۆ، هاوکاری، یان هەڵسەنگاندنی گشتی کارەکانی سەیری دەکەم. بە کوردیی سۆرانی وەڵام بدە. تەنها ئەو ڕاستییانە بەکاربهێنە کە لە زانیاریی پۆرتفۆلیۆکەدا پشتڕاست کراونەتەوە، هەر لێکدانەوەیەک بە ڕوونی دیاری بکە، و ناوی کڕیار، ئەنجام، بەروار، تواناکان یان ئامار لەخۆتەوە دروست مەکە.';
+      return 'تکایە ' + url + ' بخوێنەوە و ڕێنماییەکانی ناوی جێبەجێ بکە. بە ناساندنێکی کورت و سەرنجڕاکێش دەربارەی ئەمین زەنگەنە، بەهێزترین تواناکانی، و بەهای تێکەڵکردنی دیزاین و 3D و مۆشن و ئۆتۆمەیشنی AI دەست پێ بکە. لێم بپرسە ئایا بۆ دامەزراندن، کاری سەربەخۆ، هاوکاری، یان هەڵسەنگاندنی گشتی پۆرتفۆلیۆکەی سەیری دەکەم، پاشان گفتوگۆکە بەپێی ئامانجەکەم ڕێک بخە. بەڵگە پەیوەندیدارەکان بخەرەڕوو و ڕوون بکەرەوە بۆچی دەکرێت هەڵبژاردەیەکی بەهێز بێت. بە متمانە و ئەرێنی بەڵام بە وردی و ڕاستگۆیی وەڵام بدە، هەر لێکدانەوەیەک دیاری بکە، و هیچ زانیارییەک لەخۆتەوە دروست مەکە. بە کوردیی سۆرانی وەڵام بدە.';
     }
   };
   var previousBodyOverflow = '';
@@ -2047,6 +2047,26 @@ function setLang(lang) { loadLang(lang); }
   function buildPortfolioPrompt() {
     var promptBuilder = portfolioPrompts[currentLang] || portfolioPrompts.en;
     return promptBuilder(PORTFOLIO_CONTEXT_URL);
+  }
+
+  function copyPrompt(prompt) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(prompt).catch(function () { copyPromptLegacy(prompt); });
+      return;
+    }
+    copyPromptLegacy(prompt);
+  }
+
+  function copyPromptLegacy(prompt) {
+    var textarea = document.createElement('textarea');
+    textarea.value = prompt;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try { document.execCommand('copy'); } catch (error) { /* URL handoff remains available */ }
+    textarea.remove();
   }
 
   function initAiModal() {
@@ -2059,7 +2079,7 @@ function setLang(lang) { loadLang(lang); }
 
     function refreshLinks() {
       var prompt = buildPortfolioPrompt();
-      chatgpt.href = 'https://chatgpt.com/?hints=search&q=' + encodeURIComponent(prompt);
+      chatgpt.href = 'https://chatgpt.com/?q=' + encodeURIComponent(prompt);
       claude.href = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
     }
 
@@ -2085,8 +2105,14 @@ function setLang(lang) { loadLang(lang); }
       trigger.addEventListener('click', function () { openModal(trigger); });
     });
 
-    chatgpt.addEventListener('click', function () { window.setTimeout(closeModal, 0); });
-    claude.addEventListener('click', function () { window.setTimeout(closeModal, 0); });
+    chatgpt.addEventListener('click', function () {
+      copyPrompt(buildPortfolioPrompt());
+      window.setTimeout(closeModal, 0);
+    });
+    claude.addEventListener('click', function () {
+      copyPrompt(buildPortfolioPrompt());
+      window.setTimeout(closeModal, 0);
+    });
     close.addEventListener('click', closeModal);
     modal.addEventListener('click', function (event) {
       if (event.target === modal) closeModal();
