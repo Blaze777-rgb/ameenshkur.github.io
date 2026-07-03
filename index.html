@@ -91,6 +91,7 @@
       --teal: #0d9488; --teal-light: #ccfbf1; --teal-dark: #0f766e;
       --text: #0f172a; --text-muted: #64748b; --text-faint: #94a3b8;
       --border: #e2e8f0; --white: #ffffff;
+      --ai-chatgpt: #0f172a; --ai-claude: #d97757;
       --card-shadow: 0 1px 3px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.06);
       --radius: 14px;
       --font-head: 'Sora', 'Inter', Arial, sans-serif;
@@ -208,6 +209,10 @@
     .btn-primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
     .btn-secondary { background: transparent; color: var(--text); border: 1.5px solid var(--border); border-radius: 10px; padding: 13px 28px; font-family: var(--font-body); font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; transition: border-color .2s, color .2s, transform .15s; display: inline-block; }
     .btn-secondary:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
+    .btn-ai { background: rgba(255,255,255,.86); color: var(--teal-dark); border: 1.5px solid rgba(13,148,136,.28); border-radius: 10px; padding: 12px 22px; font-family: var(--font-body); font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; transition: border-color .2s, background .2s, box-shadow .2s, transform .15s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 5px 18px rgba(13,148,136,.08); }
+    .btn-ai:hover { background: #fff; border-color: var(--teal); box-shadow: 0 8px 22px rgba(13,148,136,.15); transform: translateY(-1px); }
+    .btn-ai:focus-visible { outline: 3px solid rgba(13,148,136,.24); outline-offset: 3px; }
+    .btn-ai svg { width: 17px; height: 17px; stroke-width: 2.25; }
     .hero-stats { display: flex; justify-content: center; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 32px; }
     .stat-item { padding: 0 28px; text-align: center; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
@@ -331,12 +336,14 @@
     .cv-card { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); border-radius: var(--radius); padding: 40px 32px; color: #fff; display: flex; flex-direction: column; gap: 12px; min-height: 220px; justify-content: center; }
     .cv-card-heading { font-family: var(--font-head); font-size: 24px; font-weight: 700; line-height: 1.2; }
     .cv-card-subtext { font-size: 14px; opacity: .8; line-height: 1.6; }
-    .cv-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .cv-actions { display: flex; align-items: stretch; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
     .cv-card .btn-white { display: inline-block; align-self: flex-start; background: #fff; color: var(--teal-dark); border: none; border-radius: 10px; padding: 12px 26px; font-family: var(--font-body); font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; margin-top: 8px; transition: opacity .2s, transform .15s; }
     .cv-card .btn-white:hover { opacity: .92; transform: translateY(-1px); }
-    .cv-card .btn-white, .cv-card .btn-outline-white { margin-top: 0; }
+    .cv-card .btn-white, .cv-card .btn-outline-white { height: 46px; min-height: 46px; margin-top: 0; padding-block: 0; display: inline-flex; align-items: center; justify-content: center; line-height: 1.2; }
     .cv-card .btn-outline-white { display: inline-block; align-self: flex-start; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.55); border-radius: 10px; padding: 11px 24px; font-family: var(--font-body); font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: background .2s, transform .15s; }
     .cv-card .btn-outline-white:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
+    .cv-card .ask-ai-trigger { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    .cv-card .ask-ai-trigger svg { width: 17px; height: 17px; }
     .cv-download-btn { position: relative; overflow: hidden; }
     .cv-download-label { position: relative; z-index: 1; display: inline-block; }
     .cv-download-icon { position: absolute; left: 50%; top: 50%; z-index: 2; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; color: currentColor; opacity: 0; pointer-events: none; transform: translate(-50%, -58%) scale(.92); }
@@ -370,6 +377,39 @@
     .qr-dialog img { display: block; width: min(100%, 260px); height: auto; margin: 0 auto; border: 1px solid var(--border); border-radius: 8px; }
     .qr-close { position: absolute; top: 10px; inset-inline-end: 10px; width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 999px; background: #fff; color: var(--text); font-size: 24px; line-height: 1; cursor: pointer; }
     .qr-close:focus-visible { outline: 3px solid rgba(13,148,136,.25); outline-offset: 3px; }
+
+    /* ── ASK AI MODAL ── */
+    .ai-modal { position: fixed; inset: 0; z-index: 9200; display: grid; place-items: center; padding: 20px; background: rgba(15,23,42,.62); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+    .ai-modal[hidden] { display: none; }
+    .ai-dialog { position: relative; width: min(100%, 380px); padding: 22px; border: 1px solid rgba(255,255,255,.7); border-radius: 15px; background: var(--white); box-shadow: 0 24px 70px rgba(15,23,42,.25); }
+    .ai-dialog h2 { padding-inline-end: 38px; font-family: var(--font-head); font-size: 20px; line-height: 1.3; color: var(--text); margin-bottom: 5px; }
+    .ai-dialog-intro { color: var(--text-muted); font-size: 13px; line-height: 1.5; margin-bottom: 16px; }
+    .ai-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .ai-option { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-width: 0; min-height: 94px; padding: 11px 7px; border: 1px solid var(--border); border-radius: 12px; background: #fff; color: var(--text); text-align: center; text-decoration: none; transition: border-color .2s, background .2s, box-shadow .2s, transform .15s; }
+    .ai-option:hover { border-color: rgba(13,148,136,.42); background: rgba(204,251,241,.22); box-shadow: 0 8px 24px rgba(15,23,42,.07); transform: translateY(-1px); }
+    .ai-option:focus-visible { outline: 3px solid rgba(13,148,136,.22); outline-offset: 2px; }
+    .ai-option-icon { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--text); }
+    .ai-option--chatgpt .ai-option-icon { color: var(--ai-chatgpt); }
+    .ai-option--claude .ai-option-icon { color: var(--ai-claude); }
+    .ai-brand-mark { display: block; width: 28px; height: 28px; background: currentColor; -webkit-mask-position: center; mask-position: center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; }
+    .ai-brand-mark--chatgpt { -webkit-mask-image: url('assets/ai/openai.svg'); mask-image: url('assets/ai/openai.svg'); }
+    .ai-brand-mark--claude { -webkit-mask-image: url('assets/ai/claude.svg'); mask-image: url('assets/ai/claude.svg'); }
+    .ai-option-copy { min-width: 0; }
+    .ai-option-name { display: block; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-head); font-size: 13px; font-weight: 700; line-height: 1.35; white-space: nowrap; }
+    .ai-context-download { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 52px; margin-top: 10px; padding: 8px 11px; border: 1px solid var(--border); border-radius: 11px; background: var(--bg2); color: var(--text); text-decoration: none; transition: border-color .2s, background .2s, transform .15s; }
+    .ai-context-download:hover { border-color: rgba(13,148,136,.42); background: rgba(204,251,241,.28); transform: translateY(-1px); }
+    .ai-context-download:focus-visible { outline: 3px solid rgba(13,148,136,.22); outline-offset: 2px; }
+    .ai-context-download-icon { width: 32px; height: 32px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; background: #fff; color: var(--teal-dark); }
+    .ai-context-download-icon svg { width: 17px; height: 17px; }
+    .ai-context-download-copy { min-width: 0; text-align: start; }
+    .ai-context-download-name { display: block; font-size: 12px; font-weight: 700; line-height: 1.35; }
+    .ai-context-download-note { display: block; color: var(--text-faint); font-size: 10px; line-height: 1.35; margin-top: 1px; }
+    .ai-context-download-arrow { display: flex; color: var(--text-faint); }
+    .ai-context-download-arrow svg { width: 16px; height: 16px; }
+    .ai-close { position: absolute; top: 14px; inset-inline-end: 14px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--border); border-radius: 999px; background: #fff; color: var(--text); cursor: pointer; transition: border-color .2s, color .2s, background .2s; }
+    .ai-close:hover { border-color: var(--teal); color: var(--teal); background: rgba(13,148,136,.05); }
+    .ai-close:focus-visible { outline: 3px solid rgba(13,148,136,.24); outline-offset: 3px; }
+    .ai-close svg { width: 17px; height: 17px; }
 
     /* ── LIGHTBOX ── */
     .lb { position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,.92); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .22s; }
@@ -522,7 +562,7 @@
       .hero-name { font-size: clamp(32px, 9vw, 40px); letter-spacing: -.35px; margin-bottom: 12px; overflow-wrap: anywhere; }
       .hero-bio { width: 100%; max-width: 330px; margin-bottom: 26px; line-height: 1.62; overflow-wrap: break-word; }
       .hero-btns { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 28px; }
-      .hero-btns a { text-align: center; width: 100%; max-width: 330px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+      .hero-btns a, .hero-btns button { text-align: center; width: 100%; max-width: 330px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
       .btn-secondary { background: rgba(255,255,255,.74); }
       .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-width: 330px; margin: 0 auto; padding-top: 18px; }
       .stat-item { min-height: 58px; display: flex; align-items: center; justify-content: center; flex: none; border-right: none; border: 1px solid var(--border); border-radius: 10px; padding: 10px 8px; text-align: center; background: rgba(255,255,255,.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
@@ -558,6 +598,17 @@
       .hero-scroll-cue { width: 50px; height: 50px; bottom: 18px; }
       .hero-scroll-cue i,
       .hero-scroll-cue svg { width: 36px; height: 36px; }
+      .ai-dialog { width: min(84vw, 330px); padding: 18px 14px 14px; border-radius: 13px; }
+      .ai-dialog h2 { padding-inline-end: 30px; font-size: clamp(15px, 4.4vw, 17px); margin-bottom: 4px; }
+      .ai-dialog-intro { font-size: 11px; margin-bottom: 13px; }
+      .ai-close { top: 11px; inset-inline-end: 11px; width: 28px; height: 28px; }
+      .ai-close svg { width: 15px; height: 15px; }
+      .ai-options { gap: 7px; }
+      .ai-option { min-height: 82px; padding: 9px 7px; gap: 5px; }
+      .ai-option-icon { width: 28px; height: 28px; }
+      .ai-brand-mark { width: 24px; height: 24px; }
+      .ai-option-name { font-size: 13px; }
+      .ai-context-download { min-height: 48px; padding: 7px 10px; }
       .contact-link-card { min-height: 44px; }
       /* Keep dropdown panel from clipping off right edge on mobile */
       .lang-panel { right: 0; left: auto; min-width: 160px; }
@@ -746,6 +797,10 @@
       <p class="hero-bio" data-i18n="hero_bio">I create brand visuals, product animations, and custom automation tools for businesses that need faster, more professional creative workflows.</p>
       <div class="hero-btns">
         <a href="#featured" class="btn-primary" data-i18n="hero_cta_work">View Selected Work</a>
+        <button type="button" class="btn-ai ask-ai-trigger" aria-haspopup="dialog" aria-controls="ai-modal" aria-expanded="false">
+          <i data-lucide="sparkles" aria-hidden="true"></i>
+          <span data-i18n="ask_ai_button">Ask AI about me</span>
+        </button>
         <a href="assets/cv.pdf" class="btn-secondary cv-download-btn" download="Ameen_Zangana_CV.pdf">
           <span class="cv-download-icon" aria-hidden="true"><i data-lucide="arrow-down" style="width:16px;height:16px"></i><span class="cv-download-tray"></span></span>
           <span class="cv-download-label" data-i18n="hero_cta_cv">Download CV</span>
@@ -1372,6 +1427,10 @@
             <span class="cv-download-icon" aria-hidden="true"><i data-lucide="arrow-down" style="width:16px;height:16px"></i><span class="cv-download-tray"></span></span>
             <span class="cv-download-label" data-i18n="contact_cv_btn">Download CV</span>
           </a>
+          <button type="button" class="btn-outline-white ask-ai-trigger" aria-haspopup="dialog" aria-controls="ai-modal" aria-expanded="false">
+            <i data-lucide="sparkles" aria-hidden="true"></i>
+            <span data-i18n="ask_ai_button">Ask AI about me</span>
+          </button>
         </div>
       </div>
     </div>
@@ -1408,6 +1467,38 @@
     <h2 id="wechat-modal-title" data-i18n="wechat_modal_title">Add me on WeChat</h2>
     <p id="wechat-modal-body" data-i18n="wechat_modal_body">Scan this QR code in WeChat to contact me directly.</p>
     <img id="wechat-modal-image" src="assets/contact/wechat-qr.png" alt="WeChat QR code" data-i18n-alt="wechat_modal_alt" />
+  </div>
+</div>
+
+<div class="ai-modal" id="ai-modal" hidden>
+  <div class="ai-dialog" role="dialog" aria-modal="true" aria-labelledby="ai-modal-title" aria-describedby="ai-modal-intro">
+    <button class="ai-close" id="ai-modal-close" type="button" aria-label="Close" data-i18n-aria-label="ai_modal_close">
+      <i data-lucide="x" aria-hidden="true"></i>
+    </button>
+    <h2 id="ai-modal-title" data-i18n="ai_modal_title">Explore my portfolio with AI</h2>
+    <p class="ai-dialog-intro" id="ai-modal-intro" data-i18n="ai_modal_intro">Ask about my work, skills, and experience.</p>
+    <div class="ai-options">
+      <a class="ai-option ai-option--chatgpt" id="ai-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" data-ai="chatgpt">
+        <span class="ai-option-icon" aria-hidden="true"><span class="ai-brand-mark ai-brand-mark--chatgpt"></span></span>
+        <span class="ai-option-copy">
+          <span class="ai-option-name">ChatGPT</span>
+        </span>
+      </a>
+      <a class="ai-option ai-option--claude" id="ai-claude" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" data-ai="claude">
+        <span class="ai-option-icon" aria-hidden="true"><span class="ai-brand-mark ai-brand-mark--claude"></span></span>
+        <span class="ai-option-copy">
+          <span class="ai-option-name">Claude</span>
+        </span>
+      </a>
+    </div>
+    <a class="ai-context-download" href="portfolio-ai.md" download="Ameen-Zangana-Portfolio-Context.md">
+      <span class="ai-context-download-icon" aria-hidden="true"><i data-lucide="file-down"></i></span>
+      <span class="ai-context-download-copy">
+        <span class="ai-context-download-name" data-i18n="ai_download_name">Download portfolio context</span>
+        <span class="ai-context-download-note" data-i18n="ai_download_note">Markdown file (.md)</span>
+      </span>
+      <span class="ai-context-download-arrow" aria-hidden="true"><i data-lucide="download"></i></span>
+    </a>
   </div>
 </div>
 
@@ -1786,7 +1877,7 @@ var LANGS = {
 // ── i18n ──────────────────────────────────────────────────────
 var translations = {};
 var currentLang = localStorage.getItem('lang') || 'en';
-var I18N_VERSION = '2026-06-15-service-highlights';
+var I18N_VERSION = '2026-07-04-ai-copy-aligned';
 
 function loadLang(lang) {
   fetch('assets/lang/' + lang + '.json?v=' + encodeURIComponent(I18N_VERSION))
@@ -1815,6 +1906,11 @@ function applyTranslations() {
   document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
     var k = el.getAttribute('data-i18n-alt');
     if (translations[k] !== undefined) el.setAttribute('alt', translations[k]);
+  });
+
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(function (el) {
+    var k = el.getAttribute('data-i18n-aria-label');
+    if (translations[k] !== undefined) el.setAttribute('aria-label', translations[k]);
   });
 
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
@@ -1926,6 +2022,95 @@ function setLang(lang) { loadLang(lang); }
   }
 
   document.addEventListener('DOMContentLoaded', initWeChatModal);
+}());
+
+// ── Portfolio AI handoff ─────────────────────────────────────
+(function () {
+  var PORTFOLIO_CONTEXT_URL = 'https://ameenshkur.github.io/portfolio-ai.md';
+  var portfolioPrompts = {
+    en: function (url) {
+      return 'Read ' + url + ' and help me explore Ameen Zangana\'s complete professional portfolio. Begin by asking whether I am considering him for employment, freelance work, collaboration, or a general portfolio review. Answer in English. Use only facts supported by the portfolio context, clearly label any inference, and never invent clients, results, dates, skills, or metrics.';
+    },
+    ar: function (url) {
+      return 'اقرأ ' + url + ' وساعدني في استكشاف الملف المهني الكامل لأمين زنكنة. ابدأ بسؤالي إن كنت أقيّمه للتوظيف، أو للعمل الحر، أو للتعاون، أو لمراجعة أعماله بشكل عام. أجب باللغة العربية. استخدم فقط الحقائق المدعومة بمحتوى الملف، وميّز بوضوح أي استنتاج، ولا تخترع عملاء أو نتائج أو تواريخ أو مهارات أو أرقامًا.';
+    },
+    zh: function (url) {
+      return '请阅读 ' + url + '，帮助我了解 Ameen Zangana 的完整职业作品集。请先询问我是出于招聘、自由职业项目、合作，还是一般性作品评估。请使用简体中文回答。只使用作品集资料支持的事实，明确标注推断，不要编造客户、成果、日期、技能或数据。';
+    },
+    ku: function (url) {
+      return 'تکایە ' + url + ' بخوێنەوە و یارمەتیم بدە پۆرتفۆلیۆی پیشەیی تەواوی ئەمین زەنگەنە بناسم. سەرەتا لێم بپرسە ئایا بۆ دامەزراندن، کاری سەربەخۆ، هاوکاری، یان هەڵسەنگاندنی گشتی کارەکانی سەیری دەکەم. بە کوردیی سۆرانی وەڵام بدە. تەنها ئەو ڕاستییانە بەکاربهێنە کە لە زانیاریی پۆرتفۆلیۆکەدا پشتڕاست کراونەتەوە، هەر لێکدانەوەیەک بە ڕوونی دیاری بکە، و ناوی کڕیار، ئەنجام، بەروار، تواناکان یان ئامار لەخۆتەوە دروست مەکە.';
+    }
+  };
+  var previousBodyOverflow = '';
+  var activeTrigger = null;
+
+  function buildPortfolioPrompt() {
+    var promptBuilder = portfolioPrompts[currentLang] || portfolioPrompts.en;
+    return promptBuilder(PORTFOLIO_CONTEXT_URL);
+  }
+
+  function initAiModal() {
+    var triggers = Array.from(document.querySelectorAll('.ask-ai-trigger'));
+    var modal = document.getElementById('ai-modal');
+    var close = document.getElementById('ai-modal-close');
+    var chatgpt = document.getElementById('ai-chatgpt');
+    var claude = document.getElementById('ai-claude');
+    if (!triggers.length || !modal || !close || !chatgpt || !claude) return;
+
+    function refreshLinks() {
+      var prompt = buildPortfolioPrompt();
+      chatgpt.href = 'https://chatgpt.com/?hints=search&q=' + encodeURIComponent(prompt);
+      claude.href = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
+    }
+
+    function openModal(trigger) {
+      activeTrigger = trigger;
+      refreshLinks();
+      previousBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      modal.hidden = false;
+      triggers.forEach(function (item) { item.setAttribute('aria-expanded', item === trigger ? 'true' : 'false'); });
+      close.focus();
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.style.overflow = previousBodyOverflow;
+      triggers.forEach(function (item) { item.setAttribute('aria-expanded', 'false'); });
+      if (activeTrigger) activeTrigger.focus();
+      activeTrigger = null;
+    }
+
+    triggers.forEach(function (trigger) {
+      trigger.addEventListener('click', function () { openModal(trigger); });
+    });
+
+    chatgpt.addEventListener('click', function () { window.setTimeout(closeModal, 0); });
+    claude.addEventListener('click', function () { window.setTimeout(closeModal, 0); });
+    close.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) closeModal();
+    });
+    modal.addEventListener('keydown', function (event) {
+      if (event.key !== 'Tab') return;
+      var focusable = Array.from(modal.querySelectorAll('button, a[href]')).filter(function (item) { return !item.disabled; });
+      if (!focusable.length) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) closeModal();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initAiModal);
 }());
 
 // ── DOMContentLoaded ─────────────────────────────────────────
