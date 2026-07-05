@@ -554,11 +554,11 @@ function setLang(lang) { loadLang(lang); }
 
     function measureActionWidths(menu) {
       var menuWidth = menu.clientWidth || 220;
-      var maxWidth = Math.min(160, Math.max(108, menuWidth - 24));
+      var maxWidth = Math.min(220, Math.max(108, menuWidth - 8));
       menu.querySelectorAll('.ai-menu-action').forEach(function (action) {
         var label = action.querySelector('.ai-menu-label');
         if (!label) return;
-        var contentWidth = Math.ceil(label.scrollWidth + 44);
+        var contentWidth = Math.ceil(label.scrollWidth + 46);
         action.style.setProperty('--ai-expanded-width', Math.min(maxWidth, Math.max(98, contentWidth)) + 'px');
       });
     }
