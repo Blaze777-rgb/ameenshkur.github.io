@@ -347,7 +347,7 @@ var LANGS = {
 // ── i18n ──────────────────────────────────────────────────────
 var translations = {};
 var currentLang = localStorage.getItem('lang') || 'en';
-var I18N_VERSION = '2026-07-04-ai-detailed-prompts';
+var I18N_VERSION = '2026-07-05-ai-mobile-tray-v4';
 
 function loadLang(lang) {
   fetch('assets/lang/' + lang + '.json?v=' + encodeURIComponent(I18N_VERSION))
@@ -510,9 +510,6 @@ function setLang(lang) { loadLang(lang); }
       return 'تکایە ' + url + ' بخوێنەوە و ڕێنماییەکانی ناوی جێبەجێ بکە. بە ناساندنێکی کورت و سەرنجڕاکێش دەربارەی ئەمین زەنگەنە، بەهێزترین تواناکانی، و بەهای تێکەڵکردنی دیزاین و 3D و مۆشن و ئۆتۆمەیشنی AI دەست پێ بکە. لێم بپرسە ئایا بۆ دامەزراندن، کاری سەربەخۆ، هاوکاری، یان هەڵسەنگاندنی گشتی پۆرتفۆلیۆکەی سەیری دەکەم، پاشان گفتوگۆکە بەپێی ئامانجەکەم ڕێک بخە. بەڵگە پەیوەندیدارەکان بخەرەڕوو و ڕوون بکەرەوە بۆچی دەکرێت هەڵبژاردەیەکی بەهێز بێت. بە متمانە و ئەرێنی بەڵام بە وردی و ڕاستگۆیی وەڵام بدە، هەر لێکدانەوەیەک دیاری بکە، و هیچ زانیارییەک لەخۆتەوە دروست مەکە. بە کوردیی سۆرانی وەڵام بدە.';
     }
   };
-  var previousBodyOverflow = '';
-  var activeTrigger = null;
-
   function buildPortfolioPrompt() {
     var promptBuilder = portfolioPrompts[currentLang] || portfolioPrompts.en;
     return promptBuilder(PORTFOLIO_CONTEXT_URL);
@@ -538,74 +535,154 @@ function setLang(lang) { loadLang(lang); }
     textarea.remove();
   }
 
-  function initAiModal() {
-    var triggers = Array.from(document.querySelectorAll('.ask-ai-trigger'));
-    var modal = document.getElementById('ai-modal');
-    var close = document.getElementById('ai-modal-close');
-    var chatgpt = document.getElementById('ai-chatgpt');
-    var claude = document.getElementById('ai-claude');
-    if (!triggers.length || !modal || !close || !chatgpt || !claude) return;
+  function initAiMenus() {
+    var shells = Array.from(document.querySelectorAll('.ask-ai-menu-shell'));
+    var activeShell = null;
+    var closeTimers = new WeakMap();
+    if (!shells.length) return;
 
     function refreshLinks() {
-      var prompt = buildPortfolioPrompt();
-      chatgpt.href = 'https://chatgpt.com/?q=' + encodeURIComponent(prompt);
-      claude.href = 'https://claude.ai/new?q=' + encodeURIComponent(prompt);
+      var prompt = encodeURIComponent(buildPortfolioPrompt());
+      document.querySelectorAll('[data-ai="chatgpt"]').forEach(function (link) {
+        link.href = 'https://chatgpt.com/?q=' + prompt;
+      });
+      document.querySelectorAll('[data-ai="claude"]').forEach(function (link) {
+        link.href = 'https://claude.ai/new?q=' + prompt;
+      });
     }
 
-    function openModal(trigger) {
-      activeTrigger = trigger;
+    function measureActionWidths(menu) {
+      var menuWidth = menu.clientWidth || 220;
+      var maxWidth = Math.min(160, Math.max(108, menuWidth - 24));
+      menu.querySelectorAll('.ai-menu-action').forEach(function (action) {
+        var label = action.querySelector('.ai-menu-label');
+        if (!label) return;
+        var contentWidth = Math.ceil(label.scrollWidth + 44);
+        action.style.setProperty('--ai-expanded-width', Math.min(maxWidth, Math.max(98, contentWidth)) + 'px');
+      });
+    }
+
+    function closeMenu(shell, restoreFocus) {
+      if (!shell) return;
+      var trigger = shell.querySelector('.ask-ai-trigger');
+      var menu = shell.querySelector('.ai-quick-menu');
+      if (!trigger || !menu) return;
+
+      window.clearTimeout(closeTimers.get(shell));
+      delete menu.dataset.active;
+      shell.classList.remove('is-menu-open');
+      shell.classList.add('is-menu-closing');
+      menu.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      closeTimers.set(shell, window.setTimeout(function () {
+        menu.hidden = true;
+        shell.classList.remove('is-menu-closing');
+      }, 260));
+      if (activeShell === shell) activeShell = null;
+      if (restoreFocus) trigger.focus();
+    }
+
+    function closeOtherMenus(exception) {
+      shells.forEach(function (shell) {
+        if (shell !== exception && shell.querySelector('.ask-ai-trigger').getAttribute('aria-expanded') === 'true') {
+          closeMenu(shell, false);
+        }
+      });
+    }
+
+    function openMenu(shell, focusFirst) {
+      var trigger = shell.querySelector('.ask-ai-trigger');
+      var menu = shell.querySelector('.ai-quick-menu');
+      if (!trigger || !menu) return;
+
+      closeOtherMenus(shell);
       refreshLinks();
-      previousBodyOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-      modal.hidden = false;
-      triggers.forEach(function (item) { item.setAttribute('aria-expanded', item === trigger ? 'true' : 'false'); });
-      close.focus();
+      window.clearTimeout(closeTimers.get(shell));
+      menu.hidden = false;
+      shell.classList.remove('is-menu-closing');
+      shell.classList.add('is-menu-open');
+      measureActionWidths(menu);
+      trigger.setAttribute('aria-expanded', 'true');
+      activeShell = shell;
+      window.requestAnimationFrame(function () {
+        menu.classList.add('is-open');
+        if (focusFirst) {
+          var firstAction = menu.querySelector('[role="menuitem"]');
+          if (firstAction) firstAction.focus();
+        }
+      });
     }
 
-    function closeModal() {
-      modal.hidden = true;
-      document.body.style.overflow = previousBodyOverflow;
-      triggers.forEach(function (item) { item.setAttribute('aria-expanded', 'false'); });
-      if (activeTrigger) activeTrigger.focus();
-      activeTrigger = null;
-    }
+    shells.forEach(function (shell) {
+      var trigger = shell.querySelector('.ask-ai-trigger');
+      var menu = shell.querySelector('.ai-quick-menu');
+      var actions = Array.from(menu.querySelectorAll('[role="menuitem"]'));
 
-    triggers.forEach(function (trigger) {
-      trigger.addEventListener('click', function () { openModal(trigger); });
-    });
-
-    chatgpt.addEventListener('click', function () {
-      copyPrompt(buildPortfolioPrompt());
-      window.setTimeout(closeModal, 0);
-    });
-    claude.addEventListener('click', function () {
-      copyPrompt(buildPortfolioPrompt());
-      window.setTimeout(closeModal, 0);
-    });
-    close.addEventListener('click', closeModal);
-    modal.addEventListener('click', function (event) {
-      if (event.target === modal) closeModal();
-    });
-    modal.addEventListener('keydown', function (event) {
-      if (event.key !== 'Tab') return;
-      var focusable = Array.from(modal.querySelectorAll('button, a[href]')).filter(function (item) { return !item.disabled; });
-      if (!focusable.length) return;
-      var first = focusable[0];
-      var last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
+      function setActiveAction(index) {
+        menu.dataset.active = String(index + 1);
       }
+
+      function clearPointerAction() {
+        if (!menu.contains(document.activeElement)) delete menu.dataset.active;
+      }
+
+      trigger.addEventListener('click', function (event) {
+        event.stopPropagation();
+        if (trigger.getAttribute('aria-expanded') === 'true') closeMenu(shell, false);
+        else openMenu(shell, false);
+      });
+
+      trigger.addEventListener('keydown', function (event) {
+        if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+        event.preventDefault();
+        openMenu(shell, true);
+      });
+
+      menu.addEventListener('click', function (event) { event.stopPropagation(); });
+      menu.addEventListener('pointerleave', clearPointerAction);
+      menu.addEventListener('focusout', function () {
+        window.setTimeout(clearPointerAction, 0);
+      });
+      menu.addEventListener('keydown', function (event) {
+        var currentIndex = actions.indexOf(document.activeElement);
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeMenu(shell, true);
+          return;
+        }
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        if (event.key === 'Home') actions[0].focus();
+        else if (event.key === 'End') actions[actions.length - 1].focus();
+        else {
+          var direction = event.key === 'ArrowRight' ? 1 : -1;
+          actions[(currentIndex + direction + actions.length) % actions.length].focus();
+        }
+      });
+
+      actions.forEach(function (action, index) {
+        var surface = action.querySelector('.ai-menu-surface');
+        if (surface) surface.addEventListener('pointerenter', function () { setActiveAction(index); });
+        action.addEventListener('focus', function () { setActiveAction(index); });
+        action.addEventListener('click', function () {
+          if (action.hasAttribute('data-ai')) copyPrompt(buildPortfolioPrompt());
+          window.setTimeout(function () { closeMenu(shell, false); }, 0);
+        });
+      });
+    });
+
+    document.addEventListener('click', function () {
+      if (activeShell) closeMenu(activeShell, false);
+    });
+    document.addEventListener('focusin', function (event) {
+      if (activeShell && !activeShell.contains(event.target)) closeMenu(activeShell, false);
     });
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && !modal.hidden) closeModal();
+      if (event.key === 'Escape' && activeShell) closeMenu(activeShell, true);
     });
   }
 
-  document.addEventListener('DOMContentLoaded', initAiModal);
+  document.addEventListener('DOMContentLoaded', initAiMenus);
 }());
 
 // ── DOMContentLoaded ─────────────────────────────────────────

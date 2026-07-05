@@ -71,10 +71,23 @@
       <p class="hero-bio" data-i18n="hero_bio">I create brand visuals, product animations, and custom automation tools for businesses that need faster, more professional creative workflows.</p>
       <div class="hero-btns">
         <a href="#featured" class="btn-primary" data-i18n="hero_cta_work">View Selected Work</a>
-        <button type="button" class="btn-ai ask-ai-trigger" aria-haspopup="dialog" aria-controls="ai-modal" aria-expanded="false">
-          <i data-lucide="sparkles" aria-hidden="true"></i>
-          <span data-i18n="ask_ai_button">Ask AI about me</span>
-        </button>
+        <div class="ask-ai-menu-shell">
+          <button type="button" class="btn-ai ask-ai-trigger" id="ask-ai-hero" aria-haspopup="menu" aria-controls="ai-menu-hero" aria-expanded="false">
+            <i data-lucide="sparkles" aria-hidden="true"></i>
+            <span data-i18n="ask_ai_button">Ask AI about me</span>
+          </button>
+          <div class="ai-quick-menu" id="ai-menu-hero" role="menu" aria-labelledby="ask-ai-hero" hidden>
+            <a class="ai-menu-action ai-menu-action--chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" role="menuitem" data-ai="chatgpt" aria-label="Ask ChatGPT" data-i18n-aria-label="ai_ask_chatgpt">
+              <span class="ai-menu-surface"><span class="ai-menu-icon" aria-hidden="true"><span class="ai-brand-mark ai-brand-mark--chatgpt"></span></span><span class="ai-menu-label" data-i18n="ai_ask_chatgpt">Ask ChatGPT</span><span class="ai-menu-mobile-label" data-i18n="ai_mobile_chatgpt">ChatGPT</span></span>
+            </a>
+            <a class="ai-menu-action ai-menu-action--claude" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" role="menuitem" data-ai="claude" aria-label="Ask Claude" data-i18n-aria-label="ai_ask_claude">
+              <span class="ai-menu-surface"><span class="ai-menu-icon" aria-hidden="true"><span class="ai-brand-mark ai-brand-mark--claude"></span></span><span class="ai-menu-label" data-i18n="ai_ask_claude">Ask Claude</span><span class="ai-menu-mobile-label" data-i18n="ai_mobile_claude">Claude</span></span>
+            </a>
+            <a class="ai-menu-action ai-menu-action--download" href="portfolio-ai.md" download="Ameen-Zangana-Portfolio-Context.md" role="menuitem" aria-label="Get the Markdown" data-i18n-aria-label="ai_download_markdown">
+              <span class="ai-menu-surface"><span class="ai-menu-icon ai-menu-icon--markdown" aria-hidden="true"><i class="ai-menu-file-code" data-lucide="file-code-2"></i></span><span class="ai-menu-label" data-i18n="ai_download_markdown">Get the Markdown</span><span class="ai-menu-mobile-label" data-i18n="ai_mobile_markdown">Markdown</span></span>
+            </a>
+          </div>
+        </div>
         <a href="assets/cv.pdf" class="btn-secondary cv-download-btn" download="Ameen_Zangana_CV.pdf">
           <span class="cv-download-icon" aria-hidden="true"><i data-lucide="arrow-down" style="width:16px;height:16px"></i><span class="cv-download-tray"></span></span>
           <span class="cv-download-label" data-i18n="hero_cta_cv">Download CV</span>
@@ -695,10 +708,23 @@
             <span class="cv-download-icon" aria-hidden="true"><i data-lucide="arrow-down" style="width:16px;height:16px"></i><span class="cv-download-tray"></span></span>
             <span class="cv-download-label" data-i18n="contact_cv_btn">Download CV</span>
           </a>
-          <button type="button" class="btn-outline-white ask-ai-trigger" aria-haspopup="dialog" aria-controls="ai-modal" aria-expanded="false">
-            <i data-lucide="sparkles" aria-hidden="true"></i>
-            <span data-i18n="ask_ai_button">Ask AI about me</span>
-          </button>
+          <div class="ask-ai-menu-shell ask-ai-menu-shell--contact">
+            <button type="button" class="btn-outline-white ask-ai-trigger" id="ask-ai-contact" aria-haspopup="menu" aria-controls="ai-menu-contact" aria-expanded="false">
+              <i data-lucide="sparkles" aria-hidden="true"></i>
+              <span data-i18n="ask_ai_button">Ask AI about me</span>
+            </button>
+            <div class="ai-quick-menu ai-quick-menu--contact" id="ai-menu-contact" role="menu" aria-labelledby="ask-ai-contact" hidden>
+              <a class="ai-menu-action ai-menu-action--chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" role="menuitem" data-ai="chatgpt" aria-label="Ask ChatGPT" data-i18n-aria-label="ai_ask_chatgpt">
+                <span class="ai-menu-surface"><span class="ai-menu-icon" aria-hidden="true"><span class="ai-brand-mark ai-brand-mark--chatgpt"></span></span><span class="ai-menu-label" data-i18n="ai_ask_chatgpt">Ask ChatGPT</span><span class="ai-menu-mobile-label" data-i18n="ai_mobile_chatgpt">ChatGPT</span></span>
+              </a>
+              <a class="ai-menu-action ai-menu-action--claude" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" role="menuitem" data-ai="claude" aria-label="Ask Claude" data-i18n-aria-label="ai_ask_claude">
+                <span class="ai-menu-surface"><span class="ai-menu-icon" aria-hidden="true"><span class="ai-brand-mark ai-brand-mark--claude"></span></span><span class="ai-menu-label" data-i18n="ai_ask_claude">Ask Claude</span><span class="ai-menu-mobile-label" data-i18n="ai_mobile_claude">Claude</span></span>
+              </a>
+              <a class="ai-menu-action ai-menu-action--download" href="portfolio-ai.md" download="Ameen-Zangana-Portfolio-Context.md" role="menuitem" aria-label="Get the Markdown" data-i18n-aria-label="ai_download_markdown">
+                <span class="ai-menu-surface"><span class="ai-menu-icon ai-menu-icon--markdown" aria-hidden="true"><i class="ai-menu-file-code" data-lucide="file-code-2"></i></span><span class="ai-menu-label" data-i18n="ai_download_markdown">Get the Markdown</span><span class="ai-menu-mobile-label" data-i18n="ai_mobile_markdown">Markdown</span></span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -735,38 +761,6 @@
     <h2 id="wechat-modal-title" data-i18n="wechat_modal_title">Add me on WeChat</h2>
     <p id="wechat-modal-body" data-i18n="wechat_modal_body">Scan this QR code in WeChat to contact me directly.</p>
     <img id="wechat-modal-image" src="assets/contact/wechat-qr.png" alt="WeChat QR code" data-i18n-alt="wechat_modal_alt" />
-  </div>
-</div>
-
-<div class="ai-modal" id="ai-modal" hidden>
-  <div class="ai-dialog" role="dialog" aria-modal="true" aria-labelledby="ai-modal-title" aria-describedby="ai-modal-intro">
-    <button class="ai-close" id="ai-modal-close" type="button" aria-label="Close" data-i18n-aria-label="ai_modal_close">
-      <i data-lucide="x" aria-hidden="true"></i>
-    </button>
-    <h2 id="ai-modal-title" data-i18n="ai_modal_title">Explore my portfolio with AI</h2>
-    <p class="ai-dialog-intro" id="ai-modal-intro" data-i18n="ai_modal_intro">Ask about my work, skills, and experience.</p>
-    <div class="ai-options">
-      <a class="ai-option ai-option--chatgpt" id="ai-chatgpt" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" data-ai="chatgpt">
-        <span class="ai-option-icon" aria-hidden="true"><span class="ai-brand-mark ai-brand-mark--chatgpt"></span></span>
-        <span class="ai-option-copy">
-          <span class="ai-option-name">ChatGPT</span>
-        </span>
-      </a>
-      <a class="ai-option ai-option--claude" id="ai-claude" href="https://claude.ai/new" target="_blank" rel="noopener noreferrer" data-ai="claude">
-        <span class="ai-option-icon" aria-hidden="true"><span class="ai-brand-mark ai-brand-mark--claude"></span></span>
-        <span class="ai-option-copy">
-          <span class="ai-option-name">Claude</span>
-        </span>
-      </a>
-    </div>
-    <a class="ai-context-download" href="portfolio-ai.md" download="Ameen-Zangana-Portfolio-Context.md">
-      <span class="ai-context-download-icon" aria-hidden="true"><i data-lucide="file-down"></i></span>
-      <span class="ai-context-download-copy">
-        <span class="ai-context-download-name" data-i18n="ai_download_name">Download portfolio context</span>
-        <span class="ai-context-download-note" data-i18n="ai_download_note">Markdown file (.md)</span>
-      </span>
-      <span class="ai-context-download-arrow" aria-hidden="true"><i data-lucide="download"></i></span>
-    </a>
   </div>
 </div>
 
