@@ -366,17 +366,25 @@ footer { background: var(--text); color: rgba(255,255,255,.5); padding: 28px 24p
 
 /* ── ASK AI QUICK MENU ── */
 .ask-ai-menu-shell { position: relative; z-index: 20; display: inline-flex; align-self: stretch; }
-.ask-ai-trigger[aria-expanded="true"] { transform: translateY(-1px); }
-.ask-ai-trigger[aria-expanded="true"] > svg { animation: aiTriggerSpark .52s cubic-bezier(.22,1,.36,1); }
+.ask-ai-trigger { position: relative; overflow: hidden; isolation: isolate; transform-origin: center; }
+.ask-ai-trigger:active, .cv-card .ask-ai-trigger:active { transform: translateY(1px) scale(.985); }
+.ask-ai-trigger-label { position: relative; z-index: 1; }
+.ask-ai-trigger-icon { position: relative; z-index: 1; display: inline-grid; width: 18px; height: 18px; flex: 0 0 18px; place-items: center; }
+.ask-ai-trigger-icon > svg { position: relative; z-index: 2; width: 17px; height: 17px; transform-origin: center; }
+.ask-ai-trigger-halo { position: absolute; top: 50%; left: 50%; z-index: 1; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle, rgba(45,212,191,.3) 0 22%, rgba(13,148,136,.16) 38%, rgba(13,148,136,0) 72%); opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(.35); }
+.cv-card .ask-ai-trigger-halo { background: radial-gradient(circle, rgba(255,255,255,.28) 0 22%, rgba(255,255,255,.14) 38%, rgba(255,255,255,0) 72%); }
+.ask-ai-menu-shell.is-menu-activating .ask-ai-trigger { animation: aiTriggerSettle .22s cubic-bezier(.16,1,.3,1); }
+.ask-ai-menu-shell.is-menu-activating .ask-ai-trigger-icon > svg { animation: aiTriggerIconSettle .22s cubic-bezier(.16,1,.3,1); }
+.ask-ai-menu-shell.is-menu-activating .ask-ai-trigger-halo { animation: aiTriggerHalo .38s cubic-bezier(.16,1,.3,1); }
 .ai-quick-menu { position: absolute; top: calc(100% + 12px); inset-inline: 0; z-index: 80; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; min-width: 0; height: 52px; pointer-events: none; }
 .ai-quick-menu[hidden] { display: none; }
 .ai-quick-menu.is-open { pointer-events: auto; }
-.ai-menu-action { --ai-enter-delay: 0ms; position: relative; z-index: 1; display: flex; min-width: 0; height: 52px; align-items: center; color: var(--text); text-decoration: none; pointer-events: none; opacity: 0; transform: translateY(-11px) scale(.78); transition: opacity .2s ease var(--ai-enter-delay), transform .36s cubic-bezier(.22,1,.36,1) var(--ai-enter-delay); }
+.ai-menu-action { --ai-enter-delay: 72ms; position: relative; z-index: 1; display: flex; min-width: 0; height: 52px; align-items: center; color: var(--text); text-decoration: none; pointer-events: none; opacity: 0; transform: translateY(-8px) scale(.8); transition: opacity .18s ease var(--ai-enter-delay), transform .34s cubic-bezier(.22,1,.36,1) var(--ai-enter-delay); }
 .ai-menu-action:nth-child(1) { justify-content: flex-start; }
 .ai-menu-action:nth-child(2) { justify-content: center; }
 .ai-menu-action:nth-child(3) { justify-content: flex-end; }
-.ai-menu-action:nth-child(2) { --ai-enter-delay: 75ms; }
-.ai-menu-action:nth-child(3) { --ai-enter-delay: 150ms; }
+.ai-menu-action:nth-child(2) { --ai-enter-delay: 112ms; }
+.ai-menu-action:nth-child(3) { --ai-enter-delay: 152ms; }
 .ai-quick-menu.is-open .ai-menu-action { opacity: 1; transform: none; }
 .ai-quick-menu:not(.is-open) .ai-menu-action { transition-delay: 0ms; }
 .ai-menu-surface { width: 44px; height: 44px; display: inline-flex; align-items: center; flex: 0 0 auto; overflow: hidden; border: 1px solid rgba(15,23,42,.11); border-radius: 999px; background: rgba(255,255,255,.98); color: var(--text); white-space: nowrap; box-shadow: 0 9px 24px rgba(15,23,42,.13), 0 2px 7px rgba(13,148,136,.07); cursor: pointer; pointer-events: auto; transform: translateX(0) scale(1); transform-origin: center; transition: width .36s cubic-bezier(.22,1,.36,1), transform .38s cubic-bezier(.22,1,.36,1), opacity .22s ease, border-color .2s ease, background .2s ease, box-shadow .25s ease; will-change: width, transform; }
@@ -410,14 +418,20 @@ html[dir="rtl"] .ai-quick-menu[data-active="2"] .ai-menu-action:nth-child(1) .ai
 html[dir="rtl"] .ai-quick-menu[data-active="2"] .ai-menu-action:nth-child(3) .ai-menu-surface { transform: translateX(-6px) scale(.72); }
 html[dir="rtl"] .ai-quick-menu[data-active="3"] .ai-menu-action:nth-child(1) .ai-menu-surface { transform: scale(.72); }
 html[dir="rtl"] .ai-quick-menu[data-active="3"] .ai-menu-action:nth-child(2) .ai-menu-surface { transform: translateX(48px) scale(.72); }
-@keyframes aiTriggerSpark { 0% { transform: scale(1) rotate(0); } 45% { transform: scale(1.18) rotate(-12deg); } 100% { transform: scale(1) rotate(0); } }
+@keyframes aiTriggerSettle { 0% { transform: translateY(1px) scale(.985); } 100% { transform: translateY(0) scale(1); } }
+@keyframes aiTriggerIconSettle { 0% { opacity: .86; transform: scale(.92); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes aiTriggerHalo { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.35); } 20% { opacity: .9; } 100% { opacity: 0; transform: translate(-50%, -50%) scale(12); } }
 
 @media (min-width: 769px) {
+  .ask-ai-menu-shell.is-menu-open .ask-ai-trigger { transform: translateY(0); }
   .ask-ai-menu-shell--contact { position: relative; display: grid; grid-template-columns: max-content 204px; align-items: center; gap: 12px; flex: 0 1 auto; min-width: 0; max-width: 100%; }
   .ai-quick-menu--contact { position: static; inset: auto; width: 204px; height: 46px; }
-  .ai-quick-menu--contact .ai-menu-action { height: 46px; }
+  .ai-quick-menu--contact .ai-menu-action { height: 46px; transform: translateX(-12px) scale(.8); }
+  .ai-quick-menu--contact.is-open .ai-menu-action { transform: none; }
   html[dir="rtl"] .ask-ai-menu-shell--contact { grid-template-columns: max-content 220px; }
   html[dir="rtl"] .ai-quick-menu--contact { width: 220px; }
+  html[dir="rtl"] .ai-quick-menu--contact .ai-menu-action { transform: translateX(12px) scale(.8); }
+  html[dir="rtl"] .ai-quick-menu--contact.is-open .ai-menu-action { transform: none; }
 }
 
 /* ── LIGHTBOX ── */
@@ -481,8 +495,11 @@ html[dir="rtl"] .ai-quick-menu[data-active="3"] .ai-menu-action:nth-child(2) .ai
 @media (prefers-reduced-motion: reduce) {
   .campaign-card.is-animating .campaign-list { will-change: auto; }
   .hover-preview { transition: none; }
-  .ask-ai-menu-shell, .ask-ai-trigger, .ai-quick-menu, .ai-menu-action, .ai-menu-surface, .ai-menu-icon, .ai-menu-label { transition: none; }
-  .ask-ai-trigger[aria-expanded="true"] > svg { animation: none; }
+  .ask-ai-menu-shell, .ask-ai-trigger, .ai-quick-menu, .ai-menu-action, .ai-menu-surface, .ai-menu-icon, .ai-menu-label { transition: none !important; }
+  .ask-ai-menu-shell.is-menu-activating .ask-ai-trigger,
+  .ask-ai-menu-shell.is-menu-activating .ask-ai-trigger-icon > svg,
+  .ask-ai-menu-shell.is-menu-activating .ask-ai-trigger-halo { animation: none !important; }
+  .ask-ai-trigger-halo { display: none; }
   .cv-download-btn.is-downloading .cv-download-label,
   .cv-download-btn.is-downloading .cv-download-icon,
   .cv-download-btn.is-downloading .cv-download-icon svg,
@@ -609,7 +626,7 @@ html[dir="rtl"] .ai-quick-menu[data-active="3"] .ai-menu-action:nth-child(2) .ai
   .ask-ai-menu-shell.is-menu-open, .ask-ai-menu-shell.is-menu-closing { overflow: hidden; }
   .ask-ai-menu-shell .ask-ai-trigger { position: absolute; inset: 0; z-index: 2; width: 100%; height: 46px; min-height: 46px; margin: 0; padding-block: 0; transition: opacity .18s ease, transform .28s cubic-bezier(.22,1,.36,1), border-color .2s ease; }
   .ask-ai-menu-shell.is-menu-open { height: 72px; border: 1.5px solid rgba(13,148,136,.5); background: rgba(255,255,255,.92); box-shadow: 0 9px 24px rgba(15,23,42,.08); }
-  .ask-ai-menu-shell.is-menu-open .ask-ai-trigger { opacity: 0; transform: scale(.96); pointer-events: none; }
+  .ask-ai-menu-shell.is-menu-open .ask-ai-trigger { opacity: 0; transform: scale(.985); pointer-events: none; transition-delay: 40ms, 0ms, 0ms; }
   .ask-ai-menu-shell--contact { flex: 1 1 100%; width: 100%; max-width: 310px; }
   .cv-card .ask-ai-menu-shell--contact .ask-ai-trigger { width: 100%; }
   .cv-card .ask-ai-menu-shell--contact.is-menu-open { border-color: rgba(255,255,255,.58); background: rgba(255,255,255,.1); box-shadow: none; }

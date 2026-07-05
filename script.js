@@ -539,6 +539,7 @@ function setLang(lang) { loadLang(lang); }
     var shells = Array.from(document.querySelectorAll('.ask-ai-menu-shell'));
     var activeShell = null;
     var closeTimers = new WeakMap();
+    var activationTimers = new WeakMap();
     if (!shells.length) return;
 
     function refreshLinks() {
@@ -569,7 +570,9 @@ function setLang(lang) { loadLang(lang); }
       if (!trigger || !menu) return;
 
       window.clearTimeout(closeTimers.get(shell));
+      window.clearTimeout(activationTimers.get(shell));
       delete menu.dataset.active;
+      shell.classList.remove('is-menu-activating');
       shell.classList.remove('is-menu-open');
       shell.classList.add('is-menu-closing');
       menu.classList.remove('is-open');
@@ -598,12 +601,19 @@ function setLang(lang) { loadLang(lang); }
       closeOtherMenus(shell);
       refreshLinks();
       window.clearTimeout(closeTimers.get(shell));
+      window.clearTimeout(activationTimers.get(shell));
       menu.hidden = false;
       shell.classList.remove('is-menu-closing');
+      shell.classList.remove('is-menu-activating');
+      void shell.offsetWidth;
+      shell.classList.add('is-menu-activating');
       shell.classList.add('is-menu-open');
       measureActionWidths(menu);
       trigger.setAttribute('aria-expanded', 'true');
       activeShell = shell;
+      activationTimers.set(shell, window.setTimeout(function () {
+        shell.classList.remove('is-menu-activating');
+      }, 420));
       window.requestAnimationFrame(function () {
         menu.classList.add('is-open');
         if (focusFirst) {
