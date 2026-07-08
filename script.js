@@ -347,7 +347,7 @@ var LANGS = {
 // ── i18n ──────────────────────────────────────────────────────
 var translations = {};
 var currentLang = localStorage.getItem('lang') || 'en';
-var I18N_VERSION = '2026-07-05-ai-mobile-tray-v4';
+var I18N_VERSION = '2026-07-08-mobile-hero-bio-v1';
 
 function loadLang(lang) {
   fetch('assets/lang/' + lang + '.json?v=' + encodeURIComponent(I18N_VERSION))
@@ -364,13 +364,17 @@ function loadLang(lang) {
     .catch(function (e) {
       console.error('i18n:', e);
       playHeroLiberation(lang);
+      initExpandableCardText();
     });
 }
 
 function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(function (el) {
     var k = el.getAttribute('data-i18n');
-    if (translations[k] !== undefined) el.textContent = translations[k];
+    var mobileKey = k + '_mobile';
+    var useMobileText = k === 'hero_bio' && window.matchMedia('(max-width: 768px)').matches && translations[mobileKey] !== undefined;
+    if (useMobileText) el.textContent = translations[mobileKey];
+    else if (translations[k] !== undefined) el.textContent = translations[k];
   });
 
   document.querySelectorAll('[data-i18n-alt]').forEach(function (el) {
@@ -386,6 +390,105 @@ function applyTranslations() {
   document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
     var k = el.getAttribute('data-i18n-html');
     if (translations[k] !== undefined) el.innerHTML = translations[k];
+  });
+
+  initExpandableCardText();
+}
+
+function initExpandableCardText() {
+  var isMobile = window.matchMedia('(max-width: 768px)').matches;
+  var descriptions = document.querySelectorAll('.proj-card .proj-desc, .featured-card .featured-desc');
+
+  descriptions.forEach(function (desc) {
+    var featuredCard = desc.closest('.featured-card');
+    var hasFeaturedDetails = !!(featuredCard && featuredCard.querySelector('.case-points'));
+    var textNode = desc.querySelector('.card-desc-text');
+    var text = textNode ? (desc.getAttribute('data-card-desc') || textNode.textContent.trim()) : desc.textContent.trim();
+    if (!text) return;
+
+    if (featuredCard) featuredCard.classList.remove('is-desc-expanded');
+    desc.setAttribute('data-card-desc', text);
+    desc.classList.remove('has-more', 'is-expanded');
+    desc.textContent = '';
+
+    if (!isMobile) {
+      desc.textContent = text;
+      return;
+    }
+
+    var span = document.createElement('span');
+    span.className = 'card-desc-text';
+    span.textContent = text;
+
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'card-desc-toggle';
+    button.textContent = 'More';
+    button.setAttribute('aria-expanded', 'false');
+
+    function lineClampHeight() {
+      var lineHeight = window.getComputedStyle(desc).lineHeight;
+      var numericLineHeight = parseFloat(lineHeight);
+      if (!numericLineHeight || Number.isNaN(numericLineHeight)) numericLineHeight = parseFloat(window.getComputedStyle(desc).fontSize) * 1.55;
+      return numericLineHeight * 2 + 1;
+    }
+
+    function textFits() {
+      return desc.scrollHeight <= lineClampHeight();
+    }
+
+    function setCollapsedText() {
+      span.textContent = text;
+      button.textContent = 'More';
+      button.setAttribute('aria-expanded', 'false');
+
+      if (textFits() && !hasFeaturedDetails) {
+        desc.classList.remove('has-more');
+        button.remove();
+        return;
+      }
+
+      desc.classList.add('has-more');
+
+      if (textFits()) {
+        span.textContent = text + ' ';
+        return;
+      }
+
+      var low = 0;
+      var high = text.length;
+      var best = 0;
+      while (low <= high) {
+        var mid = Math.floor((low + high) / 2);
+        span.textContent = text.slice(0, mid).trimEnd() + '... ';
+        if (textFits()) {
+          best = mid;
+          low = mid + 1;
+        } else {
+          high = mid - 1;
+        }
+      }
+
+      span.textContent = text.slice(0, best).replace(/[\s,.!?;:]+$/, '') + '... ';
+    }
+
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var expanded = desc.classList.toggle('is-expanded');
+      if (featuredCard) featuredCard.classList.toggle('is-desc-expanded', expanded);
+      button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      if (expanded) {
+        span.textContent = text + ' ';
+        button.textContent = 'Less';
+      } else {
+        setCollapsedText();
+      }
+    });
+
+    desc.appendChild(span);
+    desc.appendChild(button);
+    setCollapsedText();
   });
 }
 
@@ -867,10 +970,21 @@ document.addEventListener('DOMContentLoaded', function () {
     function finish(open) {
       card.open = open;
       card.classList.remove('is-animating');
-      list.style.height = '';
+      list.style.height = open ? 'auto' : '';
       list.style.opacity = '';
       list.style.overflow = '';
       animation = null;
+    }
+
+    function measureListHeight() {
+      var previousHeight = list.style.height;
+      var previousOverflow = list.style.overflow;
+      list.style.height = 'auto';
+      list.style.overflow = 'visible';
+      var height = list.getBoundingClientRect().height;
+      list.style.height = previousHeight;
+      list.style.overflow = previousOverflow;
+      return height;
     }
 
     function toggleCard() {
@@ -887,20 +1001,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (opening) {
         card.open = true;
-        list.style.height = '0px';
+        var openHeight = measureListHeight();
         list.style.opacity = '0';
+        list.style.height = '0px';
         animation = list.animate([
           { height: '0px', opacity: 0 },
-          { height: list.scrollHeight + 'px', opacity: 1 }
-        ], { duration: 220, easing: 'cubic-bezier(.22,.61,.36,1)' });
+          { height: openHeight + 'px', opacity: 1 }
+        ], { duration: 260, easing: 'cubic-bezier(.22,.61,.36,1)' });
+        list.style.height = openHeight + 'px';
+        list.style.opacity = '1';
       } else {
+        var closeHeight = list.getBoundingClientRect().height;
+        list.style.height = closeHeight + 'px';
+        list.style.opacity = '1';
         animation = list.animate([
-          { height: list.scrollHeight + 'px', opacity: 1 },
+          { height: closeHeight + 'px', opacity: 1 },
           { height: '0px', opacity: 0 }
-        ], { duration: 190, easing: 'cubic-bezier(.4,0,.2,1)' });
+        ], { duration: 220, easing: 'cubic-bezier(.4,0,.2,1)' });
+        list.style.height = '0px';
+        list.style.opacity = '0';
       }
 
       animation.onfinish = function () { finish(opening); };
+      animation.oncancel = function () { finish(card.open); };
     }
 
     summary.addEventListener('click', function (e) {
@@ -1035,6 +1158,21 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
+
+  var expandableCardTextResizeTimer = null;
+  window.addEventListener('resize', function () {
+    window.clearTimeout(expandableCardTextResizeTimer);
+    expandableCardTextResizeTimer = window.setTimeout(initExpandableCardText, 120);
+  });
+
+  var heroBioMedia = window.matchMedia('(max-width: 768px)');
+  function refreshResponsiveHeroBio() {
+    var bio = document.querySelector('.hero-bio');
+    var text = heroBioMedia.matches && translations.hero_bio_mobile ? translations.hero_bio_mobile : translations.hero_bio;
+    if (bio && text) bio.textContent = text;
+  }
+  if (heroBioMedia.addEventListener) heroBioMedia.addEventListener('change', refreshResponsiveHeroBio);
+  else if (heroBioMedia.addListener) heroBioMedia.addListener(refreshResponsiveHeroBio);
 
   // ── Language ──────────────────────────────────────────────
   loadLang(currentLang);
