@@ -207,6 +207,8 @@
   "wechat_modal_body": "امسح رمز QR داخل WeChat للتواصل معي مباشرة.",
   "wechat_modal_alt": "رمز WeChat QR",
 
+  "card_more": "المزيد",
+  "card_less": "أقل",
   "lb_swipe_hint": "\u2190 اسحب للتنقل \u2192",
   "footer_copy": "© 2026 أمين زنكنة · كركوك، العراق"
 }

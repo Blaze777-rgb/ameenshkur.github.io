@@ -207,6 +207,8 @@
   "wechat_modal_body": "请在微信中扫描此二维码，直接联系我。",
   "wechat_modal_alt": "微信二维码",
 
+  "card_more": "更多",
+  "card_less": "收起",
   "lb_swipe_hint": "\u2190 滑动切换 \u2192",
   "footer_copy": "© 2026 阿明 · 伊拉克基尔库克"
 }

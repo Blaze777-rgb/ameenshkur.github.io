@@ -208,6 +208,8 @@
   "wechat_modal_body": "Scan this QR code in WeChat to contact me directly.",
   "wechat_modal_alt": "WeChat QR code",
 
+  "card_more": "More",
+  "card_less": "Less",
   "lb_swipe_hint": "\u2190 Swipe to navigate \u2192",
   "footer_copy": "© 2026 Ameen Zangana · Kirkuk, Iraq"
 }

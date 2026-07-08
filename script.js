@@ -347,7 +347,7 @@ var LANGS = {
 // ── i18n ──────────────────────────────────────────────────────
 var translations = {};
 var currentLang = localStorage.getItem('lang') || 'en';
-var I18N_VERSION = '2026-07-08-mobile-hero-bio-v1';
+var I18N_VERSION = '2026-07-08-card-more-labels-v1';
 
 function loadLang(lang) {
   fetch('assets/lang/' + lang + '.json?v=' + encodeURIComponent(I18N_VERSION))
@@ -398,6 +398,8 @@ function applyTranslations() {
 function initExpandableCardText() {
   var isMobile = window.matchMedia('(max-width: 768px)').matches;
   var descriptions = document.querySelectorAll('.proj-card .proj-desc, .featured-card .featured-desc');
+  var moreLabel = translations.card_more || 'More';
+  var lessLabel = translations.card_less || 'Less';
 
   descriptions.forEach(function (desc) {
     var featuredCard = desc.closest('.featured-card');
@@ -423,7 +425,7 @@ function initExpandableCardText() {
     var button = document.createElement('button');
     button.type = 'button';
     button.className = 'card-desc-toggle';
-    button.textContent = 'More';
+    button.textContent = moreLabel;
     button.setAttribute('aria-expanded', 'false');
 
     function lineClampHeight() {
@@ -439,7 +441,7 @@ function initExpandableCardText() {
 
     function setCollapsedText() {
       span.textContent = text;
-      button.textContent = 'More';
+      button.textContent = moreLabel;
       button.setAttribute('aria-expanded', 'false');
 
       if (textFits() && !hasFeaturedDetails) {
@@ -480,7 +482,7 @@ function initExpandableCardText() {
       button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       if (expanded) {
         span.textContent = text + ' ';
-        button.textContent = 'Less';
+        button.textContent = lessLabel;
       } else {
         setCollapsedText();
       }

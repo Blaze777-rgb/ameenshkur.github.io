@@ -207,6 +207,8 @@
   "wechat_modal_body": "ئەم کۆدی QR ـە لە WeChat سکان بکە بۆ پەیوەندیکردن بە ڕاستەوخۆ.",
   "wechat_modal_alt": "کۆدی QR ـی WeChat",
 
+  "card_more": "زیاتر",
+  "card_less": "کەمتر",
   "lb_swipe_hint": "\u2190 بۆ گەڕان بسڕە \u2192",
   "footer_copy": "© 2026 ئەمین زەنگەنە · کەرکوک، عێراق"
 }
