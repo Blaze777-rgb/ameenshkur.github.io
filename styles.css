@@ -227,9 +227,12 @@ section { padding: 96px 24px; }
 /* ── SERVICES ── */
 #services { background: var(--bg2); }
 .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
-.service-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; transition: box-shadow .2s, transform .2s; }
-.service-card:hover { box-shadow: var(--card-shadow); transform: translateY(-3px); }
-.service-icon { margin-bottom: 16px; display: block; color: var(--teal); }
+.service-card.reveal { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; box-shadow: 0 10px 24px rgba(15,23,42,.045); transition: opacity .32s ease, transform .38s cubic-bezier(.22,.61,.36,1), box-shadow .38s cubic-bezier(.22,.61,.36,1), border-color .38s ease; }
+@media (hover: hover) {
+  .service-card.reveal.visible:hover { border-color: rgba(13,148,136,.24); box-shadow: 0 24px 48px rgba(15,23,42,.12), 0 6px 14px rgba(15,23,42,.055); transform: translateY(-7px); }
+  .service-card.reveal.visible:hover .service-icon { color: #2dd4bf; transform: scale(1.12); }
+}
+.service-icon { display: inline-flex; width: fit-content; margin-bottom: 16px; color: var(--teal); transform-origin: center; transition: color .38s ease, transform .38s cubic-bezier(.22,.61,.36,1); }
 .service-title { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
 .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
 .service-highlight { color: var(--teal); font-weight: 700; }
@@ -495,6 +498,8 @@ html[dir="rtl"] .ai-quick-menu[data-active="3"] .ai-menu-action:nth-child(2) .ai
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .service-card.reveal { transition: none; }
+  .service-icon { transition: none; }
   .campaign-card.is-animating .campaign-list { will-change: auto; }
   .hover-preview { transition: none; }
   .ask-ai-menu-shell, .ask-ai-trigger, .ai-quick-menu, .ai-menu-action, .ai-menu-surface, .ai-menu-icon, .ai-menu-label { transition: none !important; }
